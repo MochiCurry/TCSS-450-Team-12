@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">AboutMe2</string>
+
+    <string name="description">
+        Kerry Ferguson June 2018 graduate\n
+        I like curry\n
+        Please hire me :(\n
+        This is my favorite class! maybe.
+    </string>
+</resources>
