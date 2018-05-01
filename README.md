@@ -1,7 +1,9 @@
 # TCSS-450-Team-12
 
 Kerry Ferguson
+
 Travis Bane
+
 Dirk Sexton
 
 #TODO
@@ -33,3 +35,11 @@ setters/getters) and comments for any obscure code. Use good naming conventions
 for packages and components within your project. Java coding conventions must be
 followed that you learned in the past courses. Remove all TODOs. Make sure that
 each java file has a header with the information for each class at the top.
+
+#Bugs
+
+
+#User stories/features
+
+
+
