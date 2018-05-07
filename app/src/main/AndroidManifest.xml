@@ -19,7 +19,8 @@
         <activity android:name=".MainPage" />
         <activity android:name=".QuizActivity" />
         <activity android:name=".MatchActivity" />
-        <activity android:name=".ProfileActivity"></activity>
+        <activity android:name=".ProfileActivity" />
+        <activity android:name=".CollectionActivity"></activity>
     </application>
 
 </manifest>
