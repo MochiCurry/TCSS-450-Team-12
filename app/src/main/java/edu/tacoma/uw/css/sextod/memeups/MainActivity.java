@@ -9,12 +9,20 @@ import android.widget.RadioGroup;
 
 public class MainActivity extends AppCompatActivity {
     private Button signinbutton;
+    DBHandler db;
+    Quiz quiz;
+    String questions;
+    String choices;
+    String answers;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        db = new DBHandler(this);
+        db.addNewQuestions(new Quiz(questions,choices,answers));
 
         signinbutton = findViewById(R.id.signinbutton);
         signinbutton.setOnClickListener(new View.OnClickListener() {
