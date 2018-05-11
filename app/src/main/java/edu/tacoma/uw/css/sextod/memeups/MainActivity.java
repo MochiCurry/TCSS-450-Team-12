@@ -37,7 +37,9 @@ public class MainActivity extends AppCompatActivity implements RegisterFragment.
     private Button newuserbutton;
     private EditText registerEmail;
     private EditText registerPassword;
+
     private String mLoginName;
+
 
 
     @Override
@@ -62,6 +64,24 @@ public class MainActivity extends AppCompatActivity implements RegisterFragment.
 
                 String url = buildCourseURL(v);
                 login(url);
+            }
+        });
+
+        newuserbutton = (Button) findViewById(R.id.newuserbutton);
+        newuserbutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                signinbutton.setVisibility(View.GONE);
+                newuserbutton.setVisibility(View.GONE);
+                registerEmail = (EditText) findViewById(R.id.registerEmail);
+                registerEmail.setVisibility(View.GONE);
+                registerPassword = (EditText) findViewById(R.id.registerPassword);
+                registerPassword.setVisibility(View.GONE);
+                RegisterFragment registerFragment = new RegisterFragment();
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.fragment_container, registerFragment)
+                        .addToBackStack(null)
+                        .commit();
             }
         });
 
@@ -135,6 +155,74 @@ public class MainActivity extends AppCompatActivity implements RegisterFragment.
                 JSONObject jsonObject = new JSONObject(result);
                 String status = (String) jsonObject.get("result");
                 if (status.equals("success")) {
+                    Toast.makeText(getApplicationContext(), "User successfully added!"
+                            , Toast.LENGTH_LONG)
+                            .show();
+                } else {
+                    Toast.makeText(getApplicationContext(), "Failed to add: "
+                                    + jsonObject.get("error")
+                            , Toast.LENGTH_LONG)
+                            .show();
+                }
+            } catch (JSONException e) {
+                Toast.makeText(getApplicationContext(), "Something wrong with the data" +
+                        e.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        }
+    }
+
+
+    private class AddUserTask extends AsyncTask<String, Void, String> {
+
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected String doInBackground(String... urls) {
+            String response = "";
+            HttpURLConnection urlConnection = null;
+            for (String url : urls) {
+                try {
+                    URL urlObject = new URL(url);
+                    urlConnection = (HttpURLConnection) urlObject.openConnection();
+
+                    InputStream content = urlConnection.getInputStream();
+
+                    BufferedReader buffer = new BufferedReader(new InputStreamReader(content));
+                    String s = "";
+                    while ((s = buffer.readLine()) != null) {
+                        response += s;
+                    }
+
+                } catch (Exception e) {
+                    response = "Unable to add course, Reason: "
+                            + e.getMessage();
+                } finally {
+                    if (urlConnection != null)
+                        urlConnection.disconnect();
+                }
+            }
+            return response;
+        }
+
+
+        /**
+         * It checks to see if there was a problem with the URL(Network) which is when an
+         * exception is caught. It tries to call the parse Method and checks to see if it was successful.
+         * If not, it displays the exception.
+         *
+         * @param result
+         */
+        @Override
+        protected void onPostExecute(String result) {
+            // Something wrong with the network or the URL.
+            try {
+                JSONObject jsonObject = new JSONObject(result);
+                String status = (String) jsonObject.get("result");
+                if (status.equals("success")) {
                     Toast.makeText(getApplicationContext(), "Success!"
                             , Toast.LENGTH_LONG)
                             .show();
@@ -153,7 +241,6 @@ public class MainActivity extends AppCompatActivity implements RegisterFragment.
         }
     }
 
-
     @Override
     public void register(String url) {
         signinbutton.setVisibility(View.VISIBLE);
@@ -168,11 +255,13 @@ public class MainActivity extends AppCompatActivity implements RegisterFragment.
     }
 
 
+
     public void login(String url)
     {
         AddUserTask task = new AddUserTask();
         task.execute(new String[]{url.toString()});
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
