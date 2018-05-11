@@ -5,6 +5,7 @@ import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -22,12 +23,21 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.URLEncoder;
+
+import static android.content.ContentValues.TAG;
 
 public class MainActivity extends AppCompatActivity implements RegisterFragment.RegisterListener {
+    public static final String EMAIL = "email";
+    public static final String PASSWORD = "password";
+    private final static String LOGIN_URL
+            = "http://kferg9.000webhostapp.com/android/login.php?";
+
     private Button signinbutton;
     private Button newuserbutton;
     private EditText registerEmail;
     private EditText registerPassword;
+    private String mLoginName;
 
 
     @Override
@@ -45,7 +55,13 @@ public class MainActivity extends AppCompatActivity implements RegisterFragment.
         signinbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openMainPage();
+                //openMainPage();
+
+                registerEmail = (EditText) findViewById(R.id.registerEmail);
+                registerPassword = (EditText) findViewById(R.id.registerPassword);
+
+                String url = buildCourseURL(v);
+                login(url);
             }
         });
 
@@ -119,18 +135,20 @@ public class MainActivity extends AppCompatActivity implements RegisterFragment.
                 JSONObject jsonObject = new JSONObject(result);
                 String status = (String) jsonObject.get("result");
                 if (status.equals("success")) {
-                    Toast.makeText(getApplicationContext(), "User successfully added!"
+                    Toast.makeText(getApplicationContext(), "Success!"
                             , Toast.LENGTH_LONG)
                             .show();
+
+                            openMainPage();
                 } else {
-                    Toast.makeText(getApplicationContext(), "Failed to add: "
+                    Toast.makeText(getApplicationContext(), "Error: "
                                     + jsonObject.get("error")
                             , Toast.LENGTH_LONG)
                             .show();
                 }
             } catch (JSONException e) {
-                Toast.makeText(getApplicationContext(), "Something wrong with the data" +
-                        e.getMessage(), Toast.LENGTH_LONG).show();
+                //Toast.makeText(getApplicationContext(), "Something wrong with the data" +
+                        //3e.getMessage(), Toast.LENGTH_LONG).show();
             }
         }
     }
@@ -150,6 +168,12 @@ public class MainActivity extends AppCompatActivity implements RegisterFragment.
     }
 
 
+    public void login(String url)
+    {
+        AddUserTask task = new AddUserTask();
+        task.execute(new String[]{url.toString()});
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         return super.onCreateOptionsMenu(menu);
@@ -164,5 +188,29 @@ public class MainActivity extends AppCompatActivity implements RegisterFragment.
         Intent intent = new Intent(this, MainPage.class);
         startActivity(intent);
 
+    }
+
+    private String buildCourseURL(View v) {
+
+        StringBuilder sb = new StringBuilder(LOGIN_URL);
+
+        try {
+            String email = registerEmail.getText().toString();
+            sb.append("email=");
+            sb.append(URLEncoder.encode(email, "UTF-8"));
+            String password = registerPassword.getText().toString();
+            sb.append("&password=");
+            sb.append(URLEncoder.encode(password, "UTF-8"));
+
+
+            //Log.i(TAG sb.toString());
+            Log.i(TAG, sb.toString());
+
+        }
+        catch(Exception e) {
+            Toast.makeText(v.getContext(), "Something wrong with the url" + e.getMessage(), Toast.LENGTH_LONG)
+                    .show();
+        }
+        return sb.toString();
     }
 }
