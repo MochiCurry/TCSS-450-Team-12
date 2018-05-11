@@ -10,6 +10,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
@@ -25,6 +26,8 @@ import java.net.URL;
 public class MainActivity extends AppCompatActivity implements RegisterFragment.RegisterListener {
     private Button signinbutton;
     private Button newuserbutton;
+    private EditText registerEmail;
+    private EditText registerPassword;
 
 
     @Override
@@ -50,6 +53,9 @@ public class MainActivity extends AppCompatActivity implements RegisterFragment.
         newuserbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                signinbutton.setVisibility(View.GONE);
+                newuserbutton.setVisibility(View.GONE);
+
                 RegisterFragment registerFragment = new RegisterFragment();
                 getSupportFragmentManager().beginTransaction()
                         .replace(R.id.fragment_container, registerFragment)
@@ -57,7 +63,6 @@ public class MainActivity extends AppCompatActivity implements RegisterFragment.
                         .commit();
             }
         });
-
     }
 
     private class AddUserTask extends AsyncTask<String, Void, String> {
@@ -130,7 +135,8 @@ public class MainActivity extends AppCompatActivity implements RegisterFragment.
 
     @Override
     public void register(String url) {
-
+        signinbutton.setVisibility(View.VISIBLE);
+        newuserbutton.setVisibility(View.VISIBLE);
         AddUserTask task = new AddUserTask();
         task.execute(new String[]{url.toString()});
 

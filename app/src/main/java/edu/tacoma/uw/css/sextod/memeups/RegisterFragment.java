@@ -33,6 +33,7 @@ public class RegisterFragment extends Fragment {
     private final static String COURSE_ADD_URL
             = "http://kferg9.000webhostapp.com/android/addUser.php?";
 
+
     private RegisterListener mListener;
 
     // TODO: Rename and change types of parameters
@@ -77,6 +78,7 @@ public class RegisterFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
     }
 
     @Override
@@ -84,6 +86,7 @@ public class RegisterFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_register, container, false);
+
 
         mEmail = (EditText) v.findViewById(R.id.registerEmail);
         mPassword = (EditText) v.findViewById(R.id.registerPassword);
