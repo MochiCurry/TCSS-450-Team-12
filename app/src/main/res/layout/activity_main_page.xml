@@ -12,26 +12,14 @@
 
     </include>
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="Meme of the day"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.501"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/top_bar" />
-
     <ImageView
         android:id="@+id/imageView3"
-        android:layout_width="320dp"
-        android:layout_height="241dp"
-        android:layout_marginTop="20dp"
+        android:layout_width="290dp"
+        android:layout_height="220dp"
+        android:layout_marginTop="64dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.506"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2"
+        app:layout_constraintTop_toTopOf="@+id/imageView"
         app:srcCompat="@drawable/memeoftheday" />
 
     <Button
@@ -63,4 +51,14 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/matchbutton" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="48dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/top_bar"
+        app:srcCompat="@drawable/memeofthedaylogo" />
 </android.support.constraint.ConstraintLayout>
