@@ -13,12 +13,12 @@
     </include>
 
 
-
     <android.support.v7.widget.RecyclerView
         android:layout_width="368dp"
         android:layout_height="495dp"
+        android:layout_marginTop="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/top_bar" />
 </android.support.constraint.ConstraintLayout>
