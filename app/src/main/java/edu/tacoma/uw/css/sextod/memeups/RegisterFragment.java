@@ -156,6 +156,7 @@ public class RegisterFragment extends Fragment {
 
 
             //Log.i(TAG sb.toString());
+            Log.i(TAG, sb.toString());
 
         }
         catch(Exception e) {
