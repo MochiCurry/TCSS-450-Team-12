@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">MemeUps</string>
+    <string name="settings_name">Logout</string>
 </resources>

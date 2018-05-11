@@ -6,6 +6,14 @@
     android:layout_height="match_parent"
     tools:context=".MatchActivity">
 
+    <include
+        android:id="@+id/top_bar"
+        layout = "@layout/top_bar">
+
+    </include>
+
+
+
     <android.support.v7.widget.RecyclerView
         android:layout_width="368dp"
         android:layout_height="495dp"
