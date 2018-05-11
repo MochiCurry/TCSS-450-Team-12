@@ -1,5 +1,9 @@
 # TCSS-450-Team-12
 
+#Memeups
+
+#Team:
+
 Kerry Ferguson
 
 Travis Bane
