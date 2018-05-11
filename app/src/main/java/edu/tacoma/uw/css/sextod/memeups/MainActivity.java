@@ -55,7 +55,10 @@ public class MainActivity extends AppCompatActivity implements RegisterFragment.
             public void onClick(View view) {
                 signinbutton.setVisibility(View.GONE);
                 newuserbutton.setVisibility(View.GONE);
-
+                registerEmail = (EditText) findViewById(R.id.registerEmail);
+                registerEmail.setVisibility(View.GONE);
+                registerPassword = (EditText) findViewById(R.id.registerPassword);
+                registerPassword.setVisibility(View.GONE);
                 RegisterFragment registerFragment = new RegisterFragment();
                 getSupportFragmentManager().beginTransaction()
                         .replace(R.id.fragment_container, registerFragment)
@@ -137,6 +140,8 @@ public class MainActivity extends AppCompatActivity implements RegisterFragment.
     public void register(String url) {
         signinbutton.setVisibility(View.VISIBLE);
         newuserbutton.setVisibility(View.VISIBLE);
+        registerEmail.setVisibility(View.VISIBLE);
+        registerPassword.setVisibility(View.VISIBLE);
         AddUserTask task = new AddUserTask();
         task.execute(new String[]{url.toString()});
 
@@ -147,8 +152,6 @@ public class MainActivity extends AppCompatActivity implements RegisterFragment.
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.topbarmenu, menu);
         return super.onCreateOptionsMenu(menu);
     }
 

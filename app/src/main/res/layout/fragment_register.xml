@@ -6,34 +6,18 @@
     android:layout_height="match_parent"
     tools:context=".RegisterFragment">
 
-    <include
-        android:id="@+id/top_bar"
-        layout = "@layout/top_bar">
-
-    </include>
-
 
     <EditText
         android:id="@+id/registerEmail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="64dp"
+        android:layout_marginTop="214dp"
         android:ems="10"
         android:inputType="textEmailAddress"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView5" />
-
-    <ImageView
-        android:id="@+id/imageView5"
-        android:layout_width="300dp"
-        android:layout_height="80dp"
-        android:layout_marginTop="24dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/top_bar"
-        app:srcCompat="@drawable/memeupslogo" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/registerPassword"
