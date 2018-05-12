@@ -24,8 +24,6 @@ public class QuizActivity extends AppCompatActivity {
     private Button mButtonChoice1;
     private Button mButtonChoice2;
     private Button mButtonChoice3;
-    //private Button mButtonChoice4;
-
 
     private String mAnswer;
     private int mScore = 0;
@@ -48,13 +46,14 @@ public class QuizActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayUseLogoEnabled(true);
 
         radioGroup = findViewById(R.id.radioGroup);
+//
+
 
         //mScoreView = (TextView)findViewById(R.id.score);
         mQuestionView = (TextView)findViewById(R.id.question);
         mButtonChoice1 = (Button)findViewById(R.id.choice1);
         mButtonChoice2 = (Button)findViewById(R.id.choice2);
         mButtonChoice3 = (Button)findViewById(R.id.choice3);
-
         updateQuestion();
 
         Button submitbutton = findViewById(R.id.submitbutton);
@@ -77,8 +76,7 @@ public class QuizActivity extends AppCompatActivity {
                     //This line of code is optiona
                     Toast.makeText(QuizActivity.this, "correct", Toast.LENGTH_SHORT).show();
 
-
-                } else {
+                }else {
                     Toast.makeText(QuizActivity.this, "wrong", Toast.LENGTH_SHORT).show();
 
                     updateQuestion();
@@ -105,9 +103,6 @@ public class QuizActivity extends AppCompatActivity {
         mButtonChoice1.setText(mQuestionLibrary.getChoice1(mQuestionNumber));
         mButtonChoice2.setText(mQuestionLibrary.getChoice2(mQuestionNumber));
         mButtonChoice3.setText(mQuestionLibrary.getChoice3(mQuestionNumber));
-
-
-
 
         mAnswer = mQuestionLibrary.getCorrectAnswer(mQuestionNumber);
         mQuestionNumber++;
