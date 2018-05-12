@@ -1,5 +1,6 @@
 package edu.tacoma.uw.css.sextod.memeups;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -16,7 +17,7 @@ import android.widget.Toast;
 public class QuizActivity extends AppCompatActivity {
     RadioGroup radioGroup;
     RadioButton radioButton;
-
+    private static int QUIZ_COUNT = 0;
     private QuestionLibrary mQuestionLibrary = new QuestionLibrary();
 
     private TextView mScoreView;
@@ -76,7 +77,16 @@ public class QuizActivity extends AppCompatActivity {
                     //This line of code is optiona
                     Toast.makeText(QuizActivity.this, "correct", Toast.LENGTH_SHORT).show();
 
-                }else {
+                } if (mQuestionNumber == QUIZ_COUNT) {
+
+                    //show result
+                    Intent intent = new Intent(getApplicationContext(), ResultActivity.class);
+                    intent.putExtra("Right answer count", score);
+                    startActivity(intent);
+
+
+
+                } else {
                     Toast.makeText(QuizActivity.this, "wrong", Toast.LENGTH_SHORT).show();
 
                     updateQuestion();
