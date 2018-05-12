@@ -12,7 +12,10 @@ public class QuestionLibrary {
             "When you're behind on work but you need to finish your Buzfeed quiz so you know what " +
                     "kind of _____ you are.",
             "In what year was our great leader Harambe gruesomely murdered.",
-            "What time is it for the banana."
+            "What time is it for the banana.",
+            "A 2017 hit, a chef is known as.",
+            "Where you trynna catch me at.",
+            "Where do you go to search for memes."
 
     };
 
@@ -21,13 +24,16 @@ public class QuestionLibrary {
             {"General memes", "Dank memes", "Degenerate memes"},
             {"doggo", "Garlic bread", "Spaghetti sauce"},
             {"2015", "1000 BC", "He is still alive"},
-            {"4:20 get lit", "Peanut butter jelly time","nap time"}
+            {"4:20 get lit", "Peanut butter jelly time","nap time"},
+            {"Salt bae", "Dang bae", "Bae"},
+            {"Inside", "At work", "Outside"},
+            {"Reddit", "Instagram", "Deepweb"}
     };
 
 
 
     private String mCorrectAnswers[] = {"Dank memes", "Garlic bread", "2015", "Peanut butter" +
-            " jelly time"};
+            " jelly time", "salt bae", "Outside", "Deepweb"};
 
 
 
