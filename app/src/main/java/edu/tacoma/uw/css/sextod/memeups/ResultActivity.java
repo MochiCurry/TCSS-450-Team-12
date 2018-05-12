@@ -1,3 +1,14 @@
+/**
+ * ResultActivity displays the results sent from the quiz. There is a button to take you back to the
+ * home screen.
+ *
+ * @author Travis Bain
+ * @author Kerry Fergurson
+ * @author Dirk Sexton
+ * @version 1.0
+ * @since 1.0
+ */
+
 package edu.tacoma.uw.css.sextod.memeups;
 
 import android.content.Context;
@@ -12,10 +23,17 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+/**
+ * Class to display the results of the quiz
+ */
 public class ResultActivity extends AppCompatActivity {
 
     private Button returnButton;
 
+    /**
+     * On create, read in the quiz score and display them
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,6 +57,10 @@ public class ResultActivity extends AppCompatActivity {
 
         returnButton = findViewById(R.id.returnButton);
         returnButton.setOnClickListener(new View.OnClickListener() {
+            /**
+             * Listener for the return button. Sends the user back to the main page.
+             * @param v
+             */
             @Override
             public void onClick(View v) {
 

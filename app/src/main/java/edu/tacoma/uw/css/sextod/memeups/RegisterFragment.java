@@ -1,3 +1,16 @@
+/**
+ * Register fragment opens the page for the user to create an account using an email address and password.
+ * The email address used must be unique and valid; the password must be at least 5 characters long.
+ * These fields are put into a url string that is used to pass the email and password into the php
+ * file hosted on the server to add this new user into the database.
+ *
+ * @author Travis Bain
+ * @author Kerry Fergurson
+ * @author Dirk Sexton
+ * @version 1.0
+ * @since 1.0
+ */
+
 package edu.tacoma.uw.css.sextod.memeups;
 
 import android.content.Context;
@@ -15,7 +28,6 @@ import android.widget.Toast;
 import java.net.URLEncoder;
 
 import static android.content.ContentValues.TAG;
-
 
 /**
  * A simple {@link Fragment} subclass.
@@ -42,13 +54,16 @@ public class RegisterFragment extends Fragment {
     private EditText mEmail;
     private EditText mPassword;
 
-
-
+    /**
+     * Listener for the registration button
+     */
     public interface RegisterListener {
         public void register(String url);
     }
 
-
+    /**
+     * Empty constructor
+     */
     public RegisterFragment() {
         // Required empty public constructor
     }
@@ -71,6 +86,10 @@ public class RegisterFragment extends Fragment {
         return fragment;
     }
 
+    /**
+     * Initialize the variables on create
+     * @param savedInstanceState
+     */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -82,23 +101,34 @@ public class RegisterFragment extends Fragment {
 
     }
 
+    /**
+     * Initializes the variables to the values of the text fields and listens for the register button
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_register, container, false);
 
-
+        //Set email and password
         mEmail = (EditText) v.findViewById(R.id.registerEmail);
         mPassword = (EditText) v.findViewById(R.id.registerPassword);
 
-
+        //Button for registration
         Button button = (Button)
                 getActivity().findViewById(R.id.newuserbutton);
         Button registerButton = (Button) v.findViewById(R.id.registerbutton);
+        /**
+         * Listener for registration button
+         */
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //Build url using email and password and then call register function with the url
                 String url = buildCourseURL(v);
                 mListener.register(url);
             }
@@ -107,8 +137,10 @@ public class RegisterFragment extends Fragment {
         return v;
     }
 
-
-
+    /**
+     * On attach function with listener
+     * @param context
+     */
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -120,7 +152,9 @@ public class RegisterFragment extends Fragment {
         }
     }
 
-
+    /**
+     * Detach sets listener to null
+     */
     @Override
     public void onDetach() {
         super.onDetach();
@@ -142,6 +176,11 @@ public class RegisterFragment extends Fragment {
         void onFragmentInteraction(Uri uri);
     }
 
+    /**
+     * Builds a url to be passed into php registeration function using email and password
+     * @param v view
+     * @return The url in a string format
+     */
     private String buildCourseURL(View v) {
 
         StringBuilder sb = new StringBuilder(COURSE_ADD_URL);
@@ -156,7 +195,7 @@ public class RegisterFragment extends Fragment {
 
 
             //Log.i(TAG sb.toString());
-            Log.i(TAG, sb.toString());
+            //Log.i(TAG, sb.toString());
 
         }
         catch(Exception e) {

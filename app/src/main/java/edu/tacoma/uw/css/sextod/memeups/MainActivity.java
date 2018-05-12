@@ -1,3 +1,18 @@
+/**
+ * MainActivity is the greeting page when you start the application. It allows you to either input
+ * an email address and a password if you are an existing user, which can be be submitted to login
+ * using the sign in button, or you can click the registration button which launches a RegisterFragment
+ * to allow the user to create a new account to be added to the database. The account credentials are
+ * entered as a url to pass them into a php function which verifies the credentials against the user
+ * database. If the email/password combination is valid, the user is taken to the main page.
+ *
+ * @author Travis Bain
+ * @author Kerry Fergurson
+ * @author Dirk Sexton
+ * @version 1.0
+ * @since 1.0
+ */
+
 package edu.tacoma.uw.css.sextod.memeups;
 
 import android.content.Intent;

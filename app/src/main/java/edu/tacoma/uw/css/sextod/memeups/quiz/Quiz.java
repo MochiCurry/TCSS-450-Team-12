@@ -1,3 +1,10 @@
+/**
+ * Quiz class that stores the questions, answers, and choices. Used for the quiz portion of the application
+ * and is stored in QuestionLibrary.
+ *
+ * Created by kferg on 5/7/2018.
+ */
+
 package edu.tacoma.uw.css.sextod.memeups.quiz;
 
 import org.json.JSONArray;
@@ -8,9 +15,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by kferg on 5/7/2018.
- */
+
 
 public class Quiz implements Serializable {
 
@@ -78,6 +83,12 @@ public class Quiz implements Serializable {
     }
 
 
+    /**
+     * Function to parse JSON string for the fields.
+     * @param quizJSON
+     * @return
+     * @throws JSONException
+     */
     public static List<Quiz> parseQuizJSON(String quizJSON) throws JSONException {
         List<Quiz> quizList = new ArrayList<Quiz>();
         if (quizJSON != null) {

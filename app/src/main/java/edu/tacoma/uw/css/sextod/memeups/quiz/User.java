@@ -1,3 +1,12 @@
+/**
+ * User class that stores an email and a password. Also contains a function to parse JSON files to
+ * retrieve a username and password.
+ *
+ * @author Travis Bain
+ * @version 1.0
+ * @since 1.0
+ */
+
 package edu.tacoma.uw.css.sextod.memeups.quiz;
 
 import org.json.JSONArray;
@@ -8,6 +17,9 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Class implements serializable to pass as an argument
+ */
 public class User implements Serializable
 {
     public static final String EMAIL = "email";
@@ -15,11 +27,17 @@ public class User implements Serializable
 
     private String mEmail, mPassword;
 
+    /**
+     * Constructor
+     * @param mEmail
+     * @param mPassword
+     */
     public User(String mEmail, String mPassword) {
         this.mEmail = mEmail;
         this.mPassword = mPassword;
     }
 
+    //Function parses a JSON string to retrieve email and password
     public static List<User> parseUserJSON(String courseJSON) throws JSONException {
         List<User> userList = new ArrayList<User>();
         if (courseJSON != null) {

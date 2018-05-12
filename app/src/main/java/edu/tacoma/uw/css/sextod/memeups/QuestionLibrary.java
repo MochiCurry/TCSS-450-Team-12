@@ -1,10 +1,15 @@
-package edu.tacoma.uw.css.sextod.memeups;
-
 /**
+ * The QuestionLibrary holds all of the possible questions and answers to our quiz. It is currently static,
+ * but in the future it will dynamically pull data from a database and be able to randomize our quiz.
+ *
  * Created by kferg on 5/10/2018.
  */
 
+package edu.tacoma.uw.css.sextod.memeups;
 
+/**
+ * Question Library that stores all of the quiz questions.
+ */
 public class QuestionLibrary {
 
     private String mQuestions [] = {

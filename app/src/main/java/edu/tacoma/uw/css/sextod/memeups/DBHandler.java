@@ -1,3 +1,7 @@
+/**
+ * Created by kferg on 5/7/2018.
+ */
+
 package edu.tacoma.uw.css.sextod.memeups;
 
 import android.content.ContentValues;
@@ -6,10 +10,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import edu.tacoma.uw.css.sextod.memeups.quiz.Quiz;
-
-/**
- * Created by kferg on 5/7/2018.
- */
 
 public class DBHandler extends SQLiteOpenHelper{
 
