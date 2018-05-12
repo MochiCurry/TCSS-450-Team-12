@@ -26,15 +26,11 @@ public class QuizActivity extends AppCompatActivity {
     private Button mButtonChoice2;
     private Button mButtonChoice3;
 
-    private String mAnswer;
+    private String mAnswer = "Dank memes";
     private int mScore = 0;
     private int mQuestionNumber = 0;
     boolean clicked = false;
     int score = 0; // quiz score
-
-
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,7 +67,7 @@ public class QuizActivity extends AppCompatActivity {
 
                 radioButton = findViewById(radioId);
                 clicked = true;
-                if (mButtonChoice1.getText() == mAnswer && clicked) {
+                if (radioButton.getText() == mAnswer) {
                     score += 1;
                     //This line of code is optiona
                     Toast.makeText(QuizActivity.this, "correct", Toast.LENGTH_SHORT).show();
@@ -92,9 +88,6 @@ public class QuizActivity extends AppCompatActivity {
 
                     clicked = false;
                 }
-
-
-
             }
         });
     }

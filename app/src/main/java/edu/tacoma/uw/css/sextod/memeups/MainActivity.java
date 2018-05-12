@@ -27,44 +27,65 @@ import java.net.URLEncoder;
 
 import static android.content.ContentValues.TAG;
 
+/**
+ * This is the main activity that loads when you start the application. It implements RegisterListener
+ * to start the Registeration fragment when the new user button is selected.
+ */
 public class MainActivity extends AppCompatActivity implements RegisterFragment.RegisterListener {
+    //Constant for the login url and variables for buttons and fields
     private final static String LOGIN_URL
             = "http://kferg9.000webhostapp.com/android/login.php?";
-
     private Button signinbutton;
     private Button newuserbutton;
     private EditText registerEmail;
     private EditText registerPassword;
 
+    /**
+     * This is the onCreate method that initializes values and starts the activity.
+     * @param savedInstanceState Saved instance state
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //Create our toolbar
         Toolbar toolbar = (Toolbar) findViewById(R.id.top_bar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setIcon(R.drawable.memeupstopicon);
         getSupportActionBar().setDisplayUseLogoEnabled(true);
 
-
+        //Set the sign in button
         signinbutton = findViewById(R.id.signinbutton);
         signinbutton.setOnClickListener(new View.OnClickListener() {
+            /**
+             * Listener for the sign in button
+             * @param v The view
+             */
             @Override
             public void onClick(View v) {
                 //openMainPage();
 
+                //Store the current values of the text fields
                 registerEmail = (EditText) findViewById(R.id.registerEmail);
                 registerPassword = (EditText) findViewById(R.id.registerPassword);
 
+                //Pass in email and password to the url builder, and then call login function
                 String url = buildCourseURL(v);
                 login(url);
             }
         });
 
+        //Set the register button
         newuserbutton = (Button) findViewById(R.id.newuserbutton);
         newuserbutton.setOnClickListener(new View.OnClickListener() {
+            /**
+             *Listener for the new user button
+             * @param view The view
+             */
             @Override
             public void onClick(View view) {
+                //Get rid of elements from the Main Activity and start the RegisterFragment
                 signinbutton.setVisibility(View.GONE);
                 newuserbutton.setVisibility(View.GONE);
                 registerEmail = (EditText) findViewById(R.id.registerEmail);
@@ -80,14 +101,23 @@ public class MainActivity extends AppCompatActivity implements RegisterFragment.
         });
     }
 
+    /**
+     * Private class to handle asynchronous loading of data
+     */
     private class AddUserTask extends AsyncTask<String, Void, String> {
-
-
+        /**
+         * PreExecute
+         */
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
         }
 
+        /**
+         * This function reads and returns the response from the webpage.
+         * @param urls url of the webpage
+         * @return Returns the output from the webpage
+         */
         @Override
         protected String doInBackground(String... urls) {
             String response = "";
@@ -134,7 +164,7 @@ public class MainActivity extends AppCompatActivity implements RegisterFragment.
                     Toast.makeText(getApplicationContext(), "Success!"
                             , Toast.LENGTH_LONG)
                             .show();
-
+                            //On successful login, go to main page
                             openMainPage();
                 } else {
                     Toast.makeText(getApplicationContext(), "Error: "
@@ -149,7 +179,10 @@ public class MainActivity extends AppCompatActivity implements RegisterFragment.
         }
     }
 
-
+    /**
+     * Function to begin adding the new user asynchronously
+     * @param url url to the php register function
+     */
     @Override
     public void register(String url) {
         signinbutton.setVisibility(View.VISIBLE);
@@ -163,28 +196,50 @@ public class MainActivity extends AppCompatActivity implements RegisterFragment.
         getSupportFragmentManager().popBackStackImmediate();
     }
 
+    /**
+     * Function to begin logging in asynchronously
+     * @param url to the php login verification function
+     */
     public void login(String url)
     {
         AddUserTask task = new AddUserTask();
         task.execute(new String[]{url.toString()});
     }
 
+    /**
+     * Creates options menu
+     * @param menu
+     * @return Returns boolean
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         return super.onCreateOptionsMenu(menu);
     }
 
+    /**
+     * Dropdown for options menu
+     * @param item
+     * @return Returns if the item is selected
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         return super.onOptionsItemSelected(item);
     }
 
+    /**
+     * Function to create an intent for the main page after logging in
+     */
     public void openMainPage() {
         Intent intent = new Intent(this, MainPage.class);
         startActivity(intent);
 
     }
 
+    /**
+     * Function to build the url using the email and password to pass into the php functions
+     * @param v The view
+     * @return Returns the url as a string
+     */
     private String buildCourseURL(View v) {
 
         StringBuilder sb = new StringBuilder(LOGIN_URL);
