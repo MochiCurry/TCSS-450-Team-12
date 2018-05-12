@@ -1,5 +1,7 @@
 package edu.tacoma.uw.css.sextod.memeups;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -19,7 +21,17 @@ public class ResultActivity extends AppCompatActivity {
         TextView totalScoreLabel = (TextView) findViewById(R.id.totalScoreLabel);
 
         int score = getIntent().getIntExtra("Right_Answer_Count", 0);
+
+        SharedPreferences settings = getSharedPreferences("memeups", Context.MODE_PRIVATE);
+        int totalScore = settings.getInt("totalScore", 0);
+        totalScore+=score;
+
         resultLabel.setText(score + " / 10");
+        totalScoreLabel.setText("Total Score" + totalScoreLabel);
+
+        SharedPreferences.Editor editor = settings.edit();
+        editor.putInt("totalScore", totalScore);
+        editor.commit();
 
 
 

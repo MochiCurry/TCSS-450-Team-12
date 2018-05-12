@@ -17,7 +17,7 @@ import android.widget.Toast;
 public class QuizActivity extends AppCompatActivity {
     RadioGroup radioGroup;
     RadioButton radioButton;
-    private static int QUIZ_COUNT = 0;
+    private static int QUIZ_COUNT = 5;
     private QuestionLibrary mQuestionLibrary = new QuestionLibrary();
 
     private TextView mScoreView;
@@ -73,6 +73,7 @@ public class QuizActivity extends AppCompatActivity {
                 clicked = true;
                 if (mButtonChoice1.getText() == mAnswer && clicked){
                     score += 1;
+                    mQuestionNumber++;
                     updateQuestion();
                     //This line of code is optiona
                     Toast.makeText(QuizActivity.this, "correct", Toast.LENGTH_SHORT).show();
@@ -88,7 +89,7 @@ public class QuizActivity extends AppCompatActivity {
 
                 } else {
                     Toast.makeText(QuizActivity.this, "wrong", Toast.LENGTH_SHORT).show();
-
+                    mQuestionNumber++;
                     updateQuestion();
                 }
 
