@@ -26,7 +26,7 @@ public class ResultActivity extends AppCompatActivity {
         int totalScore = settings.getInt("totalScore", 0);
         totalScore+=score;
 
-        resultLabel.setText(score + " / 10");
+        resultLabel.setText(score + " / 7");
         totalScoreLabel.setText("Total Score" + totalScoreLabel);
 
         SharedPreferences.Editor editor = settings.edit();
