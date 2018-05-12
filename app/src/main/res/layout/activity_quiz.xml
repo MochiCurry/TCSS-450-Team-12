@@ -18,7 +18,7 @@
 
         android:id="@+id/question"
         android:layout_width="225dp"
-        android:layout_height="19dp"
+        android:layout_height="80dp"
         android:layout_marginTop="152dp"
         android:gravity="center"
         android:text="What is your favorite type of meme?"
@@ -33,7 +33,7 @@
         android:id="@+id/radioGroup"
         android:layout_width="300dp"
         android:layout_height="105dp"
-        android:layout_marginTop="44dp"
+        android:layout_marginTop="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.504"
         app:layout_constraintLeft_toLeftOf="parent"
