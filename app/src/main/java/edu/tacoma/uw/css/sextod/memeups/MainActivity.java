@@ -28,6 +28,10 @@ public class MainActivity extends AppCompatActivity implements RegisterFragment.
     private Button newuserbutton;
     private EditText registerEmail;
     private EditText registerPassword;
+<<<<<<< HEAD
+=======
+    private String mLoginName;
+>>>>>>> parent of 53adc03... Merge branch 'master' into newlogin
 
 
     @Override
@@ -46,24 +50,6 @@ public class MainActivity extends AppCompatActivity implements RegisterFragment.
             @Override
             public void onClick(View v) {
                 openMainPage();
-            }
-        });
-
-        newuserbutton = (Button) findViewById(R.id.newuserbutton);
-        newuserbutton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                signinbutton.setVisibility(View.GONE);
-                newuserbutton.setVisibility(View.GONE);
-                registerEmail = (EditText) findViewById(R.id.registerEmail);
-                registerEmail.setVisibility(View.GONE);
-                registerPassword = (EditText) findViewById(R.id.registerPassword);
-                registerPassword.setVisibility(View.GONE);
-                RegisterFragment registerFragment = new RegisterFragment();
-                getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.fragment_container, registerFragment)
-                        .addToBackStack(null)
-                        .commit();
             }
         });
     }
@@ -119,18 +105,33 @@ public class MainActivity extends AppCompatActivity implements RegisterFragment.
                 JSONObject jsonObject = new JSONObject(result);
                 String status = (String) jsonObject.get("result");
                 if (status.equals("success")) {
+<<<<<<< HEAD
                     Toast.makeText(getApplicationContext(), "User successfully added!"
                             , Toast.LENGTH_LONG)
                             .show();
                 } else {
                     Toast.makeText(getApplicationContext(), "Failed to add: "
+=======
+                    Toast.makeText(getApplicationContext(), "Success!"
+                            , Toast.LENGTH_LONG)
+                            .show();
+
+                            openMainPage();
+                } else {
+                    Toast.makeText(getApplicationContext(), "Error: "
+>>>>>>> parent of 53adc03... Merge branch 'master' into newlogin
                                     + jsonObject.get("error")
                             , Toast.LENGTH_LONG)
                             .show();
                 }
             } catch (JSONException e) {
+<<<<<<< HEAD
                 Toast.makeText(getApplicationContext(), "Something wrong with the data" +
                         e.getMessage(), Toast.LENGTH_LONG).show();
+=======
+                //Toast.makeText(getApplicationContext(), "Something wrong with the data" +
+                        //3e.getMessage(), Toast.LENGTH_LONG).show();
+>>>>>>> parent of 53adc03... Merge branch 'master' into newlogin
             }
         }
     }
@@ -150,6 +151,15 @@ public class MainActivity extends AppCompatActivity implements RegisterFragment.
     }
 
 
+<<<<<<< HEAD
+=======
+    public void login(String url)
+    {
+        AddUserTask task = new AddUserTask();
+        task.execute(new String[]{url.toString()});
+    }
+
+>>>>>>> parent of 53adc03... Merge branch 'master' into newlogin
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         return super.onCreateOptionsMenu(menu);
