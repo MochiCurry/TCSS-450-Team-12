@@ -17,7 +17,7 @@ import android.widget.Toast;
 public class QuizActivity extends AppCompatActivity {
     RadioGroup radioGroup;
     RadioButton radioButton;
-    private static int QUIZ_COUNT = 5;
+    private static int QUIZ_COUNT = 6;
     private QuestionLibrary mQuestionLibrary = new QuestionLibrary();
 
     private TextView mScoreView;

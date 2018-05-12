@@ -33,7 +33,7 @@ public class QuestionLibrary {
 
 
     private String mCorrectAnswers[] = {"Dank memes", "Garlic bread", "2015", "Peanut butter" +
-            " jelly time","salt bae", "Outside", "Deepweb"};
+            " jelly time","Salt bae", "Outside", "Deepweb"};
 
 
 
