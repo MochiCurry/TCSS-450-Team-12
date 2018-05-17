@@ -5,4 +5,9 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_result">ResultActivity</string>
+
+
+    <string name="LOGIN_PREFS">edu.tacoma.uw.css.sextod.memeups.PREFS</string>
+    <string name="LOGGEDIN">loggedin</string>
+
 </resources>

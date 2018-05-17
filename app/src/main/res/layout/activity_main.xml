@@ -35,6 +35,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
+        android:hint="enter email"
         app:layout_constraintTop_toBottomOf="@+id/imageView4" />
 
     <EditText
@@ -47,6 +48,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
+        android:hint="enter password"
         app:layout_constraintTop_toBottomOf="@+id/registerEmail" />
 
     <Button

@@ -16,6 +16,7 @@
 package edu.tacoma.uw.css.sextod.memeups;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -54,6 +55,7 @@ public class MainActivity extends AppCompatActivity implements RegisterFragment.
     private Button newuserbutton;
     private EditText registerEmail;
     private EditText registerPassword;
+    private SharedPreferences mSharedPreferences; // for the device to remember login
 
     /**
      * This is the onCreate method that initializes values and starts the activity.
