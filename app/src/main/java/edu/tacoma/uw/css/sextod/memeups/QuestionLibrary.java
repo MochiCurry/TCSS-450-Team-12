@@ -9,6 +9,7 @@ package edu.tacoma.uw.css.sextod.memeups;
 
 /**
  * Question Library that stores all of the quiz questions.
+ * author: Kerry Ferguson
  */
 public class QuestionLibrary {
 

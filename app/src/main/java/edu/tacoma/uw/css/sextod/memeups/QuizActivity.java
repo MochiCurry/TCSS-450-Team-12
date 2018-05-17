@@ -28,6 +28,7 @@ import android.widget.Toast;
 
 /**
  * Quiz activity using questions from QuestionLibrary
+ * author: Kerry Ferguson
  */
 public class QuizActivity extends AppCompatActivity {
     //New radio buttons, question library to load questions, max number of questions
@@ -96,10 +97,10 @@ public class QuizActivity extends AppCompatActivity {
                 //If correct answer, increment score and display correct
                 if (radioButton.getText() == mAnswer) {
                     score += 1;
-                    Toast.makeText(QuizActivity.this, "correct", Toast.LENGTH_SHORT).show();
+                   // Toast.makeText(QuizActivity.this, "correct", Toast.LENGTH_SHORT).show();
                 //else display wrong
                 } else {
-                    Toast.makeText(QuizActivity.this, "wrong", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(QuizActivity.this, "wrong", Toast.LENGTH_SHORT).show();
                 }
                 //Check if end of the quiz
                 if (mQuestionNumber == QUIZ_COUNT) {

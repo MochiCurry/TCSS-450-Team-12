@@ -10,7 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
-public class MainPage extends AppCompatActivity {
+public class MainPageActivity extends AppCompatActivity {
     private Button quizbutton;
     private Button matchbutton;
     private Button profilebutton;

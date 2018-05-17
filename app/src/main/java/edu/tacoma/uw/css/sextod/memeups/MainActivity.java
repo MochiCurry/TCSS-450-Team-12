@@ -15,6 +15,7 @@
 
 package edu.tacoma.uw.css.sextod.memeups;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
@@ -23,12 +24,10 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import org.json.JSONException;
@@ -66,7 +65,13 @@ public class MainActivity extends AppCompatActivity implements RegisterFragment.
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //Create our toolbar
+        mSharedPreferences = getSharedPreferences(getString(R.string.LOGIN_PREFS)
+                , Context.MODE_PRIVATE);
+        if (!mSharedPreferences.getBoolean(getString(R.string.LOGGEDIN), false)) {
+
+
+
+            //Create our toolbar
         Toolbar toolbar = (Toolbar) findViewById(R.id.top_bar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setIcon(R.drawable.memeupstopicon);
@@ -116,6 +121,13 @@ public class MainActivity extends AppCompatActivity implements RegisterFragment.
                         .commit();
             }
         });
+
+        } else {
+            Intent i = new Intent(this, MainPageActivity.class);
+            startActivity(i);
+            finish();
+        }
+
     }
 
     /**
@@ -219,6 +231,12 @@ public class MainActivity extends AppCompatActivity implements RegisterFragment.
      */
     public void login(String url)
     {
+        mSharedPreferences
+                .edit()
+                .putBoolean(getString(R.string.LOGGEDIN), true)
+                .commit();
+
+
         AddUserTask task = new AddUserTask();
         task.execute(new String[]{url.toString()});
     }
@@ -247,7 +265,7 @@ public class MainActivity extends AppCompatActivity implements RegisterFragment.
      * Function to create an intent for the main page after logging in
      */
     public void openMainPage() {
-        Intent intent = new Intent(this, MainPage.class);
+        Intent intent = new Intent(this, MainPageActivity.class);
         startActivity(intent);
 
     }

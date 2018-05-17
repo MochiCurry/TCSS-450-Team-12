@@ -15,16 +15,14 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
 /**
  * Class to display the results of the quiz
+ * author: Kerry Ferguson
  */
 public class ResultActivity extends AppCompatActivity {
 
@@ -64,7 +62,7 @@ public class ResultActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Intent intent = new Intent(getApplicationContext(), MainPage.class);
+                Intent intent = new Intent(getApplicationContext(), MainPageActivity.class);
                 startActivity(intent);
 
             }
