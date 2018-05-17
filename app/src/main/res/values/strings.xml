@@ -10,4 +10,6 @@
     <string name="LOGIN_PREFS">edu.tacoma.uw.css.sextod.memeups.PREFS</string>
     <string name="LOGGEDIN">loggedin</string>
 
+    <string name="action_logout">Logout</string>
+
 </resources>

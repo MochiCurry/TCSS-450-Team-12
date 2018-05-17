@@ -70,8 +70,8 @@ public class MainActivity extends AppCompatActivity implements RegisterFragment.
         if (!mSharedPreferences.getBoolean(getString(R.string.LOGGEDIN), false)) {
 
 
-
-            //Create our toolbar
+            //if logged in is false, go to log in screen again.
+            // Create our toolbar
         Toolbar toolbar = (Toolbar) findViewById(R.id.top_bar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setIcon(R.drawable.memeupstopicon);
@@ -122,6 +122,7 @@ public class MainActivity extends AppCompatActivity implements RegisterFragment.
             }
         });
 
+        //if logged in is true, go to main page
         } else {
             Intent i = new Intent(this, MainPageActivity.class);
             startActivity(i);
@@ -231,6 +232,7 @@ public class MainActivity extends AppCompatActivity implements RegisterFragment.
      */
     public void login(String url)
     {
+        //to allow the app to remember login without asking for it every time
         mSharedPreferences
                 .edit()
                 .putBoolean(getString(R.string.LOGGEDIN), true)
