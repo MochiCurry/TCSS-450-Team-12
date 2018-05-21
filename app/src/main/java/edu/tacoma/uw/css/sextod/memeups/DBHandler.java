@@ -9,7 +9,7 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import edu.tacoma.uw.css.sextod.memeups.course.Quiz;
+import edu.tacoma.uw.css.sextod.memeups.database.Quiz;
 
 public class DBHandler extends SQLiteOpenHelper{
 

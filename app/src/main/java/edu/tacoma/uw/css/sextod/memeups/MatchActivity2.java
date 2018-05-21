@@ -7,7 +7,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
-import edu.tacoma.uw.css.sextod.memeups.course.Match;
+import edu.tacoma.uw.css.sextod.memeups.database.Match;
 
 public class MatchActivity2 extends AppCompatActivity implements MatchListFragment.OnListFragmentInteractionListener {
 

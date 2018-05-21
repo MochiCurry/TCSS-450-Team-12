@@ -7,7 +7,7 @@
  * @since 1.0
  */
 
-package edu.tacoma.uw.css.sextod.memeups.course;
+package edu.tacoma.uw.css.sextod.memeups.database;
 
 import org.json.JSONArray;
 import org.json.JSONException;

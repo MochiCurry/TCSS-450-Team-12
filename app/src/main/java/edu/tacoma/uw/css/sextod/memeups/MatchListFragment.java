@@ -14,7 +14,7 @@ import android.widget.Toast;
 
 import org.json.JSONException;
 
-import edu.tacoma.uw.css.sextod.memeups.course.Match;
+import edu.tacoma.uw.css.sextod.memeups.database.Match;
 
 import java.io.BufferedReader;
 import java.io.InputStream;

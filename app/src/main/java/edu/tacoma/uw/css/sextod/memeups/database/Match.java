@@ -1,4 +1,4 @@
-package edu.tacoma.uw.css.sextod.memeups.course;
+package edu.tacoma.uw.css.sextod.memeups.database;
 
 
 import org.json.JSONArray;

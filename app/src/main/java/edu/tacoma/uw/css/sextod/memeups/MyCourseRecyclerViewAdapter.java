@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import edu.tacoma.uw.css.sextod.memeups.MatchListFragment.OnListFragmentInteractionListener;
-import edu.tacoma.uw.css.sextod.memeups.course.Match;
+import edu.tacoma.uw.css.sextod.memeups.database.Match;
 
 import java.util.List;
 
