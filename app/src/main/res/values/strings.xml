@@ -11,5 +11,6 @@
     <string name="LOGGEDIN">loggedin</string>
 
     <string name="action_logout">Logout</string>
+    <string name="title_activity_course">Matches</string>
 
 </resources>

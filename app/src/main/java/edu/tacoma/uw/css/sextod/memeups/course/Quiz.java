@@ -5,7 +5,7 @@
  * Created by kferg on 5/7/2018.
  */
 
-package edu.tacoma.uw.css.sextod.memeups.quiz;
+package edu.tacoma.uw.css.sextod.memeups.course;
 
 import org.json.JSONArray;
 import org.json.JSONException;
