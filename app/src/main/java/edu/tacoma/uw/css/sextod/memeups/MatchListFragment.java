@@ -31,7 +31,7 @@ import java.util.List;
  */
 public class MatchListFragment extends Fragment {
 
-    private static final String COURSE_URL = "http://pbaeandroid.000webhostapp.com/android/list.php?cmd=courses";
+    private static final String COURSE_URL = "http://kferg9.000webhostapp.com/android/list.php?cmd=courses";
     private static final String ARG_COLUMN_COUNT = "column-count";
     private int mColumnCount = 1;
     private OnListFragmentInteractionListener mListener;

@@ -47,13 +47,13 @@ public class ResultActivity extends AppCompatActivity {
         TextView resultLabel = (TextView) findViewById(R.id.resultLabel);
         TextView totalScoreLabel = (TextView) findViewById(R.id.totalScoreLabel);
 
-        // get the use score
-//        int score = getIntent().getIntExtra("Right_Answer_Count", 0);
+        // get the user score
+        // int score = getIntent().getIntExtra("Right_Answer_Count", 0);
         int category = getIntent().getIntExtra("Right_Answer_Count", 0);
-        //
+
         SharedPreferences settings = getSharedPreferences("memeups", Context.MODE_PRIVATE);
         int totalScore = settings.getInt("totalScore", 0);
-       // totalScore+=score;
+        // totalScore+=score;
 
         resultLabel.setText("Your meme level is");
 
