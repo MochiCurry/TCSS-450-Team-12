@@ -34,7 +34,8 @@ public class QuizActivity extends AppCompatActivity {
     //New radio buttons, question library to load questions, max number of questions
     RadioGroup radioGroup;
     RadioButton radioButton;
-    private static int QUIZ_COUNT = 7;
+
+    private static int QUIZ_COUNT = 7; // the total count of questions
     private QuestionLibrary mQuestionLibrary = new QuestionLibrary();
 
     private TextView mScoreView;
@@ -45,9 +46,10 @@ public class QuizActivity extends AppCompatActivity {
 
     private String mAnswer = "Dank memes";
     private int mScore = 0;
-    private int mQuestionNumber = 0;
+    private int mQuestionNumber = 0; //the question user is at
     boolean clicked = false;
-    int score = 0; // quiz score
+    double score = 0; // quiz score
+    public int status = 0; // user meme status
 
     /**
      * On create, add the options bar the question and the three answers.
@@ -107,7 +109,8 @@ public class QuizActivity extends AppCompatActivity {
 
                     //show result
                     Intent intent = new Intent(getApplicationContext(), ResultActivity.class);
-                    intent.putExtra("Right_Answer_Count", score);
+                    //intent.putExtra("Right_Answer_Count", score);
+                    intent.putExtra("Right_Answer_Count", displayMemeLevel(score));
                     startActivity(intent);
                 } else //Else load the next question
                 {
@@ -117,6 +120,32 @@ public class QuizActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    /**
+     *A class to calculate level of "memer" based on your score. Send it to
+     *ResultActivity to display.
+     */
+    public int displayMemeLevel(double score) {
+
+        double percentage = score / QUIZ_COUNT ;
+        percentage = percentage * 100;
+
+        if(percentage < 20) {
+            status = 0;
+        }
+        else if(percentage >= 20 && percentage < 40) {
+            status = 1;
+        }else if(percentage >= 40 && percentage < 60) {
+            status = 2;
+        }else if(percentage >= 60 && percentage < 80) {
+            status = 3;
+        }else if(percentage >= 80 && percentage <= 100) {
+            status = 4;
+        }
+
+        return status;
+
     }
 
     /**

@@ -14,6 +14,11 @@ import edu.tacoma.uw.css.sextod.memeups.database.Match;
 
 public class MatchActivity extends AppCompatActivity implements MatchListFragment.OnListFragmentInteractionListener {
 
+   // private CourseDetailFragment mDetail;
+
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,7 +60,18 @@ public class MatchActivity extends AppCompatActivity implements MatchListFragmen
 
     @Override
     public void onListFragmentInteraction(Match course) {
+        CourseDetailFragment courseDetailFragment = new CourseDetailFragment();
+        Bundle args = new Bundle();
+        args.putSerializable(CourseDetailFragment.COURSE_ITEM_SELECTED, course);
+        courseDetailFragment.setArguments(args);
+
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.fragment_container, courseDetailFragment)
+                .addToBackStack(null)
+                .commit();
 
     }
+
+
 
 }

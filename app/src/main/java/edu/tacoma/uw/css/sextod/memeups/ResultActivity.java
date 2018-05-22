@@ -27,6 +27,12 @@ import android.widget.TextView;
 public class ResultActivity extends AppCompatActivity {
 
     private Button returnButton;
+    private String level0 = "Scrub";
+    private String level1 = "Squire";
+    private String level2 = "Alright";
+    private String level3 = "Spicy";
+    private String level4 = "Hokage";
+
 
     /**
      * On create, read in the quiz score and display them
@@ -37,17 +43,37 @@ public class ResultActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_result);
 
+        // text for results
         TextView resultLabel = (TextView) findViewById(R.id.resultLabel);
         TextView totalScoreLabel = (TextView) findViewById(R.id.totalScoreLabel);
 
-        int score = getIntent().getIntExtra("Right_Answer_Count", 0);
-
+        // get the use score
+//        int score = getIntent().getIntExtra("Right_Answer_Count", 0);
+        int category = getIntent().getIntExtra("Right_Answer_Count", 0);
+        //
         SharedPreferences settings = getSharedPreferences("memeups", Context.MODE_PRIVATE);
         int totalScore = settings.getInt("totalScore", 0);
-        totalScore+=score;
+       // totalScore+=score;
 
-        resultLabel.setText(score + " / 7");
-        totalScoreLabel.setText("Total Score: " + score);
+        resultLabel.setText("Your meme level is");
+
+        if(category == 0) {
+            totalScoreLabel.setText(level0);
+        }
+        else if(category == 1) {
+            totalScoreLabel.setText(level1);
+        }
+        else if(category == 2) {
+            totalScoreLabel.setText(level2);
+        }
+        else if(category == 3) {
+            totalScoreLabel.setText(level3);
+        }
+        else if(category == 4) {
+            totalScoreLabel.setText(level4);
+        }
+        //resultLabel.setText(score + " / 7");
+        //totalScoreLabel.setText("Total Score: " + score);
 
         SharedPreferences.Editor editor = settings.edit();
         editor.putInt("totalScore", totalScore);
