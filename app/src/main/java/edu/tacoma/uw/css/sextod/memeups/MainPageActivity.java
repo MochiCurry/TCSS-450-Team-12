@@ -56,7 +56,6 @@ public class MainPageActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.topbarmenu, menu);
         getMenuInflater().inflate(R.menu.menu_course,menu); //logout button
         return super.onCreateOptionsMenu(menu);
     }
