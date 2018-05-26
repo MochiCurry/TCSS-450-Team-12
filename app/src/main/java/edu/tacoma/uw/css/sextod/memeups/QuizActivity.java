@@ -179,7 +179,7 @@ public class QuizActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-     
+
         return super.onCreateOptionsMenu(menu);
     }
 

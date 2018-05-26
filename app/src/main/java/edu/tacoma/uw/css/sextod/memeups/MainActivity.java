@@ -15,6 +15,7 @@
 
 package edu.tacoma.uw.css.sextod.memeups;
 
+import android.app.FragmentManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -300,4 +301,13 @@ public class MainActivity extends AppCompatActivity implements RegisterFragment.
         }
         return sb.toString();
     }
+    @Override
+    public void onBackPressed(){
+        signinbutton.setVisibility(View.VISIBLE);
+        newuserbutton.setVisibility(View.VISIBLE);
+        registerEmail.setVisibility(View.VISIBLE);
+        registerPassword.setVisibility(View.VISIBLE);
+        getSupportFragmentManager().popBackStack();
+    }
+
 }

@@ -48,6 +48,8 @@ public class RegisterFragment extends Fragment {
 
     private RegisterListener mListener;
 
+    private Button registerbutton;
+
     private String mParam1;
     private String mParam2;
     private EditText mEmail;
@@ -201,6 +203,7 @@ public class RegisterFragment extends Fragment {
         }
         return sb.toString();
     }
+
 
 
 }
