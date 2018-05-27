@@ -23,6 +23,7 @@ import edu.tacoma.uw.css.sextod.memeups.database.Match;
  */
 public class CourseDetailFragment extends Fragment {
 
+
     public final static String COURSE_ITEM_SELECTED = "course_selected";
 
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -38,37 +39,39 @@ public class CourseDetailFragment extends Fragment {
     private TextView mCoursePrereqsTextView;
 
 
-    private OnFragmentInteractionListener mListener;
+
+
+   //private OnFragmentInteractionListener mListener;
 
     public CourseDetailFragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment CourseDetailFragment.
-     */
-    public static CourseDetailFragment newInstance(String param1, String param2) {
-        CourseDetailFragment fragment = new CourseDetailFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
+//    /**
+//     * Use this factory method to create a new instance of
+//     * this fragment using the provided parameters.
+//     *
+//     * @param param1 Parameter 1.
+//     * @param param2 Parameter 2.
+//     * @return A new instance of fragment CourseDetailFragment.
+//     */
+//    public static CourseDetailFragment newInstance(String param1, String param2) {
+//        CourseDetailFragment fragment = new CourseDetailFragment();
+//        Bundle args = new Bundle();
+//        args.putString(ARG_PARAM1, param1);
+//        args.putString(ARG_PARAM2, param2);
+//        fragment.setArguments(args);
+//        return fragment;
+//    }
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
+//    @Override
+//    public void onCreate(Bundle savedInstanceState) {
+//        super.onCreate(savedInstanceState);
+//        if (getArguments() != null) {
+//            mParam1 = getArguments().getString(ARG_PARAM1);
+//            mParam2 = getArguments().getString(ARG_PARAM2);
+//        }
+//    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -79,6 +82,7 @@ public class CourseDetailFragment extends Fragment {
         mCourseShortDescTextView = (TextView) view.findViewById(R.id.course_short_desc);
         mCourseLongDescTextView = (TextView) view.findViewById(R.id.course_long_desc);
         mCoursePrereqsTextView = (TextView) view.findViewById(R.id.course_prereqs);
+
 
         FloatingActionButton floatingActionButton = (FloatingActionButton)
                 getActivity().findViewById(R.id.fab);
@@ -99,28 +103,29 @@ public class CourseDetailFragment extends Fragment {
     }
 
 
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
-    }
 
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
-    }
+//    public void onButtonPressed(Uri uri) {
+//        if (mListener != null) {
+//            mListener.onFragmentInteraction(uri);
+//        }
+//    }
+//
+//    @Override
+//    public void onAttach(Context context) {
+//        super.onAttach(context);
+//        if (context instanceof OnFragmentInteractionListener) {
+//            mListener = (OnFragmentInteractionListener) context;
+//        } else {
+//            throw new RuntimeException(context.toString()
+//                    + " must implement OnFragmentInteractionListener");
+//        }
+//    }
+//
+//    @Override
+//    public void onDetach() {
+//        super.onDetach();
+//        mListener = null;
+//    }
 
     /**
      * This interface must be implemented by activities that contain this
@@ -132,9 +137,9 @@ public class CourseDetailFragment extends Fragment {
      * "http://developer.android.com/training/basics/fragments/communicating.html"
      * >Communicating with Other Fragments</a> for more information.
      */
-    public interface OnFragmentInteractionListener {
-        void onFragmentInteraction(Uri uri);
-    }
+//    public interface OnFragmentInteractionListener {
+//        void onFragmentInteraction(Uri uri);
+//    }
 
     @Override
     public void onResume() {
@@ -143,8 +148,11 @@ public class CourseDetailFragment extends Fragment {
         if (args != null) {
             // Set course information based on argument passed
             updateView((Match) args.getSerializable(COURSE_ITEM_SELECTED));
+        } else {
+            getActivity().getSupportFragmentManager().popBackStack();
         }
 
     }
+
 
 }

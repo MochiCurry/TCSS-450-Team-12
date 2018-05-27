@@ -23,10 +23,11 @@ import java.net.URL;
 
 import edu.tacoma.uw.css.sextod.memeups.database.Match;
 
-public class MatchActivity extends AppCompatActivity implements MatchListFragment.OnListFragmentInteractionListener,
+public class MatchActivity extends AppCompatActivity implements
+        MatchListFragment.OnListFragmentInteractionListener,
         CourseAddFragment.CourseAddListener {
 
-   // private CourseDetailFragment mDetail;
+    private CourseDetailFragment mDetail;
 
 
 
