@@ -1,6 +1,4 @@
 package edu.tacoma.uw.css.sextod.memeups.database;
-
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -21,9 +19,9 @@ public class Match implements Serializable{
     private String mPrereqs;
 
     public Match(String courseId,
-                 String shortDesc,
-                 String longDesc,
-                 String prereqs) {
+                  String shortDesc,
+                  String longDesc,
+                  String prereqs) {
         mCourseId = courseId;
         mShortDescription = shortDesc;
         mLongDescription = longDesc;
@@ -63,19 +61,19 @@ public class Match implements Serializable{
     }
 
     public static List<Match> parseCourseJSON(String courseJSON) throws JSONException {
-        List<Match> courseList = new ArrayList<Match>();
+        List<Match> matchList = new ArrayList<Match>();
         if (courseJSON != null) {
             JSONArray arr = new JSONArray(courseJSON);
             for (int i = 0; i < arr.length(); i++) {
                 JSONObject obj = arr.getJSONObject(i);
-                Match course = new Match(obj.getString(Match.ID),
+                Match match = new Match(obj.getString(Match.ID),
                         obj.getString(Match.SHORT_DESC) ,
                         obj.getString(Match.LONG_DESC),
                         obj.getString(Match.PRE_REQS));
-                courseList.add(course);
+                matchList.add(match);
             }
         }
-        return courseList;
+        return matchList;
     }
 
 }

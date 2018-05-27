@@ -3,6 +3,7 @@ package edu.tacoma.uw.css.sextod.memeups;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -81,6 +82,11 @@ public class MatchListFragment extends Fragment {
            // mRecyclerView.setAdapter(new MyCourseRecyclerViewAdapter(mCourseList, mListener));
             CourseAsyncTask courseAsyncTask = new CourseAsyncTask();
             courseAsyncTask.execute(new String[]{COURSE_URL});
+
+            FloatingActionButton floatingActionButton = (FloatingActionButton)
+                    getActivity().findViewById(R.id.fab);
+            floatingActionButton.show();
+
 
         }
         return view;
