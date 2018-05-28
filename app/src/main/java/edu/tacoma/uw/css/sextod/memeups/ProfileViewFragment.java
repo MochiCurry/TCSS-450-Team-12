@@ -17,7 +17,7 @@ import edu.tacoma.uw.css.sextod.memeups.database.Match;
 /**
  *
  */
-public class ViewProfileFragment extends Fragment {
+public class ProfileViewFragment extends Fragment {
 
 
     public final static String COURSE_ITEM_SELECTED = "course_selected";
@@ -48,7 +48,7 @@ public class ViewProfileFragment extends Fragment {
 
     //private OnFragmentInteractionListener mListener;
 
-    public ViewProfileFragment() {
+    public ProfileViewFragment() {
         // Required empty public constructor
     }
 
@@ -58,10 +58,10 @@ public class ViewProfileFragment extends Fragment {
 //     *
 //     * @param param1 Parameter 1.
 //     * @param param2 Parameter 2.
-//     * @return A new instance of fragment ViewProfileFragment.
+//     * @return A new instance of fragment ProfileViewFragment.
 //     */
-//    public static ViewProfileFragment newInstance(String param1, String param2) {
-//        ViewProfileFragment fragment = new ViewProfileFragment();
+//    public static ProfileViewFragment newInstance(String param1, String param2) {
+//        ProfileViewFragment fragment = new ProfileViewFragment();
 //        Bundle args = new Bundle();
 //        args.putString(ARG_PARAM1, param1);
 //        args.putString(ARG_PARAM2, param2);

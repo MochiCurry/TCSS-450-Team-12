@@ -6,7 +6,6 @@ import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -14,9 +13,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
-import org.json.JSONObject;
+import org.json.JSONException;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -25,28 +25,33 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 
+import edu.tacoma.uw.css.sextod.memeups.database.Match;
+
 import static android.content.ContentValues.TAG;
 
 
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link CourseAddFragment.OnFragmentInteractionListener} interface
+ * {@link ProfileEditFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link CourseAddFragment#newInstance} factory method to
+ * Use the {@link ProfileEditFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class CourseAddFragment extends Fragment {
+public class ProfileEditFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
     private String mParam1;
     private String mParam2;
+    private Match mUser;
 
     private CourseAddListener mListener;
     private final static String COURSE_ADD_URL
             = "http://kferg9.000webhostapp.com/android/updateProfile.php?cmd=update";
+    private final static String GET_USER_URL
+            = "http://kferg9.000webhostapp.com/android/list.php?cmd=singleuser";
 
     private EditText mUserNameEditText;
     private EditText mCatchPhraseEditText;
@@ -57,7 +62,7 @@ public class CourseAddFragment extends Fragment {
 
    // private OnFragmentInteractionListener mListener;
 
-    public CourseAddFragment() {
+    public ProfileEditFragment() {
         // Required empty public constructor
     }
 
@@ -67,10 +72,10 @@ public class CourseAddFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment CourseAddFragment.
+     * @return A new instance of fragment ProfileEditFragment.
      */
-    public static CourseAddFragment newInstance(String param1, String param2) {
-        CourseAddFragment fragment = new CourseAddFragment();
+    public static ProfileEditFragment newInstance(String param1, String param2) {
+        ProfileEditFragment fragment = new ProfileEditFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -91,9 +96,32 @@ public class CourseAddFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View v = inflater.inflate(R.layout.fragment_course_add, container, false);
+        View v = inflater.inflate(R.layout.fragment_profile_edit, container, false);
+
+        try
+        {
+            StringBuilder sb = new StringBuilder(GET_USER_URL);
+
+            SharedPreferences mLoginEmail = this.getActivity().getSharedPreferences(getString(R.string.LOGIN_PREFS)
+                    , Context.MODE_PRIVATE);
+
+            String email = mLoginEmail.getString("email", "");
+            sb.append("&email=");
+            sb.append(URLEncoder.encode(email, "UTF-8"));
+
+            Log.i(TAG, sb.toString());
+
+            CourseAsyncTask courseAsyncTask = new CourseAsyncTask();
+            courseAsyncTask.execute(new String[]{sb.toString()});
+
+
+        }catch(Exception e) {
+            Toast.makeText(v.getContext(), "Something wrong with the url" + e.getMessage(), Toast.LENGTH_LONG)
+                    .show();
+        }
 
         mUserNameEditText = (EditText) v.findViewById(R.id.user_name);
+        mUserNameEditText.setText("", TextView.BufferType.EDITABLE);
       //  mCatchPhraseEditText = (EditText) v.findViewById(R.id.catch_phrase);
         mBiographyEditText = (EditText) v.findViewById(R.id.biography);
        // mPreferenceEditText = (EditText) v.findViewById(R.id.preference);
@@ -108,13 +136,8 @@ public class CourseAddFragment extends Fragment {
 
                 Intent intent = new Intent(getActivity(), ProfileActivity.class);
                 startActivity(intent);
-
-
-
             }
         });
-
-
 
         return v;
     }
@@ -175,7 +198,6 @@ public class CourseAddFragment extends Fragment {
             String email = mLoginEmail.getString("email", "");
             sb.append("&email=");
             sb.append(URLEncoder.encode(email, "UTF-8"));
-
 
             String courseId = mUserNameEditText.getText().toString();
             sb.append("&username=");
@@ -278,5 +300,68 @@ public class CourseAddFragment extends Fragment {
 //            }
 //        }
 
+    }
+
+    private class CourseAsyncTask extends AsyncTask<String, Void, String> {
+        @Override
+        protected String doInBackground(String... urls) {
+            String response = "";
+            HttpURLConnection urlConnection = null;
+            for (String url : urls) {
+                try {
+                    URL urlObject = new URL(url);
+                    urlConnection = (HttpURLConnection) urlObject.openConnection();
+
+                    InputStream content = urlConnection.getInputStream();
+
+                    BufferedReader buffer = new BufferedReader(new InputStreamReader(content));
+                    String s = "";
+                    while ((s = buffer.readLine()) != null) {
+                        response += s;
+                    }
+
+                } catch (Exception e) {
+                    response = "Unable to download the list of user matches, Reason: "
+                            + e.getMessage();
+                }
+                finally {
+                    if (urlConnection != null)
+                        urlConnection.disconnect();
+                }
+            }
+            return response;
+        }
+        @Override
+        protected void onPostExecute(String result) {
+            Log.i(TAG, "onPostExecute");
+
+            if (result.startsWith("Unable to")) {
+                Toast.makeText(getActivity().getApplicationContext(), result, Toast.LENGTH_SHORT)
+                        .show();
+                return;
+            }
+
+            try {
+                mUser = Match.parseUserJSON(result);
+                updateView();
+            }
+            catch (JSONException e) {
+                Toast.makeText(getActivity().getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT)
+                        .show();
+                return;
+            }
+        }
+
+    }
+
+    public void updateView() {
+        Log.i(TAG, "In updateView()");
+        if (mUser != null) {
+            Log.i(TAG, "mUser not null");
+//            mCourseIdTextView.setText(course.getCourseId());
+//            mCourseShortDescTextView.setText(course.getShortDescription());
+            mUserNameEditText.setText(mUser.getmUsername(), TextView.BufferType.EDITABLE);
+            mBiographyEditText.setText(mUser.getmBio(), TextView.BufferType.EDITABLE);
+        }
     }
 }

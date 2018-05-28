@@ -1,8 +1,6 @@
 package edu.tacoma.uw.css.sextod.memeups;
 
 import android.content.Intent;
-import android.media.Image;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -14,7 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 
-public class ProfileActivity extends AppCompatActivity implements CourseAddFragment.CourseAddListener
+public class ProfileActivity extends AppCompatActivity implements ProfileEditFragment.CourseAddListener
 {
 
     private Button collectionbutton;
@@ -50,9 +48,9 @@ public class ProfileActivity extends AppCompatActivity implements CourseAddFragm
                 profilePic.setVisibility(View.GONE);
 
 
-                CourseAddFragment courseAddFragment = new CourseAddFragment();
+                ProfileEditFragment profileEditFragment = new ProfileEditFragment();
                 getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.fragment_container, courseAddFragment)
+                        .replace(R.id.fragment_container, profileEditFragment)
                         .addToBackStack(null)
                         .commit();
 

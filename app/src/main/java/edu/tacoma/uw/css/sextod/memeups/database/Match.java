@@ -17,7 +17,7 @@ public class Match implements Serializable{
     private String mEmail;
     private String mFirst;
     private String mLast;
-    private String mPrereqs;
+    private String mUsername;
     private String mBio;
 
 
@@ -37,12 +37,12 @@ public class Match implements Serializable{
         this.mLast = mLongDescription;
     }
 
-    public String getmPrereqs() {
-        return mPrereqs;
+    public String getmUsername() {
+        return mUsername;
     }
 
-    public void setmPrereqs(String mPrereqs) {
-        this.mPrereqs = mPrereqs;
+    public void setmUsername(String mUsername) {
+        this.mUsername = mUsername;
     }
 
     public String getmBio() {
@@ -53,11 +53,16 @@ public class Match implements Serializable{
         this.mBio = mBio;
     }
 
+    public Match()
+    {
+
+    }
+
     public Match(String email, String shortDesc, String longDesc, String prereqs, String bio) {
         mEmail = email;
         mFirst = shortDesc;
         mLast = longDesc;
-        mPrereqs = prereqs;
+        mUsername = prereqs;
 
         mBio = bio;
     }
@@ -87,4 +92,19 @@ public class Match implements Serializable{
         return matchList;
     }
 
+    public static Match parseUserJSON(String courseJSON) throws JSONException
+    {
+        Match match = null;
+        if (courseJSON != null)
+        {
+            JSONArray arr = new JSONArray(courseJSON);
+            JSONObject obj = arr.getJSONObject(0);
+            match = new Match(obj.getString(Match.EMAIL),
+                    obj.getString(Match.FIRST),
+                    obj.getString(Match.LAST),
+                    obj.getString(Match.USERNAME),
+                    obj.getString(Match.BIO));
+        }
+        return match;
+    }
 }

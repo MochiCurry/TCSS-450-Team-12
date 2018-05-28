@@ -2,13 +2,11 @@ package edu.tacoma.uw.css.sextod.memeups;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Toast;
 
 import org.json.JSONException;
@@ -23,9 +21,9 @@ import java.net.URL;
 import edu.tacoma.uw.css.sextod.memeups.database.Match;
 
 public class MatchActivity extends AppCompatActivity implements MatchListFragment.OnListFragmentInteractionListener,
-        CourseAddFragment.CourseAddListener, ViewProfileFragment.MatchListener {
+        ProfileEditFragment.CourseAddListener, ProfileViewFragment.MatchListener {
 
-   // private ViewProfileFragment mDetail;
+   // private ProfileViewFragment mDetail;
 
     @Override
     public void matchRequest(String email)
@@ -66,13 +64,13 @@ public class MatchActivity extends AppCompatActivity implements MatchListFragmen
 
     @Override
     public void onListFragmentInteraction(Match course) {
-        ViewProfileFragment viewProfileFragment = new ViewProfileFragment();
+        ProfileViewFragment profileViewFragment = new ProfileViewFragment();
         Bundle args = new Bundle();
-        args.putSerializable(ViewProfileFragment.COURSE_ITEM_SELECTED, course);
-        viewProfileFragment.setArguments(args);
+        args.putSerializable(ProfileViewFragment.COURSE_ITEM_SELECTED, course);
+        profileViewFragment.setArguments(args);
 
         getSupportFragmentManager().beginTransaction()
-                .replace(R.id.fragment_container, viewProfileFragment)
+                .replace(R.id.fragment_container, profileViewFragment)
                 .addToBackStack(null)
                 .commit();
 
