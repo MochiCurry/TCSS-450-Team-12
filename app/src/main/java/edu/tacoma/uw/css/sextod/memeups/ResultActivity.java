@@ -105,8 +105,8 @@ public class ResultActivity extends AppCompatActivity {
                     , Context.MODE_PRIVATE);
 
             String email = mLoginEmail.getString("email", "");
-            Log.i(TAG, "email should be here");
-            Log.i(TAG, email);
+//            Log.i(TAG, "email should be here");
+//            Log.i(TAG, email);
 
 
             sb.append("&email=");

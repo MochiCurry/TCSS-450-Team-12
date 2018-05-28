@@ -2,11 +2,13 @@ package edu.tacoma.uw.css.sextod.memeups;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,6 +24,8 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
+
+import static android.content.ContentValues.TAG;
 
 
 /**
@@ -164,16 +168,24 @@ public class CourseAddFragment extends Fragment {
         StringBuilder sb = new StringBuilder(COURSE_ADD_URL);
 
         try {
+            //To use getSharedPreferences in a fragment, use this code.
+            SharedPreferences mLoginEmail = this.getActivity().getSharedPreferences(getString(R.string.LOGIN_PREFS)
+                    , Context.MODE_PRIVATE);
+
+            String email = mLoginEmail.getString("email", "");
+            sb.append("&email=");
+            sb.append(URLEncoder.encode(email, "UTF-8"));
+
 
             String courseId = mUserNameEditText.getText().toString();
-            sb.append("username=");
+            sb.append("&username=");
             sb.append(URLEncoder.encode(courseId, "UTF-8"));
 
             String courseLongDesc = mBiographyEditText.getText().toString();
             sb.append("&bio=");
             sb.append(URLEncoder.encode(courseLongDesc, "UTF-8"));
 
-            //Log.i(TAG sb.toString());
+            Log.i(TAG, sb.toString());
 
         }
         catch(Exception e) {
