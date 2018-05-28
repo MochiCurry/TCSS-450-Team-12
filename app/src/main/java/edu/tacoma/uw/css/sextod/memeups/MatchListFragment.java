@@ -32,7 +32,7 @@ import java.util.List;
  */
 public class MatchListFragment extends Fragment {
 
-    private static final String COURSE_URL = "http://kferg9.000webhostapp.com/android/list.php?cmd=courses";
+    private static final String COURSE_URL = "http://kferg9.000webhostapp.com/android/list.php?cmd=matchusers";
     private static final String ARG_COLUMN_COUNT = "column-count";
     private int mColumnCount = 1;
     private OnListFragmentInteractionListener mListener;
@@ -143,7 +143,7 @@ public class MatchListFragment extends Fragment {
                     }
 
                 } catch (Exception e) {
-                    response = "Unable to download the list of courses, Reason: "
+                    response = "Unable to download the list of user matches, Reason: "
                             + e.getMessage();
                 }
                 finally {

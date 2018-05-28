@@ -1,5 +1,5 @@
 /**
- * MainActivity is the greeting page when you start the application. It allows you to either input
+ * LoginActivity is the greeting page when you start the application. It allows you to either input
  * an email address and a password if you are an existing user, which can be be submitted to login
  * using the sign in button, or you can click the registration button which launches a RegisterFragment
  * to allow the user to create a new account to be added to the database. The account credentials are
@@ -15,7 +15,6 @@
 
 package edu.tacoma.uw.css.sextod.memeups;
 
-import android.app.FragmentManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -47,7 +46,7 @@ import static android.content.ContentValues.TAG;
  * This is the main activity that loads when you start the application. It implements RegisterListener
  * to start the Registeration fragment when the new user button is selected.
  */
-public class MainActivity extends AppCompatActivity implements RegisterFragment.RegisterListener {
+public class LoginActivity extends AppCompatActivity implements RegisterFragment.RegisterListener {
     //Constant for the login url and variables for buttons and fields
     private final static String LOGIN_URL
             = "http://kferg9.000webhostapp.com/android/login.php?";
@@ -125,7 +124,8 @@ public class MainActivity extends AppCompatActivity implements RegisterFragment.
 
         //if logged in is true, go to main page
         } else {
-            Intent i = new Intent(this, MainPageActivity.class);
+            Intent i = new Intent(this, HomeScreenActivity.class);
+            //i.putExtra("loggedUser", registerEmail.getText().toString());
             startActivity(i);
             finish();
         }
@@ -233,13 +233,6 @@ public class MainActivity extends AppCompatActivity implements RegisterFragment.
      */
     public void login(String url)
     {
-        //to allow the app to remember login without asking for it every time
-        mSharedPreferences
-                .edit()
-                .putBoolean(getString(R.string.LOGGEDIN), true)
-                .commit();
-
-
         AddUserTask task = new AddUserTask();
         task.execute(new String[]{url.toString()});
     }
@@ -268,7 +261,14 @@ public class MainActivity extends AppCompatActivity implements RegisterFragment.
      * Function to create an intent for the main page after logging in
      */
     public void openMainPage() {
-        Intent intent = new Intent(this, MainPageActivity.class);
+        //to allow the app to remember login without asking for it every time
+        mSharedPreferences
+                .edit()
+                .putBoolean(getString(R.string.LOGGEDIN), true)
+                .putString("email", registerEmail.getText().toString())
+                .commit();
+
+        Intent intent = new Intent(this, HomeScreenActivity.class);
         startActivity(intent);
 
     }

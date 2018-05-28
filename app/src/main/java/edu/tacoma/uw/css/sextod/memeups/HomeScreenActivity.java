@@ -12,7 +12,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
-public class MainPageActivity extends AppCompatActivity {
+public class HomeScreenActivity extends AppCompatActivity {
     private Button quizbutton;
     private Button matchbutton;
     private Button profilebutton;
@@ -27,6 +27,7 @@ public class MainPageActivity extends AppCompatActivity {
         getSupportActionBar().setIcon(R.drawable.memeupstopicon);
         getSupportActionBar().setDisplayUseLogoEnabled(true);
 
+        getIntent().getIntExtra("loggedUser", 0);
 
         quizbutton = findViewById(R.id.quizbutton);
         quizbutton.setOnClickListener(new View.OnClickListener() {
@@ -68,7 +69,7 @@ public class MainPageActivity extends AppCompatActivity {
             sharedPreferences.edit().putBoolean(getString(R.string.LOGGEDIN), false)
                     .commit();
 
-            Intent i = new Intent(this, MainActivity.class);
+            Intent i = new Intent(this, LoginActivity.class);
             startActivity(i);
             finish();
 

@@ -42,6 +42,9 @@ public class RegisterFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    private static final String ARG_PARAM3 = "param3";
+    private static final String ARG_PARAM4 = "param4";
+    private static final String ARG_PARAM5 = "param5";
     private final static String COURSE_ADD_URL
             = "http://kferg9.000webhostapp.com/android/addUser.php?";
 
@@ -52,8 +55,14 @@ public class RegisterFragment extends Fragment {
 
     private String mParam1;
     private String mParam2;
+    private String mParam3;
+    private String mParam4;
+    private String mParam5;
     private EditText mEmail;
     private EditText mPassword;
+    private EditText mFirst;
+    private EditText mLast;
+    private EditText mUsername;
 
     /**
      * Listener for the registration button
@@ -77,11 +86,14 @@ public class RegisterFragment extends Fragment {
      * @param param2 Parameter 2.
      * @return A new instance of fragment RegisterFragment.
      */
-    public static RegisterFragment newInstance(String param1, String param2) {
+    public static RegisterFragment newInstance(String param1, String param2, String param3, String param4, String param5) {
         RegisterFragment fragment = new RegisterFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
+        args.putString(ARG_PARAM3, param3);
+        args.putString(ARG_PARAM4, param4);
+        args.putString(ARG_PARAM5, param5);
         fragment.setArguments(args);
         return fragment;
     }
@@ -97,6 +109,9 @@ public class RegisterFragment extends Fragment {
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
+            mParam3 = getArguments().getString(ARG_PARAM3);
+            mParam4 = getArguments().getString(ARG_PARAM4);
+            mParam5 = getArguments().getString(ARG_PARAM5);
         }
 
     }
@@ -117,6 +132,9 @@ public class RegisterFragment extends Fragment {
         //Set email and password
         mEmail = (EditText) v.findViewById(R.id.registerEmail);
         mPassword = (EditText) v.findViewById(R.id.registerPassword);
+        mFirst = (EditText) v.findViewById(R.id.registerFirst);
+        mLast = (EditText) v.findViewById(R.id.registerLast);
+        mUsername = (EditText) v.findViewById(R.id.registerUsername);
 
         //Button for registration
         Button button = (Button)
@@ -191,10 +209,19 @@ public class RegisterFragment extends Fragment {
             String password = mPassword.getText().toString();
             sb.append("&password=");
             sb.append(URLEncoder.encode(password, "UTF-8"));
+            String first = mFirst.getText().toString();
+            sb.append("&first=");
+            sb.append(URLEncoder.encode(first, "UTF-8"));
+            String last = mLast.getText().toString();
+            sb.append("&last=");
+            sb.append(URLEncoder.encode(last, "UTF-8"));
+            String username = mUsername.getText().toString();
+            sb.append("&username=");
+            sb.append(URLEncoder.encode(username, "UTF-8"));
 
 
             //Log.i(TAG sb.toString());
-            //Log.i(TAG, sb.toString());
+            Log.i(TAG, sb.toString());
 
         }
         catch(Exception e) {

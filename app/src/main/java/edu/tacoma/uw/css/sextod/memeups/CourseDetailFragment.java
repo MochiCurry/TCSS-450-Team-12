@@ -89,14 +89,15 @@ public class CourseDetailFragment extends Fragment {
 
     }
 
-    public void updateView(Match course) {
-        if (course != null) {
-            mCourseIdTextView.setText(course.getCourseId());
-            mCourseShortDescTextView.setText(course.getShortDescription());
-            mCourseLongDescTextView.setText(course.getLongDescription());
-            mCoursePrereqsTextView.setText(course.getPrereqs());
-        }
-    }
+//    public void updateView(Match course) {
+//        if (course != null) {
+//            mCourseIdTextView.setText(course.getCourseId());
+//            mCourseShortDescTextView.setText(course.getShortDescription());
+//            mCourseLongDescTextView.setText(course.getLongDescription());
+//            mCoursePrereqsTextView.setText(course.getPrereqs());
+//            mEmailTextView.setText(course.ge);
+//        }
+//    }
 
 
     public void onButtonPressed(Uri uri) {
@@ -136,15 +137,15 @@ public class CourseDetailFragment extends Fragment {
         void onFragmentInteraction(Uri uri);
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        Bundle args = getArguments();
-        if (args != null) {
-            // Set course information based on argument passed
-            updateView((Match) args.getSerializable(COURSE_ITEM_SELECTED));
-        }
-
-    }
+//    @Override
+//    public void onResume() {
+//        super.onResume();
+//        Bundle args = getArguments();
+//        if (args != null) {
+//            // Set course information based on argument passed
+//            updateView((Match) args.getSerializable(COURSE_ITEM_SELECTED));
+//        }
+//
+//    }
 
 }
