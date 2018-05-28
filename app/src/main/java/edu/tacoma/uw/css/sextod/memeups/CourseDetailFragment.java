@@ -33,8 +33,8 @@ public class CourseDetailFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    private TextView mCourseIdTextView;
-    private TextView mCourseShortDescTextView;
+//    private TextView mCourseIdTextView;
+//    private TextView mCourseShortDescTextView;
     private TextView mCourseLongDescTextView;
     private TextView mCoursePrereqsTextView;
 
@@ -78,8 +78,8 @@ public class CourseDetailFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view =  inflater.inflate(R.layout.fragment_course_detail, container, false);
-        mCourseIdTextView = (TextView) view.findViewById(R.id.course_item_id);
-        mCourseShortDescTextView = (TextView) view.findViewById(R.id.course_short_desc);
+//        mCourseIdTextView = (TextView) view.findViewById(R.id.course_item_id);
+//        mCourseShortDescTextView = (TextView) view.findViewById(R.id.course_short_desc);
         mCourseLongDescTextView = (TextView) view.findViewById(R.id.course_long_desc);
         mCoursePrereqsTextView = (TextView) view.findViewById(R.id.course_prereqs);
 
@@ -95,8 +95,8 @@ public class CourseDetailFragment extends Fragment {
 
     public void updateView(Match course) {
         if (course != null) {
-            mCourseIdTextView.setText(course.getCourseId());
-            mCourseShortDescTextView.setText(course.getShortDescription());
+//            mCourseIdTextView.setText(course.getCourseId());
+//            mCourseShortDescTextView.setText(course.getShortDescription());
             mCourseLongDescTextView.setText(course.getLongDescription());
             mCoursePrereqsTextView.setText(course.getPrereqs());
         }
