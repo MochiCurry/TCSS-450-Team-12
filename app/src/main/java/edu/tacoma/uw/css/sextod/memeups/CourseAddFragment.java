@@ -1,7 +1,9 @@
 package edu.tacoma.uw.css.sextod.memeups;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
@@ -12,6 +14,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.net.URLEncoder;
 
 
@@ -33,12 +42,12 @@ public class CourseAddFragment extends Fragment {
 
     private CourseAddListener mListener;
     private final static String COURSE_ADD_URL
-            = "http://kferg9.000webhostapp.com/android/addCourse.php?";
+            = "http://kferg9.000webhostapp.com/android/updateProfile.php?cmd=update";
 
-    private EditText mCourseIdEditText;
-    private EditText mCourseShortDescEditText;
-    private EditText mCourseLongDescEditText;
-    private EditText mCoursePrereqsEditText;
+    private EditText mUserNameEditText;
+    private EditText mCatchPhraseEditText;
+    private EditText mBiographyEditText;
+    private EditText mPreferenceEditText;
 
 
 
@@ -80,10 +89,10 @@ public class CourseAddFragment extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_course_add, container, false);
 
-        mCourseIdEditText = (EditText) v.findViewById(R.id.user_name);
-        mCourseShortDescEditText = (EditText) v.findViewById(R.id.catch_phrase);
-        mCourseLongDescEditText = (EditText) v.findViewById(R.id.tell_us_more);
-        mCoursePrereqsEditText = (EditText) v.findViewById(R.id.preference);
+        mUserNameEditText = (EditText) v.findViewById(R.id.user_name);
+      //  mCatchPhraseEditText = (EditText) v.findViewById(R.id.catch_phrase);
+        mBiographyEditText = (EditText) v.findViewById(R.id.biography);
+       // mPreferenceEditText = (EditText) v.findViewById(R.id.preference);
 
 
         Button addCourseButton = (Button) v.findViewById(R.id.btnCourse);
@@ -92,6 +101,12 @@ public class CourseAddFragment extends Fragment {
             public void onClick(View v) {
                 String url = buildCourseURL(v);
                 mListener.addCourse(url);
+
+                Intent intent = new Intent(getActivity(), ProfileActivity.class);
+                startActivity(intent);
+
+
+
             }
         });
 
@@ -150,23 +165,13 @@ public class CourseAddFragment extends Fragment {
 
         try {
 
-            String courseId = mCourseIdEditText.getText().toString();
-            sb.append("id=");
+            String courseId = mUserNameEditText.getText().toString();
+            sb.append("username=");
             sb.append(URLEncoder.encode(courseId, "UTF-8"));
 
-
-            String courseShortDesc = mCourseShortDescEditText.getText().toString();
-            sb.append("&shortDesc=");
-            sb.append(URLEncoder.encode(courseShortDesc, "UTF-8"));
-
-
-            String courseLongDesc = mCourseLongDescEditText.getText().toString();
-            sb.append("&longDesc=");
+            String courseLongDesc = mBiographyEditText.getText().toString();
+            sb.append("&bio=");
             sb.append(URLEncoder.encode(courseLongDesc, "UTF-8"));
-
-            String coursePrereqs = mCoursePrereqsEditText.getText().toString();
-            sb.append("&prereqs=");
-            sb.append(URLEncoder.encode(coursePrereqs, "UTF-8"));
 
             //Log.i(TAG sb.toString());
 
@@ -175,8 +180,91 @@ public class CourseAddFragment extends Fragment {
             Toast.makeText(v.getContext(), "Something wrong with the url" + e.getMessage(), Toast.LENGTH_LONG)
                     .show();
         }
+
+        //should have string now, try updating result
+        AddUserTask task = new AddUserTask();
+        task.execute(new String[]{sb.toString()});
+
+
         return sb.toString();
     }
 
+    /**
+     * Private class to handle asynchronous loading of data
+     */
+    private class AddUserTask extends AsyncTask<String, Void, String> {
+        /**
+         * PreExecute
+         */
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
 
+        /**
+         * This function reads and returns the response from the webpage.
+         *
+         * @param urls url of the webpage
+         * @return Returns the output from the webpage
+         */
+        @Override
+        protected String doInBackground(String... urls) {
+            String response = "";
+            HttpURLConnection urlConnection = null;
+            for (String url : urls) {
+                try {
+                    URL urlObject = new URL(url);
+                    urlConnection = (HttpURLConnection) urlObject.openConnection();
+
+                    InputStream content = urlConnection.getInputStream();
+
+                    BufferedReader buffer = new BufferedReader(new InputStreamReader(content));
+                    String s = "";
+                    while ((s = buffer.readLine()) != null) {
+                        response += s;
+                    }
+
+                } catch (Exception e) {
+                    response = "Unable to add course, Reason: "
+                            + e.getMessage();
+                } finally {
+                    if (urlConnection != null)
+                        urlConnection.disconnect();
+                }
+            }
+            return response;
+        }
+
+        /**
+         * It checks to see if there was a problem with the URL(Network) which is when an
+         * exception is caught. It tries to call the parse Method and checks to see if it was successful.
+         * If not, it displays the exception.
+         *
+         * @param result
+         */
+//        @Override
+//        protected void onPostExecute(String result) {
+//            // Something wrong with the network or the URL.
+//            try {
+//                JSONObject jsonObject = new JSONObject(result);
+//                String status = (String) jsonObject.get("result");
+//                if (status.equals("success")) {
+//                    Toast.makeText(getApplicationContext(), "Success!"
+//                            , Toast.LENGTH_LONG)
+//                            .show();
+//                    //On successful login, go to main page
+//                    //openMainPage();
+//                } else {
+//                    Toast.makeText(getApplicationContext(), "Error: "
+//                                    + jsonObject.get("error")
+//                            , Toast.LENGTH_LONG)
+//                            .show();
+//                }
+//            } catch (JSONException e) {
+//                Toast.makeText(getApplicationContext(), "Something wrong with the data" +
+//                        e.getMessage(), Toast.LENGTH_LONG).show();
+//            }
+//        }
+
+    }
 }
