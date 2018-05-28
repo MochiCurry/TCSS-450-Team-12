@@ -1,8 +1,10 @@
 package edu.tacoma.uw.css.sextod.memeups;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -85,9 +87,9 @@ public class CourseAddFragment extends Fragment {
         mCourseLongDescEditText = (EditText) v.findViewById(R.id.add_course_long_desc);
         mCoursePrereqsEditText = (EditText) v.findViewById(R.id.add_course_prereqs);
 
-        FloatingActionButton floatingActionButton = (FloatingActionButton)
-                getActivity().findViewById(R.id.fab);
-        floatingActionButton.hide();
+//        FloatingActionButton floatingActionButton = (FloatingActionButton)
+//                getActivity().findViewById(R.id.fab);
+//        floatingActionButton.hide();
 
         Button addCourseButton = (Button) v.findViewById(R.id.btnCourse);
         addCourseButton.setOnClickListener(new View.OnClickListener() {
@@ -95,6 +97,7 @@ public class CourseAddFragment extends Fragment {
             public void onClick(View v) {
                 String url = buildCourseURL(v);
                 mListener.addCourse(url);
+
             }
         });
 

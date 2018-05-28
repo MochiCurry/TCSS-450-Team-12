@@ -6,6 +6,11 @@
     android:layout_height="match_parent"
     tools:context=".CourseAddFragment">
 
+    <include
+        android:id="@+id/top_bar"
+        layout = "@layout/top_bar">
+
+    </include>
 
     <EditText
         android:id="@+id/add_course_id"
@@ -15,10 +20,12 @@
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
-        android:hint="Course id"
+        android:hint="User Name"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/top_bar"
+        />
 
     <EditText
         android:id="@+id/add_course_short_desc"
@@ -45,7 +52,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:ems="10"
-        android:hint="Long Description"
+        android:hint="About you"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -61,7 +68,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:ems="10"
-        android:hint="Prereq"
+        android:hint="Preference"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

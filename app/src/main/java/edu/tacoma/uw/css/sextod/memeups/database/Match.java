@@ -8,10 +8,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Match implements Serializable{
-    public static final String ID = "id";
-    public static final String SHORT_DESC = "shortDesc";
-    public static final String LONG_DESC = "longDesc";
-    public static final String PRE_REQS = "prereqs";
+//    public static final String ID = "id";
+//    public static final String SHORT_DESC = "shortDesc";
+    public static final String ID = "email";
+    public static final String SHORT_DESC = "password";
+    public static final String LONG_DESC = "bio";
+    public static final String PRE_REQS = "score_category";
 
     private String mCourseId;
     private String mShortDescription;
