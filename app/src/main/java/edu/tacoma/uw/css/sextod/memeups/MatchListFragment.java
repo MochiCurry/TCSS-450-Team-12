@@ -83,9 +83,9 @@ public class MatchListFragment extends Fragment {
             CourseAsyncTask courseAsyncTask = new CourseAsyncTask();
             courseAsyncTask.execute(new String[]{COURSE_URL});
 
-            FloatingActionButton floatingActionButton = (FloatingActionButton)
+            /*FloatingActionButton floatingActionButton = (FloatingActionButton)
                     getActivity().findViewById(R.id.fab);
-            floatingActionButton.show();
+            floatingActionButton.show();*/
 
 
         }

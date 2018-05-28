@@ -3,7 +3,6 @@ package edu.tacoma.uw.css.sextod.memeups;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -24,11 +23,15 @@ import java.net.URL;
 import edu.tacoma.uw.css.sextod.memeups.database.Match;
 
 public class MatchActivity extends AppCompatActivity implements MatchListFragment.OnListFragmentInteractionListener,
-        CourseAddFragment.CourseAddListener {
+        CourseAddFragment.CourseAddListener, ViewProfileFragment.MatchListener {
 
-   // private CourseDetailFragment mDetail;
+   // private ViewProfileFragment mDetail;
 
-
+    @Override
+    public void matchRequest(String email)
+    {
+        //add match stuff?
+    }
 
 
     @Override
@@ -42,19 +45,6 @@ public class MatchActivity extends AppCompatActivity implements MatchListFragmen
         setSupportActionBar(toolbar);
         getSupportActionBar().setIcon(R.drawable.memeupstopicon);
         getSupportActionBar().setDisplayUseLogoEnabled(true);
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                CourseAddFragment courseAddFragment = new CourseAddFragment();
-                getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.fragment_container, courseAddFragment)
-                        .addToBackStack(null)
-                        .commit();
-
-            }
-        });
 
         MatchListFragment courseListFragment = new MatchListFragment();
 
@@ -76,13 +66,13 @@ public class MatchActivity extends AppCompatActivity implements MatchListFragmen
 
     @Override
     public void onListFragmentInteraction(Match course) {
-        CourseDetailFragment courseDetailFragment = new CourseDetailFragment();
+        ViewProfileFragment viewProfileFragment = new ViewProfileFragment();
         Bundle args = new Bundle();
-        args.putSerializable(CourseDetailFragment.COURSE_ITEM_SELECTED, course);
-        courseDetailFragment.setArguments(args);
+        args.putSerializable(ViewProfileFragment.COURSE_ITEM_SELECTED, course);
+        viewProfileFragment.setArguments(args);
 
         getSupportFragmentManager().beginTransaction()
-                .replace(R.id.fragment_container, courseDetailFragment)
+                .replace(R.id.fragment_container, viewProfileFragment)
                 .addToBackStack(null)
                 .commit();
 

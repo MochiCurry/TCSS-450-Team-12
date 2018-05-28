@@ -9,11 +9,57 @@ import java.util.List;
 
 public class Match implements Serializable{
     public static final String EMAIL = "email";
+    public static final String FIRST = "first";
+    public static final String LAST = "last";
+    public static final String USERNAME = "username";
+    public static final String BIO = "bio";
 
     private String mEmail;
+    private String mFirst;
+    private String mLast;
+    private String mPrereqs;
+    private String mBio;
 
-    public Match(String email) {
+
+    public String getmFirst() {
+        return mFirst;
+    }
+
+    public void setmFirst(String mShortDescription) {
+        this.mFirst = mShortDescription;
+    }
+
+    public String getmLongDescription() {
+        return mLast;
+    }
+
+    public void setmLast(String mLongDescription) {
+        this.mLast = mLongDescription;
+    }
+
+    public String getmPrereqs() {
+        return mPrereqs;
+    }
+
+    public void setmPrereqs(String mPrereqs) {
+        this.mPrereqs = mPrereqs;
+    }
+
+    public String getmBio() {
+        return mBio;
+    }
+
+    public void setmBio(String mBio) {
+        this.mBio = mBio;
+    }
+
+    public Match(String email, String shortDesc, String longDesc, String prereqs, String bio) {
         mEmail = email;
+        mFirst = shortDesc;
+        mLast = longDesc;
+        mPrereqs = prereqs;
+
+        mBio = bio;
     }
 
     public String getmEmail() {
@@ -30,7 +76,11 @@ public class Match implements Serializable{
             JSONArray arr = new JSONArray(courseJSON);
             for (int i = 0; i < arr.length(); i++) {
                 JSONObject obj = arr.getJSONObject(i);
-                Match match = new Match(obj.getString(Match.EMAIL));
+                Match match = new Match(obj.getString(Match.EMAIL),
+                        obj.getString(Match.FIRST),
+                        obj.getString(Match.LAST),
+                        obj.getString(Match.USERNAME),
+                        obj.getString(Match.BIO));
                 matchList.add(match);
             }
         }

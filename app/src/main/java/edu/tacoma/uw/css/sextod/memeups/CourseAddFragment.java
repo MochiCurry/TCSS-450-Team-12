@@ -85,9 +85,6 @@ public class CourseAddFragment extends Fragment {
         mCourseLongDescEditText = (EditText) v.findViewById(R.id.add_course_long_desc);
         mCoursePrereqsEditText = (EditText) v.findViewById(R.id.add_course_prereqs);
 
-        FloatingActionButton floatingActionButton = (FloatingActionButton)
-                getActivity().findViewById(R.id.fab);
-        floatingActionButton.hide();
 
         Button addCourseButton = (Button) v.findViewById(R.id.btnCourse);
         addCourseButton.setOnClickListener(new View.OnClickListener() {
