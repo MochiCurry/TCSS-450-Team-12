@@ -80,10 +80,10 @@ public class CourseAddFragment extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_course_add, container, false);
 
-        mCourseIdEditText = (EditText) v.findViewById(R.id.add_course_id);
-        mCourseShortDescEditText = (EditText) v.findViewById(R.id.add_course_short_desc);
-        mCourseLongDescEditText = (EditText) v.findViewById(R.id.add_course_long_desc);
-        mCoursePrereqsEditText = (EditText) v.findViewById(R.id.add_course_prereqs);
+        mCourseIdEditText = (EditText) v.findViewById(R.id.user_name);
+        mCourseShortDescEditText = (EditText) v.findViewById(R.id.catch_phrase);
+        mCourseLongDescEditText = (EditText) v.findViewById(R.id.tell_us_more);
+        mCoursePrereqsEditText = (EditText) v.findViewById(R.id.preference);
 
 
         Button addCourseButton = (Button) v.findViewById(R.id.btnCourse);
