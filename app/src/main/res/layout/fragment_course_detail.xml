@@ -2,9 +2,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    tools:context=".ProfileViewFragment">
+    tools:context=".CourseDetailFragment">
 
     <TextView
         android:layout_width="match_parent"
@@ -25,15 +24,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/course_prereqs" />
-
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="send match request"
-        tools:text="send match request"
-        android:id="@+id/match_button" />
-
-
 
 </LinearLayout>
 

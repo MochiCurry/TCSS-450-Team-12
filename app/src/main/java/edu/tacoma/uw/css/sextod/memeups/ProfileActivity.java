@@ -9,55 +9,27 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageView;
 
-public class ProfileActivity extends AppCompatActivity implements ProfileEditFragment.CourseAddListener
-{
+public class ProfileActivity extends AppCompatActivity {
 
     private Button collectionbutton;
-    private EditText registerBio;
-    private ImageView profilePic;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
-
         Toolbar toolbar = (Toolbar) findViewById(R.id.top_bar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setIcon(R.drawable.memeupstopicon);
         getSupportActionBar().setDisplayUseLogoEnabled(true);
 
-
-//        profilePic = findViewById(R.id.profilePic);
-
-
-        registerBio = (EditText) findViewById(R.id.biotext);
-        profilePic = (ImageView) findViewById(R.id.profilePic);
-
         collectionbutton = findViewById(R.id.collectionbutton);
         collectionbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                //clear the elements in activity
-                collectionbutton.setVisibility(View.GONE);
-                registerBio.setVisibility(View.GONE);
-                profilePic.setVisibility(View.GONE);
-
-
-                ProfileEditFragment profileEditFragment = new ProfileEditFragment();
-                getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.fragment_container, profileEditFragment)
-                        .addToBackStack(null)
-                        .commit();
-
-                // openCollectionPage();
+                openCollectionPage();
             }
         });
-
     }
 
     public void openCollectionPage() {
@@ -76,10 +48,4 @@ public class ProfileActivity extends AppCompatActivity implements ProfileEditFra
     public boolean onOptionsItemSelected(MenuItem item) {
         return super.onOptionsItemSelected(item);
     }
-    @Override
-    public void addCourse(String url) {
-
-    }
-
-
 }

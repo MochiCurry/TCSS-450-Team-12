@@ -11,13 +11,13 @@
         android:id="@+id/registerEmail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="170dp"
+        android:layout_marginTop="214dp"
         android:ems="10"
-        android:hint="enter email"
         android:inputType="textEmailAddress"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
+        android:hint="enter email"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
@@ -33,45 +33,6 @@
         android:hint="enter password"
         app:layout_constraintTop_toBottomOf="@+id/registerEmail" />
 
-    <EditText
-        android:id="@+id/registerFirst"
-        android:layout_width="wrap_content"
-        android:layout_height="46dp"
-        android:layout_marginTop="16dp"
-        android:ems="10"
-        android:hint="enter first name"
-        android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/registerPassword" />
-
-    <EditText
-        android:id="@+id/registerLast"
-        android:layout_width="wrap_content"
-        android:layout_height="46dp"
-        android:layout_marginTop="16dp"
-        android:ems="10"
-        android:hint="enter last name"
-        android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/registerFirst" />
-
-    <EditText
-        android:id="@+id/registerUsername"
-        android:layout_width="wrap_content"
-        android:layout_height="46dp"
-        android:layout_marginTop="16dp"
-        android:ems="10"
-        android:hint="enter username"
-        android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/registerLast" />
-
     <Button
         android:id="@+id/registerbutton"
         android:layout_width="wrap_content"
@@ -81,6 +42,6 @@
 
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/registerUsername" />
+        app:layout_constraintTop_toBottomOf="@+id/registerPassword" />
 
 </android.support.constraint.ConstraintLayout>

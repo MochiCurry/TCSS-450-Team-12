@@ -1,69 +1,22 @@
 package edu.tacoma.uw.css.sextod.memeups;
 
-import android.content.Context;
-import android.content.SharedPreferences;
-import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.widget.Toast;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.net.URLEncoder;
+import android.view.View;
 
 import edu.tacoma.uw.css.sextod.memeups.database.Match;
 
-import static android.content.ContentValues.TAG;
+public class MatchActivity extends AppCompatActivity implements MatchListFragment.OnListFragmentInteractionListener {
 
-public class MatchActivity extends AppCompatActivity implements MatchListFragment.OnListFragmentInteractionListener,
-        ProfileEditFragment.CourseAddListener, ProfileViewFragment.MatchListener {
-
-    private final static String MATCH_URL
-            = "http://kferg9.000webhostapp.com/android/addMatch.php?";
-
-   // private ProfileViewFragment mDetail;
-
-    @Override
-    public void matchRequest(String email)
-    {
-        //match with given email
-        StringBuilder sb = new StringBuilder(MATCH_URL);
-
-        try {
-            SharedPreferences mLoginEmail = getSharedPreferences(getString(R.string.LOGIN_PREFS)
-                    , Context.MODE_PRIVATE);
-
-            String email1 = mLoginEmail.getString("email", "");
-            sb.append("email1=");
-            sb.append(URLEncoder.encode(email1, "UTF-8"));
-            String email2 = email;
-            sb.append("&email2=");
-            sb.append(URLEncoder.encode(email2, "UTF-8"));
+   // private CourseDetailFragment mDetail;
 
 
-            //Log.i(TAG sb.toString());
-            Log.i(TAG, sb.toString());
-
-        }
-        catch(Exception e) {
-            //Toast.makeText(view.getContext(), "Something wrong with the url" + e.getMessage(), Toast.LENGTH_LONG)
-                    //.show();
-        }
-        //return sb.toString();
-
-        addCourse(sb.toString());
-    }
 
 
     @Override
@@ -77,6 +30,15 @@ public class MatchActivity extends AppCompatActivity implements MatchListFragmen
         setSupportActionBar(toolbar);
         getSupportActionBar().setIcon(R.drawable.memeupstopicon);
         getSupportActionBar().setDisplayUseLogoEnabled(true);
+
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+            }
+        });
 
         MatchListFragment courseListFragment = new MatchListFragment();
 
@@ -98,94 +60,16 @@ public class MatchActivity extends AppCompatActivity implements MatchListFragmen
 
     @Override
     public void onListFragmentInteraction(Match course) {
-        ProfileViewFragment profileViewFragment = new ProfileViewFragment();
+        CourseDetailFragment courseDetailFragment = new CourseDetailFragment();
         Bundle args = new Bundle();
-        args.putSerializable(ProfileViewFragment.COURSE_ITEM_SELECTED, course);
-        profileViewFragment.setArguments(args);
+        args.putSerializable(CourseDetailFragment.COURSE_ITEM_SELECTED, course);
+        courseDetailFragment.setArguments(args);
 
         getSupportFragmentManager().beginTransaction()
-                .replace(R.id.fragment_container, profileViewFragment)
+                .replace(R.id.fragment_container, courseDetailFragment)
                 .addToBackStack(null)
                 .commit();
 
-    }
-
-    @Override
-    public void addCourse(String url) {
-
-        AddCourseTask task = new AddCourseTask();
-        task.execute(new String[]{url.toString()});
-
-// Takes you back to the previous fragment by popping the current fragment out.
-        getSupportFragmentManager().popBackStackImmediate();
-    }
-
-
-    private class AddCourseTask extends AsyncTask<String, Void, String> {
-
-
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-        }
-
-        @Override
-        protected String doInBackground(String... urls) {
-            String response = "";
-            HttpURLConnection urlConnection = null;
-            for (String url : urls) {
-                try {
-                    URL urlObject = new URL(url);
-                    urlConnection = (HttpURLConnection) urlObject.openConnection();
-
-                    InputStream content = urlConnection.getInputStream();
-
-                    BufferedReader buffer = new BufferedReader(new InputStreamReader(content));
-                    String s = "";
-                    while ((s = buffer.readLine()) != null) {
-                        response += s;
-                    }
-
-                } catch (Exception e) {
-                    response = "Unable to add course, Reason: "
-                            + e.getMessage();
-                } finally {
-                    if (urlConnection != null)
-                        urlConnection.disconnect();
-                }
-            }
-            return response;
-        }
-
-
-        /**
-         * It checks to see if there was a problem with the URL(Network) which is when an
-         * exception is caught. It tries to call the parse Method and checks to see if it was successful.
-         * If not, it displays the exception.
-         *
-         * @param result
-         */
-        @Override
-        protected void onPostExecute(String result) {
-            // Something wrong with the network or the URL.
-            try {
-                JSONObject jsonObject = new JSONObject(result);
-                String status = (String) jsonObject.get("result");
-                if (status.equals("success")) {
-                    Toast.makeText(getApplicationContext(), "Success!"
-                            , Toast.LENGTH_LONG)
-                            .show();
-                } else {
-                    Toast.makeText(getApplicationContext(), "Failed to add: "
-                                    + jsonObject.get("error")
-                            , Toast.LENGTH_LONG)
-                            .show();
-                }
-            } catch (JSONException e) {
-                Toast.makeText(getApplicationContext(), "Something wrong with the data" +
-                        e.getMessage(), Toast.LENGTH_LONG).show();
-            }
-        }
     }
 
 

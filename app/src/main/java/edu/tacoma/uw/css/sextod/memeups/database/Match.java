@@ -1,4 +1,6 @@
 package edu.tacoma.uw.css.sextod.memeups.database;
+
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -8,103 +10,72 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Match implements Serializable{
-    public static final String EMAIL = "email";
-    public static final String FIRST = "first";
-    public static final String LAST = "last";
-    public static final String USERNAME = "username";
-    public static final String BIO = "bio";
+    public static final String ID = "id";
+    public static final String SHORT_DESC = "shortDesc";
+    public static final String LONG_DESC = "longDesc";
+    public static final String PRE_REQS = "prereqs";
 
-    private String mEmail;
-    private String mFirst;
-    private String mLast;
-    private String mUsername;
-    private String mBio;
+    private String mCourseId;
+    private String mShortDescription;
+    private String mLongDescription;
+    private String mPrereqs;
 
-
-    public String getmFirst() {
-        return mFirst;
+    public Match(String courseId,
+                 String shortDesc,
+                 String longDesc,
+                 String prereqs) {
+        mCourseId = courseId;
+        mShortDescription = shortDesc;
+        mLongDescription = longDesc;
+        mPrereqs = prereqs;
     }
 
-    public void setmFirst(String mShortDescription) {
-        this.mFirst = mShortDescription;
+    public String getCourseId() {
+        return mCourseId;
     }
 
-    public String getmLongDescription() {
-        return mLast;
+    public String getShortDescription() {
+        return mShortDescription;
     }
 
-    public void setmLast(String mLongDescription) {
-        this.mLast = mLongDescription;
+    public String getLongDescription() {
+        return mLongDescription;
     }
 
-    public String getmUsername() {
-        return mUsername;
+    public String getPrereqs() {
+        return mPrereqs;
     }
 
-    public void setmUsername(String mUsername) {
-        this.mUsername = mUsername;
+    public void setCourseId(String id) {
+        mCourseId = id;
     }
 
-    public String getmBio() {
-        return mBio;
+    public void setShortDescription(String shortDesc) {
+        mShortDescription = shortDesc;
     }
 
-    public void setmBio(String mBio) {
-        this.mBio = mBio;
+    public void setLongDescription(String longDesc) {
+        mLongDescription = longDesc;
     }
 
-    public Match()
-    {
-
-    }
-
-    public Match(String email, String shortDesc, String longDesc, String prereqs, String bio) {
-        mEmail = email;
-        mFirst = shortDesc;
-        mLast = longDesc;
-        mUsername = prereqs;
-
-        mBio = bio;
-    }
-
-    public String getmEmail() {
-        return mEmail;
-    }
-
-    public void setmEmail(String mEmail) {
-        this.mEmail = mEmail;
+    public void setPreReqs(String prereqs) {
+        mPrereqs = prereqs;
     }
 
     public static List<Match> parseCourseJSON(String courseJSON) throws JSONException {
-        List<Match> matchList = new ArrayList<Match>();
+        List<Match> courseList = new ArrayList<Match>();
         if (courseJSON != null) {
             JSONArray arr = new JSONArray(courseJSON);
             for (int i = 0; i < arr.length(); i++) {
                 JSONObject obj = arr.getJSONObject(i);
-                Match match = new Match(obj.getString(Match.EMAIL),
-                        obj.getString(Match.FIRST),
-                        obj.getString(Match.LAST),
-                        obj.getString(Match.USERNAME),
-                        obj.getString(Match.BIO));
-                matchList.add(match);
+                Match course = new Match(obj.getString(Match.ID),
+                        obj.getString(Match.SHORT_DESC) ,
+                        obj.getString(Match.LONG_DESC),
+                        obj.getString(Match.PRE_REQS));
+                courseList.add(course);
             }
         }
-        return matchList;
+        return courseList;
     }
 
-    public static Match parseUserJSON(String courseJSON) throws JSONException
-    {
-        Match match = null;
-        if (courseJSON != null)
-        {
-            JSONArray arr = new JSONArray(courseJSON);
-            JSONObject obj = arr.getJSONObject(0);
-            match = new Match(obj.getString(Match.EMAIL),
-                    obj.getString(Match.FIRST),
-                    obj.getString(Match.LAST),
-                    obj.getString(Match.USERNAME),
-                    obj.getString(Match.BIO));
-        }
-        return match;
-    }
 }
