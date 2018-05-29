@@ -64,7 +64,7 @@ public class ResultActivity extends AppCompatActivity {
 
         // text for results
         TextView resultLabel = (TextView) findViewById(R.id.resultLabel);
-        TextView totalScoreLabel = (TextView) findViewById(R.id.totalScoreLabel);
+        final TextView totalScoreLabel = (TextView) findViewById(R.id.totalScoreLabel);
 
         // get the user score
         // int score = getIntent().getIntExtra("Right_Answer_Count", 0);
