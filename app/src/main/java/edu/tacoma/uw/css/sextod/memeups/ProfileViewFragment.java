@@ -28,6 +28,7 @@ public class ProfileViewFragment extends Fragment {
 
     private String mParam1;
     private String mParam2;
+    private Match mCurrentUser;
 
     //    private TextView mCourseIdTextView;
 //    private TextView mCourseShortDescTextView;
@@ -97,6 +98,7 @@ public class ProfileViewFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 //do matching stuff
+                mListener.matchRequest(mCurrentUser.getmEmail());
             }
         });
 
@@ -162,6 +164,7 @@ public class ProfileViewFragment extends Fragment {
         if (args != null) {
             // Set course information based on argument passed
             updateView((Match) args.getSerializable(COURSE_ITEM_SELECTED));
+            mCurrentUser = (Match) args.getSerializable(COURSE_ITEM_SELECTED);
         } else {
             getActivity().getSupportFragmentManager().popBackStack();
         }

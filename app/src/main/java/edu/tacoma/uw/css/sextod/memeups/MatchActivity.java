@@ -1,9 +1,12 @@
 package edu.tacoma.uw.css.sextod.memeups;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -17,18 +20,49 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.URLEncoder;
 
 import edu.tacoma.uw.css.sextod.memeups.database.Match;
 
+import static android.content.ContentValues.TAG;
+
 public class MatchActivity extends AppCompatActivity implements MatchListFragment.OnListFragmentInteractionListener,
         ProfileEditFragment.CourseAddListener, ProfileViewFragment.MatchListener {
+
+    private final static String MATCH_URL
+            = "http://kferg9.000webhostapp.com/android/addMatch.php?";
 
    // private ProfileViewFragment mDetail;
 
     @Override
     public void matchRequest(String email)
     {
-        //add match stuff?
+        //match with given email
+        StringBuilder sb = new StringBuilder(MATCH_URL);
+
+        try {
+            SharedPreferences mLoginEmail = getSharedPreferences(getString(R.string.LOGIN_PREFS)
+                    , Context.MODE_PRIVATE);
+
+            String email1 = mLoginEmail.getString("email", "");
+            sb.append("email1=");
+            sb.append(URLEncoder.encode(email1, "UTF-8"));
+            String email2 = email;
+            sb.append("&email2=");
+            sb.append(URLEncoder.encode(email2, "UTF-8"));
+
+
+            //Log.i(TAG sb.toString());
+            Log.i(TAG, sb.toString());
+
+        }
+        catch(Exception e) {
+            //Toast.makeText(view.getContext(), "Something wrong with the url" + e.getMessage(), Toast.LENGTH_LONG)
+                    //.show();
+        }
+        //return sb.toString();
+
+        addCourse(sb.toString());
     }
 
 
@@ -138,7 +172,7 @@ public class MatchActivity extends AppCompatActivity implements MatchListFragmen
                 JSONObject jsonObject = new JSONObject(result);
                 String status = (String) jsonObject.get("result");
                 if (status.equals("success")) {
-                    Toast.makeText(getApplicationContext(), "Course successfully added!"
+                    Toast.makeText(getApplicationContext(), "Success!"
                             , Toast.LENGTH_LONG)
                             .show();
                 } else {
