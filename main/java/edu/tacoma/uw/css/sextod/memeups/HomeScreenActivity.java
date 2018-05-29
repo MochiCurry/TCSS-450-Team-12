@@ -11,11 +11,20 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 
-public class MainPageActivity extends AppCompatActivity {
+import com.squareup.picasso.Picasso;
+
+public class HomeScreenActivity extends AppCompatActivity {
     private Button quizbutton;
     private Button matchbutton;
     private Button profilebutton;
+
+    private ImageView imageView3;
+
+    /* URL of the meme of the day
+    private String url = "http://kferg9.000webhostapp.com/android/showDaily.php?id=1"; */
+    private String url = "https://qph.fs.quoracdn.net/main-qimg-2e3206445819b42a895ba8234a24ec71-c";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +36,14 @@ public class MainPageActivity extends AppCompatActivity {
         getSupportActionBar().setIcon(R.drawable.memeupstopicon);
         getSupportActionBar().setDisplayUseLogoEnabled(true);
 
+        imageView3 = findViewById(R.id.imageView3);
+        Picasso.get()
+                .load(url)
+                .placeholder(R.drawable.ic_launcher_background)
+                .error(R.drawable.memeupslogo)
+                .into(imageView3);
+
+        getIntent().getIntExtra("loggedUser", 0);
 
         quizbutton = findViewById(R.id.quizbutton);
         quizbutton.setOnClickListener(new View.OnClickListener() {
@@ -68,7 +85,7 @@ public class MainPageActivity extends AppCompatActivity {
             sharedPreferences.edit().putBoolean(getString(R.string.LOGGEDIN), false)
                     .commit();
 
-            Intent i = new Intent(this, MainActivity.class);
+            Intent i = new Intent(this, LoginActivity.class);
             startActivity(i);
             finish();
 
