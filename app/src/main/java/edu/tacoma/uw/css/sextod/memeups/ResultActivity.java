@@ -45,6 +45,7 @@ public class ResultActivity extends AppCompatActivity {
             = "http://kferg9.000webhostapp.com/android/updateUser.php?cmd=quizresult";
 
     private Button returnButton;
+    private Button shareButton;
     private String level0 = "Scrub";
     private String level1 = "Squire";
     private String level2 = "Alright";
@@ -144,6 +145,24 @@ public class ResultActivity extends AppCompatActivity {
 
             }
         });
+        
+        shareButton = findViewById(R.id.shareButton);
+        shareButton.setOnClickListener(new View.OnClickListener() {
+            /**
+             * Listener for the return button. Sends the user back to the main page.
+             * @param v
+             */
+            @Override
+            public void onClick(View v) {
+
+                Intent share = new Intent(Intent.ACTION_SEND);
+                share.setType("text/plain");
+                share.putExtra(Intent.EXTRA_TEXT, "My meme level is " + totalScoreLabel.getText() + " on MemeUps!");
+
+                startActivity(Intent.createChooser(share, "Choose where you want to share"));
+
+            }
+});
 
     }
 
