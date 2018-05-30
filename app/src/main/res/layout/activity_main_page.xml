@@ -36,10 +36,20 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="My matches"
+        android:text="Find matches"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/quizbutton" />
+
+    <Button
+        android:id="@+id/viewmatchbutton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="My matches"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/matchbutton" />
 
     <Button
         android:id="@+id/profilebutton"
@@ -49,7 +59,7 @@
         android:text="My profile"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/matchbutton" />
+        app:layout_constraintTop_toBottomOf="@+id/viewmatchbutton" />
 
     <ImageView
         android:id="@+id/imageView"

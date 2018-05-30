@@ -19,12 +19,14 @@ public class HomeScreenActivity extends AppCompatActivity {
     private Button quizbutton;
     private Button matchbutton;
     private Button profilebutton;
+    private Button viewmatchbutton;
 
     private ImageView imageView3;
 
     /* URL of the meme of the day
 private String url = "http://kferg9.000webhostapp.com/android/showDaily.php?id=1"; */
     private String url = "https://qph.fs.quoracdn.net/main-qimg-2e3206445819b42a895ba8234a24ec71-c";
+    private SharedPreferences mSharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +44,9 @@ private String url = "http://kferg9.000webhostapp.com/android/showDaily.php?id=1
                 .placeholder(R.drawable.ic_launcher_background)
                 .error(R.drawable.memeupslogo)
                 .into(imageView3);
+
+        mSharedPreferences = getSharedPreferences(getString(R.string.LOGIN_PREFS)
+                , Context.MODE_PRIVATE);
 
         getIntent().getIntExtra("loggedUser", 0);
 
@@ -68,6 +73,15 @@ private String url = "http://kferg9.000webhostapp.com/android/showDaily.php?id=1
                 openProfilePage();
             }
         });
+
+        viewmatchbutton = findViewById(R.id.viewmatchbutton);
+        viewmatchbutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openViewMatchPage();
+            }
+        });
+
     }
 
     @Override
@@ -101,6 +115,24 @@ private String url = "http://kferg9.000webhostapp.com/android/showDaily.php?id=1
     }
 
     public void openMatchPage() {
+        Intent intent = new Intent(this, MatchActivity.class);
+        startActivity(intent);
+
+        mSharedPreferences
+                .edit()
+                .putBoolean(getString(R.string.LOGGEDIN), true)
+                .putString("listmode", "matchusers")
+                .commit();
+
+    }
+
+    public void openViewMatchPage() {
+        mSharedPreferences
+                .edit()
+                .putBoolean(getString(R.string.LOGGEDIN), true)
+                .putString("listmode", "sentmatch")
+                .commit();
+
         Intent intent = new Intent(this, MatchActivity.class);
         startActivity(intent);
 
