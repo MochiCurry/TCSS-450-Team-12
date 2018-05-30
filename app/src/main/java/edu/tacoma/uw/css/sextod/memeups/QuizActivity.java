@@ -112,6 +112,7 @@ public class QuizActivity extends AppCompatActivity {
                     //intent.putExtra("Right_Answer_Count", score);
                     intent.putExtra("Right_Answer_Count", displayMemeLevel(score));
                     startActivity(intent);
+                    finish();
                 } else //Else load the next question
                 {
                     updateQuestion();
