@@ -1,6 +1,7 @@
 package edu.tacoma.uw.css.sextod.memeups;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -98,19 +99,35 @@ public class ProfileViewFragment extends Fragment {
         mDisplay = (ImageView) view.findViewById(R.id.display_pic);
         mMeme = (ImageView) view.findViewById(R.id.meme_pic);
 
+        SharedPreferences mMode = this.getActivity().getSharedPreferences(getString(R.string.LOGIN_PREFS)
+                , Context.MODE_PRIVATE);
+
+        String mode = mMode.getString("listmode", "");
+
         //match button
         Button registerButton = (Button) view.findViewById(R.id.match_button);
-        /**
-         * Listener for match button
-         */
-        registerButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //do matching stuff
-                mListener.matchRequest(mCurrentUser.getmEmail());
-            }
-        });
 
+        if(mode.equalsIgnoreCase("matchusers"))
+        {
+            /**
+             * Listener for match button
+             */
+            registerButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    //do matching stuff
+                    mListener.matchRequest(mCurrentUser.getmEmail());
+                }
+            });
+        }
+        else if(mode.equalsIgnoreCase("sentmatch"))
+        {
+            //hide match button
+            registerButton.setVisibility(View.GONE);
+
+            //send message stuff here
+
+        }
 
         return view;
 
