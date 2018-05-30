@@ -204,8 +204,12 @@ public class LoginActivity extends AppCompatActivity implements RegisterFragment
                             .show();
                 }
             } catch (JSONException e) {
-                Toast.makeText(getApplicationContext(), "Something wrong with the data" +
-                        e.getMessage(), Toast.LENGTH_LONG).show();
+                if (e.getMessage().contains("End of input at character 0 of")) {
+                    Toast.makeText(getApplicationContext(), "Email is already in use.", Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(getApplicationContext(), "Something wrong with the data" +
+                            e.getMessage(), Toast.LENGTH_LONG).show();
+                }
             }
         }
     }
@@ -216,15 +220,15 @@ public class LoginActivity extends AppCompatActivity implements RegisterFragment
      */
     @Override
     public void register(String url) {
-        signinbutton.setVisibility(View.VISIBLE);
-        newuserbutton.setVisibility(View.VISIBLE);
-        registerEmail.setVisibility(View.VISIBLE);
-        registerPassword.setVisibility(View.VISIBLE);
+//        signinbutton.setVisibility(View.VISIBLE);
+//        newuserbutton.setVisibility(View.VISIBLE);
+//        registerEmail.setVisibility(View.VISIBLE);
+//        registerPassword.setVisibility(View.VISIBLE);
         AddUserTask task = new AddUserTask();
         task.execute(new String[]{url.toString()});
 
 // Takes you back to the previous fragment by popping the current fragment out.
-        getSupportFragmentManager().popBackStackImmediate();
+        //getSupportFragmentManager().popBackStackImmediate();
     }
 
     /**
