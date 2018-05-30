@@ -52,12 +52,15 @@ public class ProfileActivity extends AppCompatActivity implements ProfileEditFra
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_profile);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.top_bar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setIcon(R.drawable.memeupstopicon);
         getSupportActionBar().setDisplayUseLogoEnabled(true);
+
+
 
         try
         {
@@ -216,6 +219,19 @@ public class ProfileActivity extends AppCompatActivity implements ProfileEditFra
                 return;
             }
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        collectionbutton.setVisibility(View.VISIBLE);
+        registerBio.setVisibility(View.VISIBLE);
+        profilePic.setVisibility(View.VISIBLE);
+        memePic.setVisibility(View.VISIBLE);
+        aboutMe.setVisibility(View.VISIBLE);
+        favoriteMeme.setVisibility(View.VISIBLE);
+        getSupportFragmentManager().popBackStack();
+       // this.finish();
     }
 
 

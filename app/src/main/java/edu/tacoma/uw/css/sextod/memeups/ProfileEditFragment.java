@@ -378,4 +378,6 @@ public class ProfileEditFragment extends Fragment {
             mMemeEditText.setText(mUser.getMEME(), TextView.BufferType.EDITABLE);
         }
     }
+
+
 }
