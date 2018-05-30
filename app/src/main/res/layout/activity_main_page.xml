@@ -47,12 +47,26 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="16dp"
+<<<<<<< HEAD
         android:layout_weight="1"
 
         android:text="My matches"
+=======
+        android:text="Find matches"
+>>>>>>> 626fa3a62b954b7c3711e6f54fcf3950ddfaf4ce
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/quizbutton" />
+
+    <Button
+        android:id="@+id/viewmatchbutton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="My matches"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/matchbutton" />
 
     <Button
         android:id="@+id/profilebutton"

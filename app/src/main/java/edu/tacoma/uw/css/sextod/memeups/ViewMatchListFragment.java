@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -17,8 +16,6 @@ import android.widget.Toast;
 
 import org.json.JSONException;
 
-import edu.tacoma.uw.css.sextod.memeups.database.Match;
-
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -26,6 +23,8 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.List;
+
+import edu.tacoma.uw.css.sextod.memeups.database.Match;
 
 import static android.content.ContentValues.TAG;
 
@@ -35,9 +34,9 @@ import static android.content.ContentValues.TAG;
  * Activities containing this fragment MUST implement the {@link OnListFragmentInteractionListener}
  * interface.
  */
-public class MatchListFragment extends Fragment {
+public class ViewMatchListFragment extends Fragment {
 
-    private static final String COURSE_URL = "http://kferg9.000webhostapp.com/android/list.php?cmd=";
+    private static final String COURSE_URL = "http://kferg9.000webhostapp.com/android/list.php?cmd=sentmatch";
     private static final String ARG_COLUMN_COUNT = "column-count";
     private int mColumnCount = 1;
     private OnListFragmentInteractionListener mListener;
@@ -49,12 +48,12 @@ public class MatchListFragment extends Fragment {
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
      */
-    public MatchListFragment() {
+    public ViewMatchListFragment() {
     }
 
     @SuppressWarnings("unused")
-    public static MatchListFragment newInstance(int columnCount) {
-        MatchListFragment fragment = new MatchListFragment();
+    public static ViewMatchListFragment newInstance(int columnCount) {
+        ViewMatchListFragment fragment = new ViewMatchListFragment();
         Bundle args = new Bundle();
         args.putInt(ARG_COLUMN_COUNT, columnCount);
         fragment.setArguments(args);
@@ -73,7 +72,7 @@ public class MatchListFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_course_list, container, false);
+        View view = inflater.inflate(R.layout.fragment_view_match_list, container, false);
 
         // Set the adapter
         if (view instanceof RecyclerView) {
@@ -93,9 +92,6 @@ public class MatchListFragment extends Fragment {
 
                 SharedPreferences mLoginEmail = this.getActivity().getSharedPreferences(getString(R.string.LOGIN_PREFS)
                         , Context.MODE_PRIVATE);
-
-                String mode = mLoginEmail.getString("listmode", "");
-                sb.append(URLEncoder.encode(mode, "UTF-8"));
 
                 String email = mLoginEmail.getString("email", "");
                 sb.append("&useremail=");
@@ -201,7 +197,7 @@ public class MatchListFragment extends Fragment {
 
 // Everything is good, show the list of courses.
             if (!mCourseList.isEmpty()) {
-                mRecyclerView.setAdapter(new MyCourseRecyclerViewAdapter(mCourseList, mListener));
+                //mRecyclerView.setAdapter(new MyCourseRecyclerViewAdapter(mCourseList, mListener));
             }
         }
 

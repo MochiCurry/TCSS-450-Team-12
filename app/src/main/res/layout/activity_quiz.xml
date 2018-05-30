@@ -49,6 +49,7 @@
             android:background="#0091EA"
             android:padding="8dp"
             android:text="bird"
+            android:checked="true"
             android:textColor="#fff" />
 
         <RadioButton
