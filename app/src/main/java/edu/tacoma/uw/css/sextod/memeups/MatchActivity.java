@@ -117,7 +117,7 @@ public class MatchActivity extends AppCompatActivity implements MatchListFragmen
         task.execute(new String[]{url.toString()});
 
 // Takes you back to the previous fragment by popping the current fragment out.
-        getSupportFragmentManager().popBackStackImmediate();
+        //getSupportFragmentManager().popBackStackImmediate();
     }
 
 
@@ -182,8 +182,14 @@ public class MatchActivity extends AppCompatActivity implements MatchListFragmen
                             .show();
                 }
             } catch (JSONException e) {
-                Toast.makeText(getApplicationContext(), "Something wrong with the data" +
-                        e.getMessage(), Toast.LENGTH_LONG).show();
+                if (e.getMessage().contains("End of input at character 0 of")) {
+                    Toast.makeText(getApplicationContext(), "You already matched with this user!", Toast.LENGTH_LONG).show();
+                } else
+                {
+                    Toast.makeText(getApplicationContext(), "Something wrong with the data" +
+                            e.getMessage(), Toast.LENGTH_LONG).show();
+                }
+
             }
         }
     }
