@@ -3,13 +3,15 @@ package edu.tacoma.uw.css.sextod.memeups;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
 
 import edu.tacoma.uw.css.sextod.memeups.database.Match;
 
@@ -32,8 +34,12 @@ public class ProfileViewFragment extends Fragment {
 
     //    private TextView mCourseIdTextView;
 //    private TextView mCourseShortDescTextView;
-    private TextView mCourseLongDescTextView;
-    private TextView mCoursePrereqsTextView;
+    private TextView mFirst;
+    private TextView mUsername;
+    private TextView mBio;
+
+    private ImageView mDisplay;
+    private ImageView mMeme;
 
     private Button matchbutton;
     private MatchListener mListener;
@@ -86,8 +92,11 @@ public class ProfileViewFragment extends Fragment {
         View view =  inflater.inflate(R.layout.fragment_view_profile, container, false);
 //        mCourseIdTextView = (TextView) view.findViewById(R.id.course_item_id);
 //        mCourseShortDescTextView = (TextView) view.findViewById(R.id.course_short_desc);
-        mCourseLongDescTextView = (TextView) view.findViewById(R.id.course_long_desc);
-        mCoursePrereqsTextView = (TextView) view.findViewById(R.id.course_prereqs);
+        mFirst = (TextView) view.findViewById(R.id.profile_first);
+        mBio = (TextView) view.findViewById(R.id.profile_bio);
+        mUsername = (TextView) view.findViewById(R.id.profile_username);
+        mDisplay = (ImageView) view.findViewById(R.id.display_pic);
+        mMeme = (ImageView) view.findViewById(R.id.meme_pic);
 
         //match button
         Button registerButton = (Button) view.findViewById(R.id.match_button);
@@ -111,8 +120,29 @@ public class ProfileViewFragment extends Fragment {
         if (course != null) {
 //            mCourseIdTextView.setText(course.getCourseId());
 //            mCourseShortDescTextView.setText(course.getShortDescription());
-            mCourseLongDescTextView.setText(course.getmFirst());
-            mCoursePrereqsTextView.setText(course.getmBio());
+            mFirst.setText(course.getmFirst());
+            mBio.setText(course.getmBio());
+            mUsername.setText(course.getmUsername());
+
+            String displayUrl = "i", memeUrl = "i";
+            if(!course.getDISPLAY().isEmpty())
+            {
+                displayUrl = course.getDISPLAY();
+            }
+            if(!course.getMEME().isEmpty())
+            {
+                memeUrl = course.getMEME();
+            }
+            Picasso.get()
+                    .load(displayUrl)
+                    .placeholder(R.drawable.ic_launcher_background)
+                    .error(R.drawable.memeupslogo)
+                    .into(mDisplay);
+            Picasso.get()
+                    .load(memeUrl)
+                    .placeholder(R.drawable.ic_launcher_background)
+                    .error(R.drawable.memeupslogo)
+                    .into(mMeme);
         }
     }
 

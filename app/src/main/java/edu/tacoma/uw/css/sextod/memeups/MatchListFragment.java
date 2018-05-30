@@ -1,6 +1,7 @@
 package edu.tacoma.uw.css.sextod.memeups;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -22,6 +23,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.URLEncoder;
 import java.util.List;
 
 /**
@@ -80,8 +82,25 @@ public class MatchListFragment extends Fragment {
                 mRecyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
            // mRecyclerView.setAdapter(new MyCourseRecyclerViewAdapter(mCourseList, mListener));
-            CourseAsyncTask courseAsyncTask = new CourseAsyncTask();
-            courseAsyncTask.execute(new String[]{COURSE_URL});
+
+
+            try
+            {
+                StringBuilder sb = new StringBuilder(COURSE_URL);
+
+                SharedPreferences mLoginEmail = this.getActivity().getSharedPreferences(getString(R.string.LOGIN_PREFS)
+                        , Context.MODE_PRIVATE);
+
+                String email = mLoginEmail.getString("email", "");
+                sb.append("&useremail=");
+                sb.append(URLEncoder.encode(email, "UTF-8"));
+
+                CourseAsyncTask courseAsyncTask = new CourseAsyncTask();
+                courseAsyncTask.execute(new String[]{sb.toString()});
+            }catch(Exception e) {
+                Toast.makeText(view.getContext(), "Something wrong with the url" + e.getMessage(), Toast.LENGTH_LONG)
+                        .show();
+            }
 
             /*FloatingActionButton floatingActionButton = (FloatingActionButton)
                     getActivity().findViewById(R.id.fab);

@@ -57,6 +57,8 @@ public class ProfileEditFragment extends Fragment {
     private EditText mCatchPhraseEditText;
     private EditText mBiographyEditText;
     private EditText mPreferenceEditText;
+    private EditText mDisplayEditText;
+    private EditText mMemeEditText;
 
 
 
@@ -125,6 +127,8 @@ public class ProfileEditFragment extends Fragment {
       //  mCatchPhraseEditText = (EditText) v.findViewById(R.id.catch_phrase);
         mBiographyEditText = (EditText) v.findViewById(R.id.biography);
        // mPreferenceEditText = (EditText) v.findViewById(R.id.preference);
+        mDisplayEditText = (EditText) v.findViewById(R.id.display_url);
+        mMemeEditText = (EditText) v.findViewById(R.id.meme_url);
 
 
         Button addCourseButton = (Button) v.findViewById(R.id.btnCourse);
@@ -206,6 +210,14 @@ public class ProfileEditFragment extends Fragment {
             String courseLongDesc = mBiographyEditText.getText().toString();
             sb.append("&bio=");
             sb.append(URLEncoder.encode(courseLongDesc, "UTF-8"));
+
+            String displayPicture = mDisplayEditText.getText().toString();
+            sb.append("&display=");
+            sb.append(URLEncoder.encode(displayPicture, "UTF-8"));
+
+            String memePicture = mMemeEditText.getText().toString();
+            sb.append("&meme=");
+            sb.append(URLEncoder.encode(memePicture, "UTF-8"));
 
             Log.i(TAG, sb.toString());
 
@@ -362,6 +374,8 @@ public class ProfileEditFragment extends Fragment {
 //            mCourseShortDescTextView.setText(course.getShortDescription());
             mUserNameEditText.setText(mUser.getmUsername(), TextView.BufferType.EDITABLE);
             mBiographyEditText.setText(mUser.getmBio(), TextView.BufferType.EDITABLE);
+            mDisplayEditText.setText(mUser.getDISPLAY(), TextView.BufferType.EDITABLE);
+            mMemeEditText.setText(mUser.getMEME(), TextView.BufferType.EDITABLE);
         }
     }
 }

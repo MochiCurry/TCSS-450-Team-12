@@ -12,13 +12,19 @@ public class Match implements Serializable{
     public static final String FIRST = "first";
     public static final String LAST = "last";
     public static final String USERNAME = "username";
+    public static final String SCORE = "score_category";
     public static final String BIO = "bio";
+    public static final String DISPLAY = "display_url";
+    public static final String MEME = "meme_url";
 
     private String mEmail;
     private String mFirst;
     private String mLast;
     private String mUsername;
     private String mBio;
+    private String mDisplay;
+    private String mMeme;
+    private int mScore;
 
 
     public String getmFirst() {
@@ -53,18 +59,17 @@ public class Match implements Serializable{
         this.mBio = mBio;
     }
 
-    public Match()
-    {
-
+    public String getDISPLAY() {
+        return mDisplay;
     }
 
-    public Match(String email, String shortDesc, String longDesc, String prereqs, String bio) {
-        mEmail = email;
-        mFirst = shortDesc;
-        mLast = longDesc;
-        mUsername = prereqs;
+    public void setDisplay(String display)
+    {
+        this.mDisplay = display;
+    }
 
-        mBio = bio;
+    public String getMEME() {
+        return mMeme;
     }
 
     public String getmEmail() {
@@ -74,6 +79,35 @@ public class Match implements Serializable{
     public void setmEmail(String mEmail) {
         this.mEmail = mEmail;
     }
+
+    public int getmScore()
+    {
+        return mScore;
+    }
+
+    public void setmScore(int score)
+    {
+        mScore = score;
+    }
+
+    public Match()
+    {
+
+    }
+
+    public Match(String email, String shortDesc, String longDesc, String prereqs, String bio, String display, String meme, int score) {
+        mEmail = email;
+        mFirst = shortDesc;
+        mLast = longDesc;
+        mUsername = prereqs;
+
+        mBio = bio;
+        mDisplay = display;
+        mMeme = meme;
+        mScore = score;
+    }
+
+
 
     public static List<Match> parseCourseJSON(String courseJSON) throws JSONException {
         List<Match> matchList = new ArrayList<Match>();
@@ -85,7 +119,10 @@ public class Match implements Serializable{
                         obj.getString(Match.FIRST),
                         obj.getString(Match.LAST),
                         obj.getString(Match.USERNAME),
-                        obj.getString(Match.BIO));
+                        obj.getString(Match.BIO),
+                        obj.getString(Match.DISPLAY),
+                        obj.getString(Match.MEME),
+                        obj.getInt(Match.SCORE));
                 matchList.add(match);
             }
         }
@@ -99,11 +136,15 @@ public class Match implements Serializable{
         {
             JSONArray arr = new JSONArray(courseJSON);
             JSONObject obj = arr.getJSONObject(0);
+
             match = new Match(obj.getString(Match.EMAIL),
                     obj.getString(Match.FIRST),
                     obj.getString(Match.LAST),
                     obj.getString(Match.USERNAME),
-                    obj.getString(Match.BIO));
+                    obj.getString(Match.BIO),
+                    obj.getString(Match.DISPLAY),
+                    obj.getString(Match.MEME),
+                    obj.getInt(Match.SCORE));
         }
         return match;
     }
