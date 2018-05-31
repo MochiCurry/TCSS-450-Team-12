@@ -138,7 +138,10 @@ public class ProfileEditFragment extends Fragment {
                 String url = buildCourseURL(v);
                 mListener.addCourse(url);
 
+
                 Intent intent = new Intent(getActivity(), ProfileActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+
                 startActivity(intent);
             }
         });
