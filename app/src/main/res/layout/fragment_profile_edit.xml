@@ -11,21 +11,30 @@
   <LinearLayout
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
+      android:layout_marginBottom="8dp"
+      android:layout_marginEnd="8dp"
+      android:layout_marginLeft="8dp"
+      android:layout_marginRight="8dp"
+      android:layout_marginStart="8dp"
+      android:layout_marginTop="8dp"
       android:orientation="vertical"
-      >
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent">
 
     <TextView
         android:id="@+id/user_name_title"
         android:layout_width="wrap_content"
-        android:layout_height="20dp"
-        android:layout_marginTop="70dp"
-
+        android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
+
         android:layout_marginLeft="8dp"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="70dp"
         android:text="Username"
-        android:textStyle="bold"
         android:textColor="@color/colorPrimary"
+        android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/user_name"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -37,11 +46,11 @@
         android:id="@+id/user_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:hint="Enter your desired Username"
         android:inputType="textPersonName"
         app:layout_constraintBottom_toTopOf="@+id/btnCourse"
@@ -54,13 +63,13 @@
     <TextView
         android:id="@+id/biography_title"
         android:layout_width="wrap_content"
-        android:layout_height="20dp"
-        android:layout_marginTop="8dp"
+        android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
         android:layout_marginStart="8dp"
-        android:textStyle="bold"
-        android:textColor="@color/colorPrimary"
+        android:layout_marginTop="8dp"
         android:text="Biography"
+        android:textColor="@color/colorPrimary"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/user_name"
         tools:text="Bio" />
@@ -69,28 +78,28 @@
         android:id="@+id/biography"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:hint="Tell us about yourself"
+        android:inputType="textMultiLine"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/biography_title"
-        android:inputType="textMultiLine" />
+        app:layout_constraintTop_toBottomOf="@+id/biography_title" />
 
     <TextView
         android:id="@+id/display_image_title"
         android:layout_width="wrap_content"
-        android:layout_height="20dp"
-        android:layout_marginTop="8dp"
+        android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:text="@string/display_image_url"
-        android:textStyle="bold"
         android:textColor="@color/colorPrimary"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/biography"
         tools:text="Display Image URL" />
@@ -99,29 +108,28 @@
         android:id="@+id/display_url"
         android:layout_width="match_parent"
         android:layout_height="45dp"
-        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:hint="Add a URL to your desired display picture"
+        android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/display_image_title"
-        android:inputType="textPersonName"
-        />
+        app:layout_constraintTop_toBottomOf="@+id/display_image_title" />
 
     <TextView
         android:id="@+id/meme_title"
         android:layout_width="wrap_content"
-        android:layout_height="20dp"
-        android:layout_marginTop="8dp"
+        android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:text="@string/favorite_meme_url"
-        android:textStyle="bold"
         android:textColor="@color/colorPrimary"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/display_url"
         tools:text="Favorite Meme URL" />
@@ -130,18 +138,17 @@
         android:id="@+id/meme_url"
         android:layout_width="match_parent"
         android:layout_height="45dp"
-        android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
         android:hint="Add a URL to your favorite meme photo"
+        android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/meme_title"
-        android:inputType="textPersonName"
-        />
+        app:layout_constraintTop_toBottomOf="@+id/meme_title" />
 
     <!--
     <EditText
@@ -178,17 +185,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tell_us_more" />
 -->
-      <Button
-          android:id="@+id/btnCourse"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_gravity="center"
-          android:layout_marginBottom="85dp"
-          android:layout_marginTop="8dp"
-          android:text="@string/submit"
-          app:layout_constraintBottom_toBottomOf="parent"
-          app:layout_constraintEnd_toEndOf="parent"
-          app:layout_constraintTop_toBottomOf="@+id/user_name" />
+    <Button
+        android:id="@+id/btnCourse"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginBottom="85dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/submit"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/user_name" />
 
 
   </LinearLayout>
