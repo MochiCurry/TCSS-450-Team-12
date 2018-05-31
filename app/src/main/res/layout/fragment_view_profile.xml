@@ -24,13 +24,13 @@
 
         <ImageView
             android:id="@+id/display_pic"
-            android:layout_width="200dp"
-            android:layout_height="100dp"
+            android:layout_width="400dp"
+            android:layout_height="200dp"
             android:layout_gravity="center"
             android:layout_marginBottom="8dp"
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="0dp"
 
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -38,14 +38,16 @@
 
 
         <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="50dp"
-        android:layout_marginTop="8dp"
-        android:text="Name:"
-        app:layout_constraintEnd_toStartOf="@+id/profile_first"
-        app:layout_constraintTop_toTopOf="parent" />
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="8dp"
+            android:text="Name:"
+            android:textColor="@color/colorPrimary"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@+id/profile_first"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/profile_first"
@@ -66,6 +68,8 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="50dp"
         android:layout_marginTop="8dp"
+        android:textColor="@color/colorPrimary"
+        android:textStyle="bold"
         android:text="Username:"
         app:layout_constraintEnd_toStartOf="@+id/profile_username"
         app:layout_constraintTop_toTopOf="parent" />
@@ -82,9 +86,12 @@
 
     <TextView
         android:id="@+id/profile_bio"
-        android:layout_width="322dp"
-        android:layout_height="66dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+
         android:layout_gravity="center"
 
         app:layout_constraintEnd_toEndOf="parent"
@@ -93,8 +100,8 @@
 
     <ImageView
         android:id="@+id/meme_pic"
-        android:layout_width="100dp"
-        android:layout_height="50dp"
+        android:layout_width="200dp"
+        android:layout_height="100dp"
         android:layout_marginTop="8dp"
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
