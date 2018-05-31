@@ -11,16 +11,20 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import edu.tacoma.uw.css.sextod.memeups.database.Quiz;
 
+/**
+ * Handles the database for quiz that is locally stored on the app.
+ * @author Kerry Ferguson
+ * @author Travis Bain
+ * @author Dirk Sexton
+ */
 public class DBHandler extends SQLiteOpenHelper{
 
     private static final int DATABASE_VERSION = 1;
 
     // Database Name
     private static final String DATABASE_NAME = "quiz";
-
     // Contacts table name
     private static final String TABLE_QUIZ_DETAIL = "quizDetails";
-
     // Contacts Table Columns names
     private static final String KEY_QUESTIONS = "questions";
     private static final String KEY_CHOICES = "choices";

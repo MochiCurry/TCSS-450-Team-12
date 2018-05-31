@@ -29,10 +29,11 @@ import edu.tacoma.uw.css.sextod.memeups.database.Match;
 import static android.content.ContentValues.TAG;
 
 /**
- * A fragment representing a list of Items.
- * <p/>
- * Activities containing this fragment MUST implement the {@link OnListFragmentInteractionListener}
- * interface.
+ * This is a fragment that will be called by the MatchActivity to showcase the people that the
+ * user's are capable of matching with according to their quiz score.
+ * @author Kerry Ferguson
+ * @author Travis Bain
+ * @author Dirk Sexton
  */
 public class ViewMatchListFragment extends Fragment {
 

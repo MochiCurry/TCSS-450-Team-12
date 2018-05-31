@@ -16,7 +16,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-
+/**
+ * @author Kerry Ferguson
+ * @author Travis Bain
+ * @author Dirk Sexton
+ */
 public class Quiz implements Serializable {
 
     public static final String QUESTION = "question";

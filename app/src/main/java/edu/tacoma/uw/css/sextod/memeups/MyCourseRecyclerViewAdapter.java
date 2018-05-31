@@ -12,9 +12,10 @@ import edu.tacoma.uw.css.sextod.memeups.database.Match;
 import java.util.List;
 
 /**
- * {@link RecyclerView.Adapter} that can display a {@link Match} and makes a call to the
- * specified {@link OnListFragmentInteractionListener}.
- * TODO: Replace the implementation with code for your data type.
+ *
+ * @author Kerry Ferguson
+ * @author Travis Bain
+ * @author Dirk Sexton
  */
 public class MyCourseRecyclerViewAdapter extends RecyclerView.Adapter<MyCourseRecyclerViewAdapter.ViewHolder> {
 

@@ -30,14 +30,12 @@ import edu.tacoma.uw.css.sextod.memeups.database.Match;
 import static android.content.ContentValues.TAG;
 import static edu.tacoma.uw.css.sextod.memeups.ProfileViewFragment.COURSE_ITEM_SELECTED;
 
-
 /**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link EmailFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link EmailFragment#newInstance} factory method to
- * create an instance of this fragment.
+ * This class is opened up from ProfileViewFragment. Main purpose is for the users to be able to
+ * send emails to each other.
+ * @author Kerry Ferguson
+ * @author Travis Bain
+ * @author Dirk Sexton
  */
 public class EmailFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER

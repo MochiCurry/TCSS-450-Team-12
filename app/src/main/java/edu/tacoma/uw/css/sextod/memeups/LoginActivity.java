@@ -43,8 +43,15 @@ import java.net.URLEncoder;
 import static android.content.ContentValues.TAG;
 
 /**
- * This is the main activity that loads when you start the application. It implements RegisterListener
- * to start the Registeration fragment when the new user button is selected.
+ * This is the main activity that loads when you start the application. It implements
+ * RegisterListener to start the Registeration fragment when the new user button is selected.
+ * The user will login with their credentials that are already registered in our webservice.
+ * The credentials will be their email and password. This activity will also remember the user
+ * so that they don't have to keep logging back in when the app closes.
+ * @author Kerry Ferguson
+ * @author Travis Bain
+ * @author Dirk Sexton
+ *
  */
 public class LoginActivity extends AppCompatActivity implements RegisterFragment.RegisterListener {
     //Constant for the login url and variables for buttons and fields

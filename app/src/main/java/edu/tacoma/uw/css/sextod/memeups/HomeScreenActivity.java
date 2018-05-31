@@ -15,6 +15,14 @@ import android.widget.ImageView;
 
 import com.squareup.picasso.Picasso;
 
+/**
+ * This class is the home page of the app where the users will be able to navigate to other
+ * parts of the app. They will be able to access quiz, matching with people, view profiles
+ * of matches, and to view and edit their profile.
+ * @author Kerry Ferguson
+ * @author Travis Bain
+ * @author Dirk Sexton
+ */
 public class HomeScreenActivity extends AppCompatActivity {
     private Button quizbutton;
     private Button matchbutton;

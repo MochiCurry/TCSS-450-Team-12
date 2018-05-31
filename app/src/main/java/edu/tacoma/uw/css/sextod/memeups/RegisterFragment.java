@@ -31,12 +31,13 @@ import java.net.URLEncoder;
 import static android.content.ContentValues.TAG;
 
 /**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link RegisterFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link RegisterFragment#newInstance} factory method to
- * create an instance of this fragment.
+ * This fragment is called from the LoginActivity when a user does not already have
+ * an account with us. They will be able to register their email, password, first and
+ * last name, and a username. Our webservice will remember their login credentials
+ * so they can login with it.
+ * @author Kerry Ferguson
+ * @author Travis Bain
+ * @author Dirk Sexton
  */
 public class RegisterFragment extends Fragment {
 

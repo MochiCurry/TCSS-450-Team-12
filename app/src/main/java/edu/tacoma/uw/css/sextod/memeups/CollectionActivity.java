@@ -7,6 +7,13 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
+/**
+ * This Activity will showcase the collection of memes that the users have accumulated
+ * throughout their usage of the app.
+ * @author Kerry Ferguson
+ * @author Travis Bain
+ * @author Dirk Sexton
+ */
 public class CollectionActivity extends AppCompatActivity {
 
     @Override

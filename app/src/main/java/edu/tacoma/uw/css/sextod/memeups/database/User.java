@@ -18,7 +18,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Class implements serializable to pass as an argument
+ * @author Kerry Ferguson
+ * @author Travis Bain
+ * @author Dirk Sexton
  */
 public class User implements Serializable
 {

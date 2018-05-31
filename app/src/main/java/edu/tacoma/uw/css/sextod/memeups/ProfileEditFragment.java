@@ -29,14 +29,14 @@ import edu.tacoma.uw.css.sextod.memeups.database.Match;
 
 import static android.content.ContentValues.TAG;
 
-
 /**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link ProfileEditFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link ProfileEditFragment#newInstance} factory method to
- * create an instance of this fragment.
+ * This fragment is called by the ProfileActivity so the user can edit their profile. They
+ * are able to update their profile picture, biography, username, and favorite meme by
+ * sending it to the database. The pictures will have to be typed in the URL format.
+ * pictures will
+ * @author Kerry Ferguson
+ * @author Travis Bain
+ * @author Dirk Sexton
  */
 public class ProfileEditFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER

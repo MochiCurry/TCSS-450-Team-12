@@ -26,6 +26,12 @@ import edu.tacoma.uw.css.sextod.memeups.database.Match;
 
 import static android.content.ContentValues.TAG;
 
+/**
+ * This activity is called from MatchActivity so that the user can view their matches.
+ * @author Kerry Ferguson
+ * @author Travis Bain
+ * @author Dirk Sexton
+ */
 public class ViewMatchActivity extends AppCompatActivity implements ViewMatchListFragment.OnListFragmentInteractionListener {
 
    // private ProfileViewFragment mDetail;

@@ -27,8 +27,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 /**
- * Quiz activity using questions from QuestionLibrary
- * author: Kerry Ferguson
+ * Quiz activity using questions from QuestionLibrary. This activity will generate quizzes that
+ * the users can interact so that they can get their meme score. The meme score will be used to
+ * match people accordingly.
+ * @author Kerry Ferguson
+ * @author Travis Bain
+ * @author Dirk Sexton
+ *
  */
 public class QuizActivity extends AppCompatActivity {
     //New radio buttons, question library to load questions, max number of questions

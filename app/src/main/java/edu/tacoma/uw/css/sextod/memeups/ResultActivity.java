@@ -36,8 +36,13 @@ import java.net.URLEncoder;
 import static android.content.ContentValues.TAG;
 
 /**
- * Class to display the results of the quiz
- * author: Kerry Ferguson
+ * Class to display the results of the quiz. This class uses data from the QuizActivity to
+ * update and showcase the results to the user. They can decide to share their quiz score
+ * to any shareable app that they have on their phone. Once they click "return" it will update
+ * their score to our webservice.
+ * @author Kerry Ferguson
+ * @author Travis Bain
+ * @author Dirk Sexton
  */
 public class ResultActivity extends AppCompatActivity {
 

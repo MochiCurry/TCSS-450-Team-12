@@ -30,10 +30,10 @@ import java.util.List;
 import static android.content.ContentValues.TAG;
 
 /**
- * A fragment representing a list of Items.
- * <p/>
- * Activities containing this fragment MUST implement the {@link OnListFragmentInteractionListener}
- * interface.
+ * This fragment is called by the MatchActivity to display an updated list of potential matches.
+ * @author Kerry Ferguson
+ * @author Travis Bain
+ * @author Dirk Sexton
  */
 public class MatchListFragment extends Fragment {
 

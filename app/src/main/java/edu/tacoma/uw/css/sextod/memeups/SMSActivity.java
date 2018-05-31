@@ -10,6 +10,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+/**
+ * This activity will open on button click from ProfileViewFragment. It is used to open up the
+ * SMS app so that the users can communicate with each other.
+ * @author Kerry Ferguson
+ * @author Travis Bain
+ * @author Dirk Sexton
+ */
 public class SMSActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +31,9 @@ public class SMSActivity extends Activity {
         });
     }
 
+    /**
+     * To open up the new intent that contains the SMS app.
+     */
     protected void sendSMS() {
         Log.i("Send SMS", "");
 //        Intent smsIntent = new Intent(Intent.ACTION_VIEW);

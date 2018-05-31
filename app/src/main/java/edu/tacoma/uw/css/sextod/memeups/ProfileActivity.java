@@ -33,6 +33,14 @@ import edu.tacoma.uw.css.sextod.memeups.database.Match;
 
 import static android.content.ContentValues.TAG;
 
+/**
+ * An activity that is opened through the HomeScreenActivity to view user's own profile.
+ * It displays an updated profile picture, biography, username, and favorite meme set by
+ * the user.
+ * @author Kerry Ferguson
+ * @author Travis Bain
+ * @author Dirk Sexton
+ */
 public class ProfileActivity extends AppCompatActivity
 {
     private final static String GET_USER_URL

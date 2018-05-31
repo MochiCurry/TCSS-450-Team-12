@@ -9,6 +9,11 @@ import android.view.MenuItem;
 
 import edu.tacoma.uw.css.sextod.memeups.database.Match;
 
+/**
+ * @author Kerry Ferguson
+ * @author Travis Bain
+ * @author Dirk Sexton
+ */
 public class MatchActivity2 extends AppCompatActivity implements MatchListFragment.OnListFragmentInteractionListener {
 
     @Override

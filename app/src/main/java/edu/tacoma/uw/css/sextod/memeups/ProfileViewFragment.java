@@ -22,7 +22,12 @@ import static android.content.ContentValues.TAG;
 
 
 /**
- *
+ * This fragment is called by the MatchActivity so the user can view the profiles of the people
+ * they are matched with. The page will only show people that the users explicitly sent a match
+ * request with. There is an option to reach out to these matches via SMS or email.
+ * @author Kerry Ferguson
+ * @author Travis Bain
+ * @author Dirk Sexton
  */
 public class ProfileViewFragment extends Fragment {
 

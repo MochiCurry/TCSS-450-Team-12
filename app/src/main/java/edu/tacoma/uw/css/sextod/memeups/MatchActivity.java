@@ -26,6 +26,14 @@ import edu.tacoma.uw.css.sextod.memeups.database.Match;
 
 import static android.content.ContentValues.TAG;
 
+/**
+ * This activity will display the people the users are capable of matching
+ * with depending on their quiz score. It will only show people with the same
+ * category of score.
+ * @author Kerry Ferguson
+ * @author Travis Bain
+ * @author Dirk Sexton
+ */
 public class MatchActivity extends AppCompatActivity implements MatchListFragment.OnListFragmentInteractionListener,
         ProfileEditFragment.CourseAddListener, ProfileViewFragment.MatchListener {
 
