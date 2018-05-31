@@ -17,6 +17,7 @@
             android:layout_height="wrap_content"
             android:text="Result"
             android:textSize="20sp"
+            android:textColor="@color/colorPrimary"
             android:layout_marginTop="50dp"/>
 
         <TextView
@@ -24,6 +25,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="3 / 5"
+            android:textStyle="bold"
+            android:textColor="@color/colorPrimary"
             android:textSize="30sp"
             android:layout_marginTop="60dp"/>
         <TextView
@@ -31,6 +34,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Total Score: 1000"
+            android:textColor="@color/colorPrimary"
             android:textSize="20sp"
             android:layout_marginTop="60dp"/>
 
