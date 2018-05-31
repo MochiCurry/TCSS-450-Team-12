@@ -35,13 +35,12 @@ import static android.content.ContentValues.TAG;
 
 /**
  * An activity that is opened through the HomeScreenActivity to view user's own profile.
- * It displays an updated profile picture, biography, username, and favorite meme set by
- * the user.
+ * It displays an updated profile picture, biography,
  * @author Kerry Ferguson
  * @author Travis Bain
  * @author Dirk Sexton
  */
-public class ProfileActivity extends AppCompatActivity
+public class ProfileActivity extends AppCompatActivity implements ProfileEditFragment.CourseAddListener
 {
     private final static String GET_USER_URL
             = "http://kferg9.000webhostapp.com/android/list.php?cmd=singleuser";
@@ -116,16 +115,12 @@ public class ProfileActivity extends AppCompatActivity
                 aboutMe.setVisibility(View.GONE);
                 favoriteMeme.setVisibility(View.GONE);
 
-
                 ProfileEditFragment profileEditFragment = new ProfileEditFragment();
                 getSupportFragmentManager().beginTransaction()
                         .replace(R.id.fragment_container, profileEditFragment)
                         .addToBackStack(null)
                         .commit();
 
-//                Intent intent = new Intent(ProfileActivity.this, SMSActivity.class);
-//                startActivity(intent);
-               //openSMSPage();
                 // openCollectionPage();
             }
         });
@@ -146,6 +141,11 @@ public class ProfileActivity extends AppCompatActivity
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void addCourse(String url) {
+
     }
 
 

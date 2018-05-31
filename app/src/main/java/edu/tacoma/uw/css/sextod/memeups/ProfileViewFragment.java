@@ -151,12 +151,11 @@ public class ProfileViewFragment extends Fragment {
 
                 Log.i (TAG, "Clicked email fragment");
 
-//                EmailFragment emailFragment = new EmailFragment();
-//                getActivity().getSupportFragmentManager().beginTransaction()
-//                        .replace(R.id.fragment_container, emailFragment)
-//                        .addToBackStack(null)
-//                        .commit();
-                    openSMSPage();
+                EmailFragment emailFragment = new EmailFragment();
+                getActivity().getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.fragment_container, emailFragment)
+                        .addToBackStack(null)
+                        .commit();
                 }
             });
         }
@@ -164,11 +163,7 @@ public class ProfileViewFragment extends Fragment {
         return view;
 
     }
-    public void openSMSPage() {
-        Intent intent = new Intent(getActivity(), SMSActivity.class);
-        getActivity().startActivity(intent);
 
-    }
 
     public void updateView(Match course) {
         if (course != null) {

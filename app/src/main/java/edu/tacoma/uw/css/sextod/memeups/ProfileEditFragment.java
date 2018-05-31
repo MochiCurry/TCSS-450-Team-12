@@ -32,7 +32,7 @@ import static android.content.ContentValues.TAG;
 /**
  * This fragment is called by the ProfileActivity so the user can edit their profile. They
  * are able to update their profile picture, biography, username, and favorite meme by
- * sending it to the database. The pictures will have to be typed in the URL format.
+ * sending it to the database. The pictures will be sent in the URL format.
  * pictures will
  * @author Kerry Ferguson
  * @author Travis Bain
