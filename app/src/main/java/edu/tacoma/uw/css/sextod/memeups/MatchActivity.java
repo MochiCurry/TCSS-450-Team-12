@@ -42,8 +42,7 @@ import static android.content.ContentValues.TAG;
  * @author Travis Bain
  * @author Dirk Sexton
  */
-public class MatchActivity extends AppCompatActivity implements MatchListFragment.OnListFragmentInteractionListener,
-        ProfileEditFragment.CourseAddListener, ProfileViewFragment.MatchListener {
+public class MatchActivity extends AppCompatActivity implements MatchListFragment.OnListFragmentInteractionListener, ProfileViewFragment.MatchListener {
 
     //Initial url to be processed, will be followed by the command
     private final static String MATCH_URL
@@ -70,16 +69,15 @@ public class MatchActivity extends AppCompatActivity implements MatchListFragmen
             String email1 = mLoginEmail.getString("email", "");
             sb.append("email1=");
             sb.append(URLEncoder.encode(email1, "UTF-8"));
-            String email2 = email;
             sb.append("&email2=");
-            sb.append(URLEncoder.encode(email2, "UTF-8"));
+            sb.append(URLEncoder.encode(email, "UTF-8"));
 
 
             //Log.i(TAG sb.toString());
             Log.i(TAG, sb.toString());
 
             //Attempt the add the match.
-            addCourse(sb.toString());
+            addMatch(sb.toString());
         }
         catch(Exception e) {
             //Toast.makeText(view.getContext(), "Something wrong with the url" + e.getMessage(), Toast.LENGTH_LONG)
@@ -132,25 +130,36 @@ public class MatchActivity extends AppCompatActivity implements MatchListFragmen
 
     }
 
-    @Override
-    public void addCourse(String url) {
+    /**
+     * Function to add a match, starts the task to execute the URL
+     * @param url URL to be executed
+     */
+    public void addMatch(String url) {
 
-        AddCourseTask task = new AddCourseTask();
+        AddMatchTask task = new AddMatchTask();
         task.execute(new String[]{url.toString()});
 
 // Takes you back to the previous fragment by popping the current fragment out.
         //getSupportFragmentManager().popBackStackImmediate();
     }
 
-
-    private class AddCourseTask extends AsyncTask<String, Void, String> {
-
-
+    /**
+     * AsyncTask to handle adding a match in the background using the given URL
+     */
+    private class AddMatchTask extends AsyncTask<String, Void, String> {
+        /**
+         * On pre execute before handing the URL
+         */
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
         }
 
+        /**
+         * Attemps to run the URL in the background and receives a response.
+         * @param urls URL to be handled for creating a match
+         * @return The result receieved by the webpage after the URL is executed
+         */
         @Override
         protected String doInBackground(String... urls) {
             String response = "";
@@ -169,7 +178,7 @@ public class MatchActivity extends AppCompatActivity implements MatchListFragmen
                     }
 
                 } catch (Exception e) {
-                    response = "Unable to add course, Reason: "
+                    response = "Unable to add match, Reason: "
                             + e.getMessage();
                 } finally {
                     if (urlConnection != null)
@@ -179,13 +188,11 @@ public class MatchActivity extends AppCompatActivity implements MatchListFragmen
             return response;
         }
 
-
         /**
          * It checks to see if there was a problem with the URL(Network) which is when an
-         * exception is caught. It tries to call the parse Method and checks to see if it was successful.
-         * If not, it displays the exception.
+         * exception is caught. If not, display a success message
          *
-         * @param result
+         * @param result Result receieved from the URL
          */
         @Override
         protected void onPostExecute(String result) {
@@ -204,6 +211,7 @@ public class MatchActivity extends AppCompatActivity implements MatchListFragmen
                             .show();
                 }
             } catch (JSONException e) {
+                //This error is given if you try to create a match that already exists (primary key)
                 if (e.getMessage().contains("End of input at character 0 of")) {
                     Toast.makeText(getApplicationContext(), "You already matched with this user!", Toast.LENGTH_LONG).show();
                 } else
@@ -215,7 +223,4 @@ public class MatchActivity extends AppCompatActivity implements MatchListFragmen
             }
         }
     }
-
-
-
 }

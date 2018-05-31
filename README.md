@@ -10,7 +10,6 @@ Travis Bain
 
 Dirk Sexton
 
-#TODO
 
 1. Uses web services to retrieve or store data for the app.
 Your app must retrieve data from the web service that you build. It could be a list
