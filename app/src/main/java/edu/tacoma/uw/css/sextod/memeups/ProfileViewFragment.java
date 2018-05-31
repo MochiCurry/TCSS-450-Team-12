@@ -106,9 +106,14 @@ public class ProfileViewFragment extends Fragment {
 
         //match button
         Button registerButton = (Button) view.findViewById(R.id.match_button);
+        //email button
+        Button emailButton = (Button) view.findViewById(R.id.email_button);
 
         if(mode.equalsIgnoreCase("matchusers"))
         {
+            //hide email button
+            emailButton.setVisibility(View.GONE);
+
             /**
              * Listener for match button
              */
