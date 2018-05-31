@@ -55,6 +55,7 @@ public class LoginActivity extends AppCompatActivity implements RegisterFragment
     private EditText loginEmail;
     private EditText registerEmail;
     private EditText registerPassword;
+    private String mode;
     private SharedPreferences mSharedPreferences; // for the device to remember login
 
     /**
@@ -199,7 +200,14 @@ public class LoginActivity extends AppCompatActivity implements RegisterFragment
                             , Toast.LENGTH_LONG)
                             .show();
                             //On successful login, go to main page
-                            openMainPageRegister();
+                            if(mode.equalsIgnoreCase("login"))
+                            {
+                                openMainPage();
+                            }
+                            else
+                            {
+                                openMainPageRegister();
+                            }
                 } else {
                     Toast.makeText(getApplicationContext(), "Error: "
                                     + jsonObject.get("error")
@@ -240,6 +248,7 @@ public class LoginActivity extends AppCompatActivity implements RegisterFragment
      */
     public void login(String url)
     {
+        mode = "login";
         AddUserTask task = new AddUserTask();
         task.execute(new String[]{url.toString()});
     }
