@@ -190,8 +190,12 @@ public class ViewMatchListFragment extends Fragment {
                 mCourseList = Match.parseCourseJSON(result);
             }
             catch (JSONException e) {
-                Toast.makeText(getActivity().getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT)
-                        .show();
+                if (e.getMessage().contains("End of input at character 0 of")) {
+                    Toast.makeText(getActivity().getApplicationContext(), "No suitable matches found.", Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(getActivity().getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT)
+                            .show();
+                }
                 return;
             }
 
