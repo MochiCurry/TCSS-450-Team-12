@@ -1,6 +1,7 @@
 package edu.tacoma.uw.css.sextod.memeups;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
@@ -145,16 +146,22 @@ public class ProfileViewFragment extends Fragment {
 
                 Log.i (TAG, "Clicked email fragment");
 
-                EmailFragment emailFragment = new EmailFragment();
-                getActivity().getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.fragment_container, emailFragment)
-                        .addToBackStack(null)
-                        .commit();
+//                EmailFragment emailFragment = new EmailFragment();
+//                getActivity().getSupportFragmentManager().beginTransaction()
+//                        .replace(R.id.fragment_container, emailFragment)
+//                        .addToBackStack(null)
+//                        .commit();
+                    openSMSPage();
                 }
             });
         }
 
         return view;
+
+    }
+    public void openSMSPage() {
+        Intent intent = new Intent(getActivity(), SMSActivity.class);
+        getActivity().startActivity(intent);
 
     }
 

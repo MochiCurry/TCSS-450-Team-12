@@ -33,7 +33,7 @@ import edu.tacoma.uw.css.sextod.memeups.database.Match;
 
 import static android.content.ContentValues.TAG;
 
-public class ProfileActivity extends AppCompatActivity implements ProfileEditFragment.CourseAddListener
+public class ProfileActivity extends AppCompatActivity
 {
     private final static String GET_USER_URL
             = "http://kferg9.000webhostapp.com/android/list.php?cmd=singleuser";
@@ -115,12 +115,14 @@ public class ProfileActivity extends AppCompatActivity implements ProfileEditFra
                         .addToBackStack(null)
                         .commit();
 
+//                Intent intent = new Intent(ProfileActivity.this, SMSActivity.class);
+//                startActivity(intent);
+               //openSMSPage();
                 // openCollectionPage();
             }
         });
 
     }
-
     public void openCollectionPage() {
         Intent intent = new Intent(this, CollectionActivity.class);
         startActivity(intent);
@@ -137,10 +139,7 @@ public class ProfileActivity extends AppCompatActivity implements ProfileEditFra
     public boolean onOptionsItemSelected(MenuItem item) {
         return super.onOptionsItemSelected(item);
     }
-    @Override
-    public void addCourse(String url) {
 
-    }
 
     private class CourseAsyncTask extends AsyncTask<String, Void, String> {
         @Override

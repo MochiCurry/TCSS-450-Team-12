@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">MemeUps</string>
+    <string name="app_name">memeups</string>
     <string name="settings_name">Logout</string>
 
     <!-- TODO: Remove or change this placeholder text -->
@@ -15,5 +15,6 @@
     <string name="submit">Submit</string>
     <string name="display_image_url">Display Image URL</string>
     <string name="favorite_meme_url">Favorite Meme URL</string>
+    <string name="title_activity_sms">SMSActivity</string>
 
 </resources>
