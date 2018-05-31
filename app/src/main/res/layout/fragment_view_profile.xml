@@ -45,6 +45,17 @@
         app:layout_constraintTop_toBottomOf="@+id/meme_pic"
         tools:text="send match request" />
 
+    <Button
+        android:id="@+id/email_button"
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:layout_marginTop="20dp"
+        android:text="send a message"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/meme_pic"
+        tools:text="send a message" />
+
     <ImageView
         android:id="@+id/display_pic"
         android:layout_width="144dp"
