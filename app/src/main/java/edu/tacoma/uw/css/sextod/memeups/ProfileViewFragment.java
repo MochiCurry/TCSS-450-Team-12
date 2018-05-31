@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,8 @@ import android.widget.TextView;
 import com.squareup.picasso.Picasso;
 
 import edu.tacoma.uw.css.sextod.memeups.database.Match;
+
+import static android.content.ContentValues.TAG;
 
 
 /**
@@ -127,11 +130,28 @@ public class ProfileViewFragment extends Fragment {
         }
         else if(mode.equalsIgnoreCase("sentmatch"))
         {
+
+
             //hide match button
             registerButton.setVisibility(View.GONE);
 
             //send message stuff here
+            /**
+             * Listener for match button
+             */
+            emailButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
 
+                Log.i (TAG, "Clicked email fragment");
+
+                EmailFragment emailFragment = new EmailFragment();
+                getActivity().getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.fragment_container, emailFragment)
+                        .addToBackStack(null)
+                        .commit();
+                }
+            });
         }
 
         return view;

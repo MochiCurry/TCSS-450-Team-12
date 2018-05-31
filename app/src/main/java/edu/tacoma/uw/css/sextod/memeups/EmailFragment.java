@@ -47,9 +47,6 @@ public class EmailFragment extends Fragment {
     private Match mUser;
     private Match mCurrentUser;
     private EditText mBiographyEditText;
-    private EditText mPreferenceEditText;
-    private EditText mDisplayEditText;
-    private EditText mMemeEditText;
 
 
 
@@ -89,15 +86,23 @@ public class EmailFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View v = inflater.inflate(R.layout.fragment_profile_edit, container, false);
+        View v = inflater.inflate(R.layout.fragment_email, container, false);
 
-        mBiographyEditText = (EditText) v.findViewById(R.id.biography);
+        mBiographyEditText = (EditText) v.findViewById(R.id.email_body);
 
-        Button addCourseButton = (Button) v.findViewById(R.id.btnCourse);
+        Button addCourseButton = (Button) v.findViewById(R.id.button_send_email);
         addCourseButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent email = new Intent(android.content.Intent.ACTION_SEND);
 
+                email.setType("plain/text");
+                email.putExtra(android.content.Intent.EXTRA_EMAIL, new String[]{mCurrentUser.getmEmail()});
+                email.putExtra(android.content.Intent.EXTRA_SUBJECT, "MemeUps Message!");
+                email.putExtra(android.content.Intent.EXTRA_TEXT,
+                        "Message:"+mBiographyEditText.getText().toString()+'\n'+'\n'+"Sent from MemeUps app.");
+                /* Send it off to the Activity-Chooser */
+                startActivity(Intent.createChooser(email, "Send mail..."));
 
             }
         });
