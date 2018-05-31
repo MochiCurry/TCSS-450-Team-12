@@ -156,6 +156,7 @@ public class ProfileViewFragment extends Fragment {
                         .replace(R.id.fragment_container, emailFragment)
                         .addToBackStack(null)
                         .commit();
+
                 }
             });
         }

@@ -55,14 +55,13 @@ public class EmailFragment extends Fragment {
     private Match mUser;
     private Match mCurrentUser;
     private EditText mBiographyEditText;
-
-
-
-   // private OnFragmentInteractionListener mListener;
+    private OnFragmentInteractionListener mListener;
 
     public EmailFragment() {
         // Required empty public constructor
     }
+
+
 
     /**
      * Use this factory method to create a new instance of
@@ -119,20 +118,34 @@ public class EmailFragment extends Fragment {
     }
 
 
-//    public void onButtonPressed(Uri uri) {
-//        if (mListener != null) {
-//            mListener.onFragmentInteraction(uri);
-//        }
-//    }
+    public void onButtonPressed(Uri uri) {
+        if (mListener != null) {
+            mListener.onFragmentInteraction(uri);
+        }
+    }
 
-    /**
-     * Called on attach. Context is the activity starts that starts EmailFragment.
-     * @param context Context Activity that EmailFragment is attached to.
-     */
+
+//    /**
+//     * Called on attach. Context is the activity starts that starts EmailFragment.
+//     * @param context Context Activity that EmailFragment is attached to.
+//     */
+//    @Override
+//    public void onAttach(Context context) {
+//        super.onAttach(context);
+//    }
+//
+
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
+        if (context instanceof OnFragmentInteractionListener) {
+            mListener = (OnFragmentInteractionListener) context;
+        } else {
+            throw new RuntimeException(context.toString()
+                    + " must implement OnFragmentInteractionListener");
+        }
     }
+
 
 
     /**
@@ -141,29 +154,8 @@ public class EmailFragment extends Fragment {
     @Override
     public void onDetach() {
         super.onDetach();
+        mListener = null;
     }
-
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
-    public interface OnFragmentInteractionListener {
-        void onFragmentInteraction(Uri uri);
-    }
-
-    /**
-     * Listener to be implemented by activities extending this fragment.
-     */
-    public interface EmailListener {
-        public void addCourse(String url);
-    }
-
     /**
      * Private class called to retrieve a user's data from the database in the background.
      */
@@ -227,20 +219,34 @@ public class EmailFragment extends Fragment {
         }
 
     }
+//
+//    /**
+//     * On resume attempt to reset the current user being emailed to, if this is null then destroy the fragment.
+//     */
+//    @Override
+//    public void onResume() {
+//        super.onResume();
+//        Bundle args = getArguments();
+//        if (args != null) {
+//            // Set course information based on argument passed
+//            mCurrentUser = (Match) args.getSerializable(COURSE_ITEM_SELECTED);
+//        } else {
+//            getActivity().getSupportFragmentManager().popBackStack();
+//        }
+//
+//    }
 
     /**
-     * On resume attempt to reset the current user being emailed to, if this is null then destroy the fragment.
+     * This interface must be implemented by activities that contain this
+     * fragment to allow an interaction in this fragment to be communicated
+     * to the activity and potentially other fragments contained in that
+     * activity.
+     * <p>
+     * See the Android Training lesson <a href=
+     * "http://developer.android.com/training/basics/fragments/communicating.html"
+     * >Communicating with Other Fragments</a> for more information.
      */
-    @Override
-    public void onResume() {
-        super.onResume();
-        Bundle args = getArguments();
-        if (args != null) {
-            // Set course information based on argument passed
-            mCurrentUser = (Match) args.getSerializable(COURSE_ITEM_SELECTED);
-        } else {
-            getActivity().getSupportFragmentManager().popBackStack();
-        }
-
+    public interface OnFragmentInteractionListener {
+        void onFragmentInteraction(Uri uri);
     }
 }

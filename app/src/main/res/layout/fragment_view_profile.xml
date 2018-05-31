@@ -34,7 +34,8 @@
 
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:contentDescription="@string/display_pic" />
 
 
         <TextView
@@ -43,11 +44,12 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="50dp"
             android:layout_marginTop="8dp"
-            android:text="Name:"
+            android:text="@string/name"
             android:textColor="@color/colorPrimary"
             android:textStyle="bold"
             app:layout_constraintEnd_toStartOf="@+id/profile_first"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginStart="50dp" />
 
         <TextView
             android:id="@+id/profile_first"
@@ -56,7 +58,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginLeft="50dp"
 
-            android:contentDescription="test"
+            android:contentDescription="@string/profile_first"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.504"
             app:layout_constraintStart_toStartOf="parent"
@@ -70,7 +72,7 @@
         android:layout_marginTop="8dp"
         android:textColor="@color/colorPrimary"
         android:textStyle="bold"
-        android:text="Username:"
+        android:text="@string/username"
         app:layout_constraintEnd_toStartOf="@+id/profile_username"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -108,14 +110,15 @@
         android:layout_gravity="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/profile_bio" />
+        app:layout_constraintTop_toBottomOf="@+id/profile_bio"
+        android:contentDescription="@string/meme_pic" />
 
     <Button
         android:id="@+id/match_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="send match request"
+        android:text="@string/send_match_request"
         android:layout_gravity="center"
 
         app:layout_constraintEnd_toEndOf="parent"
@@ -129,7 +132,7 @@
             android:layout_height="wrap_content"
 
             android:layout_gravity="center"
-            android:text="send a message"
+            android:text="@string/send_a_message"
 
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

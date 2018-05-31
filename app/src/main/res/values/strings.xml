@@ -15,5 +15,12 @@
     <string name="display_image_url">Display Image URL</string>
     <string name="favorite_meme_url">Favorite Meme URL</string>
     <string name="title_activity_sms">SMSActivity</string>
+    <string name="profile_first">test</string>
+    <string name="username">Username:</string>
+    <string name="send_match_request">send match request</string>
+    <string name="send_a_message">send a message</string>
+    <string name="name">Name:</string>
+    <string name="display_pic">display_pic</string>
+    <string name="meme_pic">meme_pic</string>
 
 </resources>

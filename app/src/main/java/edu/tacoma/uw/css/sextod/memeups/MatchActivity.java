@@ -9,6 +9,7 @@ package edu.tacoma.uw.css.sextod.memeups;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -42,7 +43,10 @@ import static android.content.ContentValues.TAG;
  * @author Travis Bain
  * @author Dirk Sexton
  */
-public class MatchActivity extends AppCompatActivity implements MatchListFragment.OnListFragmentInteractionListener, ProfileViewFragment.MatchListener {
+public class MatchActivity extends AppCompatActivity implements
+        MatchListFragment.OnListFragmentInteractionListener,
+        ProfileViewFragment.MatchListener,
+        EmailFragment.OnFragmentInteractionListener {
 
     //Initial url to be processed, will be followed by the command
     private final static String MATCH_URL
@@ -131,6 +135,14 @@ public class MatchActivity extends AppCompatActivity implements MatchListFragmen
     }
 
     /**
+     * Listener for the emailFragment
+     * @param uri
+     */
+    public void onFragmentInteraction(Uri uri) {
+
+    }
+
+    /**
      * Function to add a match, starts the task to execute the URL
      * @param url URL to be executed
      */
@@ -142,6 +154,7 @@ public class MatchActivity extends AppCompatActivity implements MatchListFragmen
 // Takes you back to the previous fragment by popping the current fragment out.
         //getSupportFragmentManager().popBackStackImmediate();
     }
+
 
     /**
      * AsyncTask to handle adding a match in the background using the given URL
