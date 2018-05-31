@@ -55,7 +55,7 @@ public class LoginActivity extends AppCompatActivity implements RegisterFragment
     private EditText loginEmail;
     private EditText registerEmail;
     private EditText registerPassword;
-    private String mode;
+    private String mode = "register";
     private SharedPreferences mSharedPreferences; // for the device to remember login
 
     /**

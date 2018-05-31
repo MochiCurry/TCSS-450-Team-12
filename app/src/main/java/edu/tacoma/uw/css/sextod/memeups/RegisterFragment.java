@@ -154,11 +154,14 @@ public class RegisterFragment extends Fragment {
             public void onClick(View v) {
                 //Build url using email and password and then call register function with the url
                 String url = buildCourseURL(v);
-                mSharedPreferences
-                        .edit()
-                        .putBoolean(getString(R.string.LOGGEDIN), true)
-                        .putString("email", mEmail.getText().toString())
-                        .commit();
+                Log.i(TAG, "Writing email to storage:");
+                Log.i(TAG, mEmail.getText().toString());
+
+//                mSharedPreferences
+//                        .edit()
+//                        .putBoolean(getString(R.string.LOGGEDIN), true)
+//                        .putString("email", mEmail.getText().toString())
+//                        .commit();
 
                 mListener.register(url);
 
