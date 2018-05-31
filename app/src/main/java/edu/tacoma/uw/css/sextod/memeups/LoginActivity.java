@@ -52,6 +52,7 @@ public class LoginActivity extends AppCompatActivity implements RegisterFragment
             = "http://kferg9.000webhostapp.com/android/login.php?";
     private Button signinbutton;
     private Button newuserbutton;
+    private EditText loginEmail;
     private EditText registerEmail;
     private EditText registerPassword;
     private SharedPreferences mSharedPreferences; // for the device to remember login
@@ -89,7 +90,7 @@ public class LoginActivity extends AppCompatActivity implements RegisterFragment
                 //openMainPage();
 
                 //Store the current values of the text fields
-                registerEmail = (EditText) findViewById(R.id.registerEmail);
+                loginEmail = (EditText) findViewById(R.id.loginEmail);
                 registerPassword = (EditText) findViewById(R.id.registerPassword);
 
                 //Pass in email and password to the url builder, and then call login function
@@ -110,8 +111,8 @@ public class LoginActivity extends AppCompatActivity implements RegisterFragment
                 //Get rid of elements from the Main Activity and start the RegisterFragment
                 signinbutton.setVisibility(View.GONE);
                 newuserbutton.setVisibility(View.GONE);
-                registerEmail = (EditText) findViewById(R.id.registerEmail);
-                registerEmail.setVisibility(View.GONE);
+                loginEmail = (EditText) findViewById(R.id.loginEmail);
+                loginEmail.setVisibility(View.GONE);
                 registerPassword = (EditText) findViewById(R.id.registerPassword);
                 registerPassword.setVisibility(View.GONE);
                 RegisterFragment registerFragment = new RegisterFragment();
@@ -124,8 +125,10 @@ public class LoginActivity extends AppCompatActivity implements RegisterFragment
 
         //if logged in is true, go to main page
         } else {
+            Log.i(TAG, "Used auto login");
+
             Intent i = new Intent(this, HomeScreenActivity.class);
-            //i.putExtra("loggedUser", registerEmail.getText().toString());
+            //i.putExtra("loggedUser", loginEmail.getText().toString());
             startActivity(i);
             finish();
         }
@@ -196,7 +199,7 @@ public class LoginActivity extends AppCompatActivity implements RegisterFragment
                             , Toast.LENGTH_LONG)
                             .show();
                             //On successful login, go to main page
-                            openMainPage();
+                            openMainPageRegister();
                 } else {
                     Toast.makeText(getApplicationContext(), "Error: "
                                     + jsonObject.get("error")
@@ -222,7 +225,7 @@ public class LoginActivity extends AppCompatActivity implements RegisterFragment
     public void register(String url) {
 //        signinbutton.setVisibility(View.VISIBLE);
 //        newuserbutton.setVisibility(View.VISIBLE);
-//        registerEmail.setVisibility(View.VISIBLE);
+//        loginEmail.setVisibility(View.VISIBLE);
 //        registerPassword.setVisibility(View.VISIBLE);
         AddUserTask task = new AddUserTask();
         task.execute(new String[]{url.toString()});
@@ -269,7 +272,20 @@ public class LoginActivity extends AppCompatActivity implements RegisterFragment
         mSharedPreferences
                 .edit()
                 .putBoolean(getString(R.string.LOGGEDIN), true)
-                .putString("email", registerEmail.getText().toString())
+                .putString("email", loginEmail.getText().toString())
+                .commit();
+
+        Intent intent = new Intent(this, HomeScreenActivity.class);
+        startActivity(intent);
+
+    }
+
+    public void openMainPageRegister() {
+        //to allow the app to remember login without asking for it every time
+
+        mSharedPreferences
+                .edit()
+                .putBoolean(getString(R.string.LOGGEDIN), true)
                 .commit();
 
         Intent intent = new Intent(this, HomeScreenActivity.class);
@@ -287,7 +303,7 @@ public class LoginActivity extends AppCompatActivity implements RegisterFragment
         StringBuilder sb = new StringBuilder(LOGIN_URL);
 
         try {
-            String email = registerEmail.getText().toString();
+            String email = loginEmail.getText().toString();
             sb.append("email=");
             sb.append(URLEncoder.encode(email, "UTF-8"));
             String password = registerPassword.getText().toString();
@@ -309,7 +325,7 @@ public class LoginActivity extends AppCompatActivity implements RegisterFragment
     public void onBackPressed(){
         signinbutton.setVisibility(View.VISIBLE);
         newuserbutton.setVisibility(View.VISIBLE);
-        registerEmail.setVisibility(View.VISIBLE);
+        loginEmail.setVisibility(View.VISIBLE);
         registerPassword.setVisibility(View.VISIBLE);
         getSupportFragmentManager().popBackStack();
     }

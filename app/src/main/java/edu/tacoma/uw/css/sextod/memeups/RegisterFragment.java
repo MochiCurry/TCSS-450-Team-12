@@ -14,6 +14,7 @@
 package edu.tacoma.uw.css.sextod.memeups;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -47,6 +48,8 @@ public class RegisterFragment extends Fragment {
     private static final String ARG_PARAM5 = "param5";
     private final static String COURSE_ADD_URL
             = "http://kferg9.000webhostapp.com/android/addUser.php?";
+
+    private SharedPreferences mSharedPreferences;
 
 
     private RegisterListener mListener;
@@ -130,11 +133,14 @@ public class RegisterFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_register, container, false);
 
         //Set email and password
-        mEmail = (EditText) v.findViewById(R.id.registerEmail);
+        mEmail = (EditText) v.findViewById(R.id.loginEmail);
         mPassword = (EditText) v.findViewById(R.id.registerPassword);
         mFirst = (EditText) v.findViewById(R.id.registerFirst);
         mLast = (EditText) v.findViewById(R.id.registerLast);
         mUsername = (EditText) v.findViewById(R.id.registerUsername);
+
+        mSharedPreferences = getActivity().getSharedPreferences(getString(R.string.LOGIN_PREFS)
+                , Context.MODE_PRIVATE);
 
         //Button for registration
         Button button = (Button)
@@ -148,7 +154,15 @@ public class RegisterFragment extends Fragment {
             public void onClick(View v) {
                 //Build url using email and password and then call register function with the url
                 String url = buildCourseURL(v);
+                mSharedPreferences
+                        .edit()
+                        .putBoolean(getString(R.string.LOGGEDIN), true)
+                        .putString("email", mEmail.getText().toString())
+                        .commit();
+
                 mListener.register(url);
+
+
             }
         });
 
