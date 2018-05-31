@@ -1,3 +1,13 @@
+/**
+ * Handles sending emails to a matched user. Called from ProfileView, includes one TextEdit field
+ * to accept the body of the message, and a button that once pressed will prompt you to open the email
+ * application, autofilling the recipient and subject fields.
+ *
+ * @author Kerry Ferguson
+ * @author Travis Bain
+ * @author Dirk Sexton
+ */
+
 package edu.tacoma.uw.css.sextod.memeups;
 
 import android.content.Context;
@@ -115,13 +125,19 @@ public class EmailFragment extends Fragment {
 //        }
 //    }
 
+    /**
+     * Called on attach. Context is the activity starts that starts EmailFragment.
+     * @param context Context Activity that EmailFragment is attached to.
+     */
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
     }
 
 
-
+    /**
+     * Handles detaching from the activity.
+     */
     @Override
     public void onDetach() {
         super.onDetach();
@@ -141,12 +157,22 @@ public class EmailFragment extends Fragment {
         void onFragmentInteraction(Uri uri);
     }
 
-    public interface CourseAddListener {
+    /**
+     * Listener to be implemented by activities extending this fragment.
+     */
+    public interface EmailListener {
         public void addCourse(String url);
     }
 
-
-    private class CourseAsyncTask extends AsyncTask<String, Void, String> {
+    /**
+     * Private class called to retrieve a user's data from the database in the background.
+     */
+    private class UserAsyncTask extends AsyncTask<String, Void, String> {
+        /**
+         * Runs in the background to execute a php URL and retrieve the results
+         * @param urls URL to be executed in the background
+         * @return Returns the response from the URL after executing
+         */
         @Override
         protected String doInBackground(String... urls) {
             String response = "";
@@ -175,18 +201,23 @@ public class EmailFragment extends Fragment {
             }
             return response;
         }
+
+        /**
+         * After executing the URL, attempt to parse the JSON string for the user data or display an error.
+         * @param result Result to check for success/failure and error messages
+         */
         @Override
         protected void onPostExecute(String result) {
             Log.i(TAG, "onPostExecute");
 
+            //Display error
             if (result.startsWith("Unable to")) {
                 Toast.makeText(getActivity().getApplicationContext(), result, Toast.LENGTH_SHORT)
                         .show();
                 return;
             }
-
             try {
-                mUser = Match.parseUserJSON(result);
+                mUser = Match.parseUserJSON(result); //Parse the JSON file for Match fields
             }
             catch (JSONException e) {
                 Toast.makeText(getActivity().getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT)
@@ -197,6 +228,9 @@ public class EmailFragment extends Fragment {
 
     }
 
+    /**
+     * On resume attempt to reset the current user being emailed to, if this is null then destroy the fragment.
+     */
     @Override
     public void onResume() {
         super.onResume();
@@ -209,6 +243,4 @@ public class EmailFragment extends Fragment {
         }
 
     }
-
-
 }

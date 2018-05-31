@@ -1,3 +1,10 @@
+/**
+ * MatchActivity handles both finding and viewing matches separately. Depending on the mode stored in
+ * SharedPreferences, the list is populated (using MatchListFragment) with either potential users to match
+ * with, or with users you have already matched with. These users can be selected to view their profile
+ * using ProfileViewFragment.
+ */
+
 package edu.tacoma.uw.css.sextod.memeups;
 
 import android.content.Context;
@@ -29,7 +36,8 @@ import static android.content.ContentValues.TAG;
 /**
  * This activity will display the people the users are capable of matching
  * with depending on their quiz score. It will only show people with the same
- * category of score.
+ * category of score. Alternatively, this activity can also display the users
+ * that you have currently matched with, in order to message them.
  * @author Kerry Ferguson
  * @author Travis Bain
  * @author Dirk Sexton
@@ -37,21 +45,28 @@ import static android.content.ContentValues.TAG;
 public class MatchActivity extends AppCompatActivity implements MatchListFragment.OnListFragmentInteractionListener,
         ProfileEditFragment.CourseAddListener, ProfileViewFragment.MatchListener {
 
+    //Initial url to be processed, will be followed by the command
     private final static String MATCH_URL
             = "http://kferg9.000webhostapp.com/android/addMatch.php?";
 
-   // private ProfileViewFragment mDetail;
-
+    /**
+     * Handles match requesting in the ViewProfile fragment. Accepts an email and builds the url
+     * using that email to add the match into the database using a PHP file.
+     * @param email email to be used for url to find the UserID to be matched to.
+     */
     @Override
     public void matchRequest(String email)
     {
         //match with given email
         StringBuilder sb = new StringBuilder(MATCH_URL);
 
+        //Try to create a match by building and running the URL
         try {
+            //Use SharedPreferences to get the current user's email
             SharedPreferences mLoginEmail = getSharedPreferences(getString(R.string.LOGIN_PREFS)
                     , Context.MODE_PRIVATE);
 
+            //Insert the user's email, followed by the match's email
             String email1 = mLoginEmail.getString("email", "");
             sb.append("email1=");
             sb.append(URLEncoder.encode(email1, "UTF-8"));
@@ -63,14 +78,13 @@ public class MatchActivity extends AppCompatActivity implements MatchListFragmen
             //Log.i(TAG sb.toString());
             Log.i(TAG, sb.toString());
 
+            //Attempt the add the match.
+            addCourse(sb.toString());
         }
         catch(Exception e) {
             //Toast.makeText(view.getContext(), "Something wrong with the url" + e.getMessage(), Toast.LENGTH_LONG)
                     //.show();
         }
-        //return sb.toString();
-
-        addCourse(sb.toString());
     }
 
 

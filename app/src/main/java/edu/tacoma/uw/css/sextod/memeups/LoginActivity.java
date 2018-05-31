@@ -74,6 +74,7 @@ public class LoginActivity extends AppCompatActivity implements RegisterFragment
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //Use SharedPreferences to check if the user was previously logged in
         mSharedPreferences = getSharedPreferences(getString(R.string.LOGIN_PREFS)
                 , Context.MODE_PRIVATE);
         if (!mSharedPreferences.getBoolean(getString(R.string.LOGGEDIN), false)) {
@@ -146,9 +147,9 @@ public class LoginActivity extends AppCompatActivity implements RegisterFragment
     /**
      * Private class to handle asynchronous loading of data
      */
-    private class AddUserTask extends AsyncTask<String, Void, String> {
+    private class LoginUserTask extends AsyncTask<String, Void, String> {
         /**
-         * PreExecute
+         * PreExecute runs before executing the URL
          */
         @Override
         protected void onPreExecute() {
@@ -156,7 +157,7 @@ public class LoginActivity extends AppCompatActivity implements RegisterFragment
         }
 
         /**
-         * This function reads and returns the response from the webpage.
+         * This function reads and returns the response from the webpage in the background.
          * @param urls url of the webpage
          * @return Returns the output from the webpage
          */
@@ -178,7 +179,7 @@ public class LoginActivity extends AppCompatActivity implements RegisterFragment
                     }
 
                 } catch (Exception e) {
-                    response = "Unable to add course, Reason: "
+                    response = "Unable to login/register, Reason: "
                             + e.getMessage();
                 } finally {
                     if (urlConnection != null)
@@ -194,7 +195,7 @@ public class LoginActivity extends AppCompatActivity implements RegisterFragment
          * exception is caught. It tries to call the parse Method and checks to see if it was successful.
          * If not, it displays the exception.
          *
-         * @param result
+         * @param result The result of the URL that was processes
          */
         @Override
         protected void onPostExecute(String result) {
@@ -211,7 +212,7 @@ public class LoginActivity extends AppCompatActivity implements RegisterFragment
                             {
                                 openMainPage();
                             }
-                            else
+                            else //Else, use the registeration automatic login method
                             {
                                 openMainPageRegister();
                             }
@@ -222,6 +223,7 @@ public class LoginActivity extends AppCompatActivity implements RegisterFragment
                             .show();
                 }
             } catch (JSONException e) {
+                //This error message is the result of registering an existing email.
                 if (e.getMessage().contains("End of input at character 0 of")) {
                     Toast.makeText(getApplicationContext(), "Email is already in use.", Toast.LENGTH_LONG).show();
                 } else {
@@ -242,7 +244,7 @@ public class LoginActivity extends AppCompatActivity implements RegisterFragment
 //        newuserbutton.setVisibility(View.VISIBLE);
 //        loginEmail.setVisibility(View.VISIBLE);
 //        registerPassword.setVisibility(View.VISIBLE);
-        AddUserTask task = new AddUserTask();
+        LoginUserTask task = new LoginUserTask();
         task.execute(new String[]{url.toString()});
 
 // Takes you back to the previous fragment by popping the current fragment out.
@@ -255,15 +257,16 @@ public class LoginActivity extends AppCompatActivity implements RegisterFragment
      */
     public void login(String url)
     {
+        //Set to login mode (as opposed to registration mode)
         mode = "login";
-        AddUserTask task = new AddUserTask();
+        LoginUserTask task = new LoginUserTask();
         task.execute(new String[]{url.toString()});
     }
 
     /**
-     * Creates options menu
-     * @param menu
-     * @return Returns boolean
+     * Creates options menu (No options on the login screen)
+     * @param menu Menu to be created
+     * @return Returns boolean if creation is finished
      */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -272,8 +275,8 @@ public class LoginActivity extends AppCompatActivity implements RegisterFragment
 
     /**
      * Dropdown for options menu
-     * @param item
-     * @return Returns if the item is selected
+     * @param item Item that is being selected
+     * @return False to allow normal menu processing, true to handle it here
      */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -296,6 +299,10 @@ public class LoginActivity extends AppCompatActivity implements RegisterFragment
 
     }
 
+    /**
+     * This method is used in the case that we are logging in immediately after a successful registration
+     * in order to avoid overwriting the stored email address in sharedPreferences.
+     */
     public void openMainPageRegister() {
         //to allow the app to remember login without asking for it every time
 
@@ -337,6 +344,11 @@ public class LoginActivity extends AppCompatActivity implements RegisterFragment
         }
         return sb.toString();
     }
+
+    /**
+     * Method to handle the back button being pressed in the registration fragment to reveal fields and
+     * buttons again.
+     */
     @Override
     public void onBackPressed(){
         signinbutton.setVisibility(View.VISIBLE);

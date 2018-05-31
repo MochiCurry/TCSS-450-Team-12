@@ -30,7 +30,7 @@ import edu.tacoma.uw.css.sextod.memeups.database.Match;
 import static android.content.ContentValues.TAG;
 
 /**
- * This fragment is called by the ProfileActivity so the user can edit their profile. They
+ * This fragment is called by the MyProfileActivity so the user can edit their profile. They
  * are able to update their profile picture, biography, username, and favorite meme by
  * sending it to the database. The pictures will be sent in the URL format.
  * pictures will
@@ -139,7 +139,7 @@ public class ProfileEditFragment extends Fragment {
                 mListener.addCourse(url);
 
 
-                Intent intent = new Intent(getActivity(), ProfileActivity.class);
+                Intent intent = new Intent(getActivity(), MyProfileActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
 
                 startActivity(intent);
@@ -163,7 +163,7 @@ public class ProfileEditFragment extends Fragment {
             mListener = (CourseAddListener) context;
         } else {
             throw new RuntimeException(context.toString()
-                    + " must implement CourseAddListener");
+                    + " must implement EmailListener");
         }
     }
 

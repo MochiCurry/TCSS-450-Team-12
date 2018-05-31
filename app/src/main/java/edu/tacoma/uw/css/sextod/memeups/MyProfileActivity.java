@@ -13,7 +13,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -40,7 +39,7 @@ import static android.content.ContentValues.TAG;
  * @author Travis Bain
  * @author Dirk Sexton
  */
-public class ProfileActivity extends AppCompatActivity implements ProfileEditFragment.CourseAddListener
+public class MyProfileActivity extends AppCompatActivity implements ProfileEditFragment.CourseAddListener
 {
     private final static String GET_USER_URL
             = "http://kferg9.000webhostapp.com/android/list.php?cmd=singleuser";
@@ -60,7 +59,7 @@ public class ProfileActivity extends AppCompatActivity implements ProfileEditFra
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_profile);
+        setContentView(R.layout.activity_my_profile);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.top_bar);
         setSupportActionBar(toolbar);
