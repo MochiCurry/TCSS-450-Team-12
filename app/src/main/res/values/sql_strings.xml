@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="CREATE_COURSE_SQL">
+        CREATE TABLE IF NOT EXISTS Course
+        (email id TEXT PRIMARY KEY, first TEXT,
+        last TEXT, username TEXT, bio TEXT,
+        display_url TEXT, meme_url TEXT, score_category TEXT)
+    </string>
+    <string name="DROP_COURSE_SQL">
+        DROP TABLE IF EXISTS Course
+    </string>
+</resources>
+
+
