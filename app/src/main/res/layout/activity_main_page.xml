@@ -22,59 +22,59 @@
         app:layout_constraintTop_toTopOf="@+id/imageView" />
 
 
-
-    <LinearLayout
+    <!--
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="15dp"
+            app:layout_constraintTop_toBottomOf="@+id/FEATURED_MEME" >
+    -->
+    <Button
+        android:id="@+id/quizbutton"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="15dp"
-        app:layout_constraintTop_toBottomOf="@+id/FEATURED_MEME" >
+        android:layout_height="36dp"
+        android:layout_marginTop="16dp"
+        android:layout_weight="1"
 
-        <Button
-            android:id="@+id/quizbutton"
-            android:layout_width="match_parent"
-            android:layout_height="36dp"
-            android:layout_marginTop="16dp"
-            android:layout_weight="1"
+        android:text="Take quiz"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/FEATURED_MEME" />
 
-            android:text="Take quiz"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/FEATURED_MEME" />
+    <Button
+        android:id="@+id/matchbutton"
+        android:layout_width="match_parent"
+        android:layout_height="36dp"
+        android:layout_marginTop="16dp"
+        android:layout_weight="1"
+        android:text="Find matches"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/quizbutton" />
 
-        <Button
-            android:id="@+id/matchbutton"
-            android:layout_width="match_parent"
-            android:layout_height="36dp"
-            android:layout_marginTop="16dp"
-            android:layout_weight="1"
-            android:text="Find matches"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/quizbutton" />
+    <Button
+        android:id="@+id/viewmatchbutton"
+        android:layout_width="match_parent"
+        android:layout_height="36dp"
+        android:layout_marginTop="16dp"
+        android:text="My matches"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/matchbutton" />
 
-        <Button
-            android:id="@+id/viewmatchbutton"
-            android:layout_width="match_parent"
-            android:layout_height="36dp"
-            android:layout_marginTop="16dp"
-            android:text="My matches"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/matchbutton" />
+    <Button
+        android:id="@+id/profilebutton"
+        android:layout_width="match_parent"
+        android:layout_height="36dp"
+        android:layout_marginTop="16dp"
+        android:layout_weight="1"
+        android:text="My profile"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/viewmatchbutton" />
 
-        <Button
-            android:id="@+id/profilebutton"
-            android:layout_width="match_parent"
-            android:layout_height="36dp"
-            android:layout_marginTop="16dp"
-            android:layout_weight="1"
-            android:text="My profile"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/viewmatchbutton" />
 
-    </LinearLayout>
 
     <ImageView
         android:id="@+id/imageView"
