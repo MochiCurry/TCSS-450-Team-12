@@ -1,3 +1,8 @@
+/**
+ * This is a fragment that will be called by the MatchActivity to showcase the people that the
+ * user's are capable of matching with according to their quiz score.
+ */
+
 package edu.tacoma.uw.css.sextod.memeups;
 
 import android.content.Context;

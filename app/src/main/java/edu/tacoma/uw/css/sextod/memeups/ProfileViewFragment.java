@@ -1,3 +1,8 @@
+/**
+ * This class displays a matched user's profile. After clicking a used's profile in the matching views,
+ * you are shown their details and are either able to send them a message, or send them a match request.
+ */
+
 package edu.tacoma.uw.css.sextod.memeups;
 
 import android.content.Context;
@@ -164,7 +169,10 @@ public class ProfileViewFragment extends Fragment {
 
     }
 
-
+    /**
+     * Update view which is called after loading the user's data, and then updates to populate the page.
+     * @param course
+     */
     public void updateView(Match course) {
         if (course != null) {
 //            mCourseIdTextView.setText(course.getCourseId());
@@ -194,8 +202,6 @@ public class ProfileViewFragment extends Fragment {
                     .into(mMeme);
         }
     }
-
-
 
     public void onButtonPressed(Uri uri) {
 //        if (mListener != null) {

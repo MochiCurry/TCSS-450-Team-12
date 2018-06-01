@@ -1,3 +1,7 @@
+/**
+ * This activity displays the list of users for the user to interact with.
+ */
+
 package edu.tacoma.uw.css.sextod.memeups;
 
 import android.content.Context;

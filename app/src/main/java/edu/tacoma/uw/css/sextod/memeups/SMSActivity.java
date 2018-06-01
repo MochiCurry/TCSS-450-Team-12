@@ -1,3 +1,7 @@
+/**
+ * Unimplemented in our current version.
+ */
+
 package edu.tacoma.uw.css.sextod.memeups;
 
 import android.net.Uri;

@@ -1,3 +1,9 @@
+/**
+ * Fragment providing TextEdits for the user to update their profile information.
+ * The TextEdits are initially populated with data pulled from the user's profile in the database.
+ * Afterwords, users can submit these changes to be accepted by the database.
+ */
+
 package edu.tacoma.uw.css.sextod.memeups;
 
 import android.content.Context;
@@ -101,6 +107,13 @@ public class MyProfileEditFragment extends Fragment {
         }
     }
 
+    /**
+     * On create view, uses the user email and URL to retrieve information to initially populate fields.
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -376,6 +389,10 @@ public class MyProfileEditFragment extends Fragment {
 
     }
 
+    /**
+     * This function is called after data has been pulled from the database, and updates the view
+     * with this data.
+     */
     public void updateView() {
         Log.i(TAG, "In updateView()");
         if (mUser != null) {

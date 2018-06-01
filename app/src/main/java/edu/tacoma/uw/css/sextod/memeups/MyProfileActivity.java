@@ -1,3 +1,8 @@
+/**
+ * Displays the user's own profile, with a button to allow them to edit their details.
+ * User's data is pulled from the database using their email which is stored in SharedPreferences.
+ */
+
 package edu.tacoma.uw.css.sextod.memeups;
 
 import android.content.Context;
@@ -47,8 +52,6 @@ public class MyProfileActivity extends AppCompatActivity implements MyProfileEdi
     private final static String GET_USER_URL
             = "http://kferg9.000webhostapp.com/android/list.php?cmd=singleuser";
 
-
-
     private Button collectionbutton;
     private TextView registerBio;
     private TextView aboutMe;
@@ -57,7 +60,11 @@ public class MyProfileActivity extends AppCompatActivity implements MyProfileEdi
     private ImageView memePic;
     private Match mUser;
 
-
+    /**
+     * Create the view and fill the fields. Builds and processes a string to retrievee the user's data from
+     * the database.
+     * @param savedInstanceState Saved instance state for resuming
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -145,7 +152,6 @@ public class MyProfileActivity extends AppCompatActivity implements MyProfileEdi
 
     }
 
-
     private class CourseAsyncTask extends AsyncTask<String, Void, String> {
         @Override
         protected String doInBackground(String... urls) {
@@ -174,6 +180,7 @@ public class MyProfileActivity extends AppCompatActivity implements MyProfileEdi
             }
             return response;
         }
+
 
         @Override
         protected void onPostExecute(String result) {
@@ -225,6 +232,9 @@ public class MyProfileActivity extends AppCompatActivity implements MyProfileEdi
         }
     }
 
+    /**
+     * On back pressed, set the fields to be visible again.
+     */
     @Override
     public void onBackPressed() {
         super.onBackPressed();
