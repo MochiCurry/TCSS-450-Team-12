@@ -28,6 +28,8 @@ import android.widget.Toast;
 
 import java.net.URLEncoder;
 
+import edu.tacoma.uw.css.sextod.memeups.database.User;
+
 import static android.content.ContentValues.TAG;
 
 /**
@@ -57,11 +59,6 @@ public class RegisterFragment extends Fragment {
 
     private Button registerbutton;
 
-    private String mParam1;
-    private String mParam2;
-    private String mParam3;
-    private String mParam4;
-    private String mParam5;
     private EditText mEmail;
     private EditText mPassword;
     private EditText mFirst;
@@ -86,18 +83,11 @@ public class RegisterFragment extends Fragment {
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
      * @return A new instance of fragment RegisterFragment.
      */
-    public static RegisterFragment newInstance(String param1, String param2, String param3, String param4, String param5) {
+    public static RegisterFragment newInstance() {
         RegisterFragment fragment = new RegisterFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        args.putString(ARG_PARAM3, param3);
-        args.putString(ARG_PARAM4, param4);
-        args.putString(ARG_PARAM5, param5);
         fragment.setArguments(args);
         return fragment;
     }
@@ -109,15 +99,6 @@ public class RegisterFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-            mParam3 = getArguments().getString(ARG_PARAM3);
-            mParam4 = getArguments().getString(ARG_PARAM4);
-            mParam5 = getArguments().getString(ARG_PARAM5);
-        }
-
     }
 
     /**
@@ -164,7 +145,17 @@ public class RegisterFragment extends Fragment {
 //                        .putString("email", mEmail.getText().toString())
 //                        .commit();
 
-                mListener.register(url, mEmail.getText().toString());
+                try {
+                    //Create user object to validate fields
+                    User user = new User(mEmail.getText().toString(), mPassword.getText().toString());
+
+                    mListener.register(url, mEmail.getText().toString());
+                } catch (Exception e){
+                    Toast.makeText(v.getContext(),
+                            "Unable to register: " + e.getMessage()
+                            , Toast.LENGTH_SHORT)
+                            .show();
+                }
 
 
             }
