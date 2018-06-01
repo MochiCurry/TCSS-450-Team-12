@@ -72,7 +72,7 @@ public class RegisterFragment extends Fragment {
      * Listener for the registration button
      */
     public interface RegisterListener {
-        public void register(String url);
+        public void register(String url, String email);
     }
 
     /**
@@ -164,7 +164,7 @@ public class RegisterFragment extends Fragment {
 //                        .putString("email", mEmail.getText().toString())
 //                        .commit();
 
-                mListener.register(url);
+                mListener.register(url, mEmail.getText().toString());
 
 
             }

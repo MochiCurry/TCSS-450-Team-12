@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
+import android.nfc.Tag;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -131,6 +132,7 @@ public class ProfileViewFragment extends Fragment {
                 @Override
                 public void onClick(View v) {
                     //do matching stuff
+
                     mListener.matchRequest(mCurrentUser.getmEmail());
                 }
             });

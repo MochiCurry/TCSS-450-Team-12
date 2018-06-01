@@ -138,8 +138,10 @@ public class MatchActivity extends AppCompatActivity implements
     {
         EmailFragment emailFragment = new EmailFragment();
 
+
+
         Bundle args = new Bundle();
-        args.putSerializable(ProfileViewFragment.COURSE_ITEM_SELECTED, email);
+        args.putSerializable("sendEmail", email);
         emailFragment.setArguments(args);
 
         getSupportFragmentManager().beginTransaction()

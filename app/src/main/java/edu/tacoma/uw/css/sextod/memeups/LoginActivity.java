@@ -239,11 +239,18 @@ public class LoginActivity extends AppCompatActivity implements RegisterFragment
      * @param url url to the php register function
      */
     @Override
-    public void register(String url) {
+    public void register(String url, String email) {
 //        signinbutton.setVisibility(View.VISIBLE);
 //        newuserbutton.setVisibility(View.VISIBLE);
 //        loginEmail.setVisibility(View.VISIBLE);
 //        registerPassword.setVisibility(View.VISIBLE);
+
+        mSharedPreferences
+                        .edit()
+                        .putBoolean(getString(R.string.LOGGEDIN), true)
+                        .putString("email", email)
+                        .commit();
+
         LoginUserTask task = new LoginUserTask();
         task.execute(new String[]{url.toString()});
 

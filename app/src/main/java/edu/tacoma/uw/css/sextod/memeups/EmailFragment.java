@@ -55,7 +55,7 @@ public class EmailFragment extends Fragment {
     private String mParam2;
 
     private Match mUser;
-    private Match mRecipient;
+    private String mRecipient;
     private EditText mMessageText;
     private EmailListener mListener;
     private String mUserEmail;
@@ -109,15 +109,25 @@ public class EmailFragment extends Fragment {
         addCourseButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent email = new Intent(android.content.Intent.ACTION_SEND);
+                Intent email = new Intent(Intent.ACTION_SENDTO);
 
-                email.setType("plain/text");
-                email.putExtra(android.content.Intent.EXTRA_EMAIL, new String[]{mUserEmail});
-                email.putExtra(android.content.Intent.EXTRA_SUBJECT, "MemeUps Message!");
-                email.putExtra(android.content.Intent.EXTRA_TEXT,
+                //Intent email = new Intent(Intent.ACTION_SENDTO, Uri.fromParts("mailto", mUserEmail, null));
+
+                //Only email apps should handle this
+//                Log.i(TAG, "Email being used in EmailFragment:");
+//                Log.i(TAG, mRecipient);
+
+                String[] addresses = new String[1];
+                addresses[0] = mRecipient;
+
+                email.setData(Uri.parse("mailto:"));
+
+                email.putExtra(Intent.EXTRA_EMAIL, addresses);
+                email.putExtra(Intent.EXTRA_SUBJECT, "MemeUps Message!");
+                email.putExtra(Intent.EXTRA_TEXT,
                         "Sender:"+mUserEmail+'\n'+'\n'+"Message: "+ mMessageText.getText().toString()+'\n'+'\n'+"Sent from MemeUps app.");
                 /* Send it off to the Activity-Chooser */
-                startActivity(Intent.createChooser(email, "Send mail..."));
+                startActivity(email);
 
             }
         });
@@ -228,20 +238,20 @@ public class EmailFragment extends Fragment {
 
     }
 
-//    /**
-//     * On resume attempt to reset the current user being emailed to, if this is null then destroy the fragment.
-//     */
-//    @Override
-//    public void onResume() {
-//        super.onResume();
-//        Bundle args = getArguments();
-//        if (args != null) {
-//            // Set course information based on argument passed
-//            mCurrentUser = (Match) args.getSerializable(COURSE_ITEM_SELECTED);
-//        } else {
-//            //getActivity().getSupportFragmentManager().popBackStack();
-//        }
-//    }
+    /**
+     * On resume attempt to reset the current user being emailed to, if this is null then destroy the fragment.
+     */
+    @Override
+    public void onResume() {
+        super.onResume();
+        Bundle args = getArguments();
+        if (args != null) {
+            // Set course information based on argument passed
+            mRecipient = (String) args.getSerializable("sendEmail");
+        } else {
+            getActivity().getSupportFragmentManager().popBackStack();
+        }
+    }
 
     /**
      * This interface must be implemented by activities that contain this
