@@ -10,6 +10,7 @@ package edu.tacoma.uw.css.sextod.memeups;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -19,8 +20,21 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+
+import edu.tacoma.uw.css.sextod.memeups.database.Match;
 
 /**
  * This class is the home page of the app where the users will be able to navigate to other
@@ -39,8 +53,9 @@ public class HomeScreenActivity extends AppCompatActivity {
 
     /* URL of the meme of the day
 private String URL = "http://kferg9.000webhostapp.com/android/showDaily.php?id=1"; */
-    private static final String URL = "https://qph.fs.quoracdn.net/main-qimg-2e3206445819b42a895ba8234a24ec71-c";
+    private static final String MEME_URL = "http://kferg9.000webhostapp.com/android/list.php?cmd=meme&id=1";
     private SharedPreferences mSharedPreferences;
+    private String mMemeUrl;
 
     /**
      * Function for on creation of the activity. Sets up all the buttons.
@@ -59,11 +74,10 @@ private String URL = "http://kferg9.000webhostapp.com/android/showDaily.php?id=1
 
         //Display the meme image using Picasso with the URL
         mMemeImage = findViewById(R.id.FEATURED_MEME);
-        Picasso.get()
-                .load(URL)
-                .placeholder(R.drawable.ic_launcher_background)
-                .error(R.drawable.memeupslogo)
-                .into(mMemeImage);
+
+        MemeAsyncTask memeAsyncTask = new MemeAsyncTask();
+        memeAsyncTask.execute(MEME_URL);
+
 
         //Start shared preferences to remember if the user is logged in and what their email is
         mSharedPreferences = getSharedPreferences(getString(R.string.LOGIN_PREFS)
@@ -198,11 +212,81 @@ private String URL = "http://kferg9.000webhostapp.com/android/showDaily.php?id=1
     }
 
     /**
+     * Called at the end of async task after parsing for meme URL, loads the meme into view
+     */
+    public void updateMeme()
+    {
+        Picasso.get()
+                .load(mMemeUrl)
+                .placeholder(R.drawable.ic_launcher_background)
+                .error(R.drawable.memeupslogo)
+                .into(mMemeImage);
+    }
+
+    /**
      * Function to start the Profile Page activity
      */
     public void openProfilePage() {
         Intent intent = new Intent(this, MyProfileActivity.class);
         startActivity(intent);
+
+    }
+    private class MemeAsyncTask extends AsyncTask<String, Void, String> {
+        @Override
+        protected String doInBackground(String... urls) {
+            String response = "";
+            HttpURLConnection urlConnection = null;
+            for (String url : urls) {
+                try {
+                    URL urlObject = new URL(url);
+                    urlConnection = (HttpURLConnection) urlObject.openConnection();
+
+                    InputStream content = urlConnection.getInputStream();
+
+                    BufferedReader buffer = new BufferedReader(new InputStreamReader(content));
+                    String s = "";
+                    while ((s = buffer.readLine()) != null) {
+                        response += s;
+                    }
+
+                } catch (Exception e) {
+                    response = "Unable to download the meme, Reason: "
+                            + e.getMessage();
+                }
+                finally {
+                    if (urlConnection != null)
+                        urlConnection.disconnect();
+                }
+            }
+            return response;
+        }
+        @Override
+        protected void onPostExecute(String result) {
+            //Log.i(TAG, "onPostExecute");
+
+            if (result.startsWith("Unable to")) {
+                Toast.makeText(getApplicationContext(), result, Toast.LENGTH_SHORT)
+                        .show();
+                return;
+            }
+
+            try {
+                JSONArray arr = new JSONArray(result);
+                JSONObject obj = arr.getJSONObject(0);
+                mMemeUrl = obj.getString("url");
+
+                updateMeme();
+            }
+            catch (JSONException e) {
+                if (e.getMessage().contains("End of input at character 0 of")) {
+                    Toast.makeText(getApplicationContext(), "No meme found.", Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT)
+                            .show();
+                }
+                return;
+            }
+        }
 
     }
 }
