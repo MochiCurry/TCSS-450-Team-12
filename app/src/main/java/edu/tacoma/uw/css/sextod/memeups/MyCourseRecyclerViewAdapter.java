@@ -12,7 +12,8 @@ import edu.tacoma.uw.css.sextod.memeups.database.Match;
 import java.util.List;
 
 /**
- *
+ * This class is used to get a list of matches using a webservice. It will cycle through
+ * the list of matches.
  * @author Kerry Ferguson
  * @author Travis Bain
  * @author Dirk Sexton
