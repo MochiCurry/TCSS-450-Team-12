@@ -1,9 +1,11 @@
-Team 12 MemeUps
+#Team 12 MemeUps
 
+@authors
 Kerry Ferguson
 Travis Bain
 Dirk Sexton
 
+Download the apk here: https://github.com/DirkScs/TCSS-450-Team-12/blob/master/app-release.apk
 
 Fixed bugs:
 On back press bugs fixed
