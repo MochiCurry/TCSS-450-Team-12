@@ -1,3 +1,9 @@
+/**
+ * Match, similarly to User, holds the data from User profiles taken from the database.
+ * It allows for storing of extra fields including score, bio, display picture url, and meme url,
+ * to be displayed on the matching list as well as viewing the profiles of other users
+ */
+
 package edu.tacoma.uw.css.sextod.memeups.database;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -15,13 +21,37 @@ import java.util.List;
  * @author Dirk Sexton
  */
 public class Match implements Serializable{
+    /**
+     * Constant with email string for url
+     */
     public static final String EMAIL = "email";
+    /**
+     * Constant with first name string for url
+     */
     public static final String FIRST = "first";
+    /**
+     * Constant with last name string for url
+     */
     public static final String LAST = "last";
+    /**
+     * Constant with username string for url
+     */
     public static final String USERNAME = "username";
+    /**
+     * Constant with score string for url
+     */
     public static final String SCORE = "score_category";
+    /**
+     * Constant with bio string for url
+     */
     public static final String BIO = "bio";
+    /**
+     * Constant with display url string for url
+     */
     public static final String DISPLAY = "display_url";
+    /**
+     * Constant with meme url string for url
+     */
     public static final String MEME = "meme_url";
 
     private String mEmail;
@@ -97,16 +127,30 @@ public class Match implements Serializable{
         mScore = score;
     }
 
+    /**
+     * Default constructor for match class
+     */
     public Match()
     {
 
     }
 
-    public Match(String email, String shortDesc, String longDesc, String prereqs, String bio, String display, String meme, int score) {
+    /**
+     * Parameterized constructor
+     * @param email Email field
+     * @param first First name field
+     * @param last Last name field
+     * @param username Username field
+     * @param bio Bio field
+     * @param display Display pic field
+     * @param meme Meme pic field
+     * @param score Score field
+     */
+    public Match(String email, String first, String last, String username, String bio, String display, String meme, int score) {
         mEmail = email;
-        mFirst = shortDesc;
-        mLast = longDesc;
-        mUsername = prereqs;
+        mFirst = first;
+        mLast = last;
+        mUsername = username;
 
         mBio = bio;
         mDisplay = display;
@@ -114,8 +158,12 @@ public class Match implements Serializable{
         mScore = score;
     }
 
-
-
+    /**
+     * Parses a json string to extract the elements
+     * @param courseJSON JSON String to be parsed
+     * @return List of all the Match objects extracted
+     * @throws JSONException
+     */
     public static List<Match> parseCourseJSON(String courseJSON) throws JSONException {
         List<Match> matchList = new ArrayList<Match>();
         if (courseJSON != null) {
@@ -136,6 +184,12 @@ public class Match implements Serializable{
         return matchList;
     }
 
+    /**
+     * Parses JSON String for the data of a single user
+     * @param courseJSON JSON String to be parsed
+     * @return Returns data for a single user
+     * @throws JSONException
+     */
     public static Match parseUserJSON(String courseJSON) throws JSONException
     {
         Match match = null;

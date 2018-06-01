@@ -22,8 +22,13 @@ import edu.tacoma.uw.css.sextod.memeups.R;
 public class MatchDB {
 
 
-
+    /**
+     * Constant for DB Version string
+     */
     public static final int DB_VERSION = 1;
+    /**
+     * Constant for DB Name string
+     */
     public static final String DB_NAME = "Course.db";
 
     private static final String COURSE_TABLE = "Course";
@@ -31,19 +36,27 @@ public class MatchDB {
     private CourseDBHelper mCourseDBHelper;
     private SQLiteDatabase mSQLiteDatabase;
 
-
-
-
+    /**
+     * Constructor for MatchDB
+     * @param context The Context
+     */
     public MatchDB(Context context) {
         mCourseDBHelper = new CourseDBHelper(
                 context, DB_NAME, null, DB_VERSION);
         mSQLiteDatabase = mCourseDBHelper.getWritableDatabase();
     }
 
-
     /**
      * Inserts the course into the local sqlite table. Returns true if successful, false otherwise.
-
+     * @param email Email field
+     * @param first First name field
+     * @param last Last name field
+     * @param username Username field
+     * @param bio Bio field
+     * @param display Display pic field
+     * @param meme Meme pic field
+     * @param score Score field
+     * @return Returns if completed
      */
     public boolean insertCourse(String email, String first, String last, String username, String bio,
                                 String display,
@@ -69,8 +82,6 @@ public class MatchDB {
         mSQLiteDatabase.delete(COURSE_TABLE, null, null);
     }
 
-
-
     /**
      * Returns the list of courses from the local Course table.
      * @return list
@@ -82,9 +93,6 @@ public class MatchDB {
                 "display_url",
                 "meme_url", "score_category"
         };
-
-
-
 
         Cursor c = mSQLiteDatabase.query(
                 COURSE_TABLE,  // The table to query
@@ -117,16 +125,22 @@ public class MatchDB {
         return list;
     }
 
-
-
-
-
+    /**
+     * Helper class for the CourseDB
+     */
     class CourseDBHelper extends SQLiteOpenHelper {
 
         private final String CREATE_COURSE_SQL;
 
         private final String DROP_COURSE_SQL;
 
+        /**
+         * This class is a helper that will locate the locally stored database stored through strings.
+         * @param context The context
+         * @param name Name
+         * @param factory Factory
+         * @param version Version
+         */
         public CourseDBHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
             super(context, name, factory, version);
             CREATE_COURSE_SQL = context.getString(R.string.CREATE_COURSE_SQL);

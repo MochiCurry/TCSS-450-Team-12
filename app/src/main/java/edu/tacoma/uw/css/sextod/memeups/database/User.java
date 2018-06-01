@@ -25,7 +25,13 @@ import java.util.regex.Pattern;
  */
 public class User implements Serializable
 {
+    /**
+     * Constant for Email string
+     */
     public static final String EMAIL = "email";
+    /**
+     * Constant for Password string
+     */
     public static final String PASSWORD = "password";
 
     private String mEmail, mPassword;
@@ -54,7 +60,6 @@ public class User implements Serializable
         }
     }
 
-
     /**
      * Parses a JSON string to retrieve email and password
      * @param courseJSON the JSON string.
@@ -74,7 +79,6 @@ public class User implements Serializable
 
         return userList;
     }
-
 
     /**
      * Getter method for email.

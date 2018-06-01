@@ -23,8 +23,17 @@ import java.util.List;
  */
 public class Quiz implements Serializable {
 
+    /**
+     * Constant for Question string
+     */
     public static final String QUESTION = "question";
+    /**
+     * Constant for Choice string
+     */
     public static final String CHOICE = "choice";
+    /**
+     * Constant for Answer string
+     */
     public static final String ANSWER = "answer";
     //  public static final String PRE_REQS = "prereqs";
 
@@ -89,8 +98,8 @@ public class Quiz implements Serializable {
 
     /**
      * Function to parse JSON string for the fields.
-     * @param quizJSON
-     * @return
+     * @param quizJSON JSON String to be parsed
+     * @return Returns list of Quiz objects
      * @throws JSONException
      */
     public static List<Quiz> parseQuizJSON(String quizJSON) throws JSONException {
