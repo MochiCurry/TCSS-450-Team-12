@@ -37,6 +37,7 @@ import static android.content.ContentValues.TAG;
  * an account with us. They will be able to register their email, password, first and
  * last name, and a username. Our webservice will remember their login credentials
  * so they can login with it.
+ *
  * @author Kerry Ferguson
  * @author Travis Bain
  * @author Dirk Sexton

@@ -13,6 +13,7 @@ import android.widget.Toast;
 /**
  * This activity will open on button click from ProfileViewFragment. It is used to open up the
  * SMS app so that the users can communicate with each other.
+ *
  * @author Kerry Ferguson
  * @author Travis Bain
  * @author Dirk Sexton

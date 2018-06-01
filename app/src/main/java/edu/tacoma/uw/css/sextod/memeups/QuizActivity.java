@@ -30,6 +30,7 @@ import android.widget.Toast;
  * Quiz activity using questions from QuestionLibrary. This activity will generate quizzes that
  * the users can interact so that they can get their meme score. The meme score will be used to
  * match people accordingly.
+ *
  * @author Kerry Ferguson
  * @author Travis Bain
  * @author Dirk Sexton
@@ -57,8 +58,10 @@ public class QuizActivity extends AppCompatActivity {
     public int status = 0; // user meme status
 
     /**
-     * On create, add the options bar the question and the three answers.
-     * @param savedInstanceState
+     * On create, Initializes the variables for the topbar, question buttons, and also contains the
+     * listener to go to the next question with the submit button.
+     *
+     * @param savedInstanceState the saved state of the app.
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -131,6 +134,7 @@ public class QuizActivity extends AppCompatActivity {
     /**
      *A class to calculate level of "memer" based on your score. Send it to
      *ResultActivity to display.
+     * @param score the users score that they earned by completing the quiz.
      */
     public int displayMemeLevel(double score) {
 
@@ -156,7 +160,7 @@ public class QuizActivity extends AppCompatActivity {
 
     /**
      * Function to check which button is selected
-     * @param v
+     * @param v the view
      */
     public void checkButton(View v) {
         int radioId = radioGroup.getCheckedRadioButtonId();
@@ -179,7 +183,7 @@ public class QuizActivity extends AppCompatActivity {
 
     /**
      * Creates option menu at top of the screen
-     * @param menu
+     * @param menu Option menu
      * @return
      */
     @Override

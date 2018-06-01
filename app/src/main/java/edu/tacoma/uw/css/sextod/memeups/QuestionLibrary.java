@@ -9,6 +9,7 @@ package edu.tacoma.uw.css.sextod.memeups;
 
 /**
  * Question Library that stores all of the quiz questions.
+ *
  * @author Kerry Ferguson
  * @author Travis Bain
  * @author Dirk Sexton
@@ -45,29 +46,43 @@ public class QuestionLibrary {
 
 
 
-
+    /**
+     * Getter method to retrieve a question for our quiz.
+     */
     public String getQuestion(int a) {
         String question = mQuestions[a];
         return question;
     }
 
 
+    /**
+     * Getter method to retrieve choice1 for the current question for our quiz.
+     */
     public String getChoice1(int a) {
         String choice0 = mChoices[a][0];
         return choice0;
     }
 
 
+    /**
+     * Getter method to retrieve choice2 for the current question for our quiz.
+     */
     public String getChoice2(int a) {
         String choice1 = mChoices[a][1];
         return choice1;
     }
 
+    /**
+     * Getter method to retrieve choice3 for the current question for our quiz.
+     */
     public String getChoice3(int a) {
         String choice2 = mChoices[a][2];
         return choice2;
     }
 
+    /**
+     * Getter method to retrieve the answer for the current question for our quiz.
+     */
     public String getCorrectAnswer(int a) {
         String answer = mCorrectAnswers[a];
         return answer;

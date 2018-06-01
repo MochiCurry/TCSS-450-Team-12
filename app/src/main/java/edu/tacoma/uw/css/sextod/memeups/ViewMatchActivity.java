@@ -28,6 +28,7 @@ import static android.content.ContentValues.TAG;
 
 /**
  * This activity is called from MatchActivity so that the user can view their matches.
+ *
  * @author Kerry Ferguson
  * @author Travis Bain
  * @author Dirk Sexton

@@ -222,7 +222,7 @@ public class ResultActivity extends AppCompatActivity {
          * exception is caught. It tries to call the parse Method and checks to see if it was successful.
          * If not, it displays the exception.
          *
-         * @param result
+         //@param result
          */
 //        @Override
 //        protected void onPostExecute(String result) {

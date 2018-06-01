@@ -32,8 +32,8 @@ public class User implements Serializable
 
     /**
      * Constructor
-     * @param email
-     * @param password
+     * @param email the provided email
+     * @param password the provided password
      */
     public User(String email, String password) {
         if(isValidEmail(email))
@@ -54,7 +54,11 @@ public class User implements Serializable
         }
     }
 
-    //Function parses a JSON string to retrieve email and password
+
+    /**
+     * Parses a JSON string to retrieve email and password
+     * @param courseJSON the JSON string.
+     */
     public static List<User> parseUserJSON(String courseJSON) throws JSONException {
         List<User> userList = new ArrayList<User>();
         if (courseJSON != null) {
@@ -71,18 +75,37 @@ public class User implements Serializable
         return userList;
     }
 
+
+    /**
+     * Getter method for email.
+     */
     public String getEmail() {
         return mEmail;
     }
 
+    /**
+     * Setter method for email.
+     *
+     * @param mEmail the email to set the variable to.
+     */
     public void setEmail(String mEmail) {
         this.mEmail = mEmail;
     }
 
+
+    /**
+     * Getter method for password.
+     */
     public String getPassword() {
         return mPassword;
     }
 
+
+    /**
+     * Setter method for password.
+     *
+     * @param mPassword the password to set the variable to.
+     */
     public void setPassword(String mPassword) {
         this.mPassword = mPassword;
     }

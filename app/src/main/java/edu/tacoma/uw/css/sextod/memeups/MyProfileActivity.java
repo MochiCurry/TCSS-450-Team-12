@@ -125,11 +125,6 @@ public class MyProfileActivity extends AppCompatActivity implements MyProfileEdi
         });
 
     }
-    public void openCollectionPage() {
-        Intent intent = new Intent(this, CollectionActivity.class);
-        startActivity(intent);
-
-    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
