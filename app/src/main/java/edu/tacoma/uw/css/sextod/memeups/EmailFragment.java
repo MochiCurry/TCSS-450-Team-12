@@ -23,7 +23,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import org.json.JSONException;
@@ -33,12 +32,10 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.net.URLEncoder;
 
 import edu.tacoma.uw.css.sextod.memeups.database.Match;
 
 import static android.content.ContentValues.TAG;
-import static edu.tacoma.uw.css.sextod.memeups.ProfileViewFragment.COURSE_ITEM_SELECTED;
 
 /**
  * This class is opened up from ProfileViewFragment. Main purpose is for the users to be able to
@@ -49,13 +46,19 @@ import static edu.tacoma.uw.css.sextod.memeups.ProfileViewFragment.COURSE_ITEM_S
  */
 public class EmailFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+    public final static String COURSE_ITEM_SELECTED = "course_selected";
+
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
+    private String mParam1;
+    private String mParam2;
+
     private Match mUser;
-    private Match mCurrentUser;
-    private EditText mBiographyEditText;
-    private OnFragmentInteractionListener mListener;
+    private Match mRecipient;
+    private EditText mMessageText;
+    private EmailListener mListener;
+    private String mUserEmail;
 
     public EmailFragment() {
         // Required empty public constructor
@@ -69,7 +72,7 @@ public class EmailFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment ProfileEditFragment.
+     * @return A new instance of fragment MyProfileEditFragment.
      */
     public static EmailFragment newInstance(String param1, String param2) {
         EmailFragment fragment = new EmailFragment();
@@ -84,8 +87,8 @@ public class EmailFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-//            mParam1 = getArguments().getString(ARG_PARAM1);
-//            mParam2 = getArguments().getString(ARG_PARAM2);
+            mParam1 = getArguments().getString(ARG_PARAM1);
+            mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
 
@@ -95,7 +98,12 @@ public class EmailFragment extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_email, container, false);
 
-        mBiographyEditText = (EditText) v.findViewById(R.id.email_body);
+        SharedPreferences mUser = getActivity().getSharedPreferences(getString(R.string.LOGIN_PREFS)
+                , Context.MODE_PRIVATE);
+
+        mUserEmail = mUser.getString("email", "");
+
+        mMessageText = (EditText) v.findViewById(R.id.email_body);
 
         Button addCourseButton = (Button) v.findViewById(R.id.button_send_email);
         addCourseButton.setOnClickListener(new View.OnClickListener() {
@@ -104,10 +112,10 @@ public class EmailFragment extends Fragment {
                 Intent email = new Intent(android.content.Intent.ACTION_SEND);
 
                 email.setType("plain/text");
-                email.putExtra(android.content.Intent.EXTRA_EMAIL, new String[]{mCurrentUser.getmEmail()});
+                email.putExtra(android.content.Intent.EXTRA_EMAIL, new String[]{mUserEmail});
                 email.putExtra(android.content.Intent.EXTRA_SUBJECT, "MemeUps Message!");
                 email.putExtra(android.content.Intent.EXTRA_TEXT,
-                        "Message:"+mBiographyEditText.getText().toString()+'\n'+'\n'+"Sent from MemeUps app.");
+                        "Sender:"+mUserEmail+'\n'+'\n'+"Message: "+ mMessageText.getText().toString()+'\n'+'\n'+"Sent from MemeUps app.");
                 /* Send it off to the Activity-Chooser */
                 startActivity(Intent.createChooser(email, "Send mail..."));
 
@@ -119,9 +127,9 @@ public class EmailFragment extends Fragment {
 
 
     public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
+//        if (mListener != null) {
+//            mListener.onFragmentInteraction(uri);
+//        }
     }
 
 
@@ -138,8 +146,8 @@ public class EmailFragment extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
+        if (context instanceof EmailListener) {
+            mListener = (EmailListener) context;
         } else {
             throw new RuntimeException(context.toString()
                     + " must implement OnFragmentInteractionListener");
@@ -219,7 +227,7 @@ public class EmailFragment extends Fragment {
         }
 
     }
-//
+
 //    /**
 //     * On resume attempt to reset the current user being emailed to, if this is null then destroy the fragment.
 //     */
@@ -231,9 +239,8 @@ public class EmailFragment extends Fragment {
 //            // Set course information based on argument passed
 //            mCurrentUser = (Match) args.getSerializable(COURSE_ITEM_SELECTED);
 //        } else {
-//            getActivity().getSupportFragmentManager().popBackStack();
+//            //getActivity().getSupportFragmentManager().popBackStack();
 //        }
-//
 //    }
 
     /**
@@ -246,7 +253,7 @@ public class EmailFragment extends Fragment {
      * "http://developer.android.com/training/basics/fragments/communicating.html"
      * >Communicating with Other Fragments</a> for more information.
      */
-    public interface OnFragmentInteractionListener {
-        void onFragmentInteraction(Uri uri);
+    public interface EmailListener {
+        void onEmailListener(String email);
     }
 }

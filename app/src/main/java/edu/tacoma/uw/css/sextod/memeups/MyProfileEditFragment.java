@@ -38,7 +38,7 @@ import static android.content.ContentValues.TAG;
  * @author Travis Bain
  * @author Dirk Sexton
  */
-public class ProfileEditFragment extends Fragment {
+public class MyProfileEditFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
@@ -64,7 +64,7 @@ public class ProfileEditFragment extends Fragment {
 
    // private OnFragmentInteractionListener mListener;
 
-    public ProfileEditFragment() {
+    public MyProfileEditFragment() {
         // Required empty public constructor
     }
 
@@ -74,10 +74,10 @@ public class ProfileEditFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment ProfileEditFragment.
+     * @return A new instance of fragment MyProfileEditFragment.
      */
-    public static ProfileEditFragment newInstance(String param1, String param2) {
-        ProfileEditFragment fragment = new ProfileEditFragment();
+    public static MyProfileEditFragment newInstance(String param1, String param2) {
+        MyProfileEditFragment fragment = new MyProfileEditFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);

@@ -39,7 +39,7 @@ import static android.content.ContentValues.TAG;
  * @author Travis Bain
  * @author Dirk Sexton
  */
-public class MyProfileActivity extends AppCompatActivity implements ProfileEditFragment.CourseAddListener
+public class MyProfileActivity extends AppCompatActivity implements MyProfileEditFragment.CourseAddListener
 {
     private final static String GET_USER_URL
             = "http://kferg9.000webhostapp.com/android/list.php?cmd=singleuser";
@@ -114,9 +114,9 @@ public class MyProfileActivity extends AppCompatActivity implements ProfileEditF
                 aboutMe.setVisibility(View.GONE);
                 favoriteMeme.setVisibility(View.GONE);
 
-                ProfileEditFragment profileEditFragment = new ProfileEditFragment();
+                MyProfileEditFragment myProfileEditFragment = new MyProfileEditFragment();
                 getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.fragment_container, profileEditFragment)
+                        .replace(R.id.fragment_container, myProfileEditFragment)
                         .addToBackStack(null)
                         .commit();
 

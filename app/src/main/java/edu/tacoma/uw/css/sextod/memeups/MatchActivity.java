@@ -46,7 +46,7 @@ import static android.content.ContentValues.TAG;
 public class MatchActivity extends AppCompatActivity implements
         MatchListFragment.OnListFragmentInteractionListener,
         ProfileViewFragment.MatchListener,
-        EmailFragment.OnFragmentInteractionListener {
+        EmailFragment.EmailListener {
 
     //Initial url to be processed, will be followed by the command
     private final static String MATCH_URL
@@ -121,10 +121,10 @@ public class MatchActivity extends AppCompatActivity implements
     }
 
     @Override
-    public void onListFragmentInteraction(Match course) {
+    public void onListFragmentInteraction(Match user) {
         ProfileViewFragment profileViewFragment = new ProfileViewFragment();
         Bundle args = new Bundle();
-        args.putSerializable(ProfileViewFragment.COURSE_ITEM_SELECTED, course);
+        args.putSerializable(ProfileViewFragment.COURSE_ITEM_SELECTED, user);
         profileViewFragment.setArguments(args);
 
         getSupportFragmentManager().beginTransaction()
@@ -134,12 +134,18 @@ public class MatchActivity extends AppCompatActivity implements
 
     }
 
-    /**
-     * Listener for the emailFragment
-     * @param uri
-     */
-    public void onFragmentInteraction(Uri uri) {
+    public void onEmailListener(String email)
+    {
+        EmailFragment emailFragment = new EmailFragment();
 
+        Bundle args = new Bundle();
+        args.putSerializable(ProfileViewFragment.COURSE_ITEM_SELECTED, email);
+        emailFragment.setArguments(args);
+
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.fragment_container, emailFragment)
+                .addToBackStack(null)
+                .commit();
     }
 
     /**

@@ -53,6 +53,7 @@ public class ProfileViewFragment extends Fragment {
 
     private Button matchbutton;
     private MatchListener mListener;
+    private EmailFragment.EmailListener mEmailListener;
 
 
     /**
@@ -149,13 +150,9 @@ public class ProfileViewFragment extends Fragment {
                 @Override
                 public void onClick(View v) {
 
-                Log.i (TAG, "Clicked email fragment");
+                Log.i (TAG, mCurrentUser.getmEmail());
 
-                EmailFragment emailFragment = new EmailFragment();
-                getActivity().getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.fragment_container, emailFragment)
-                        .addToBackStack(null)
-                        .commit();
+                mEmailListener.onEmailListener(mCurrentUser.getmEmail());
 
                 }
             });
@@ -211,6 +208,12 @@ public class ProfileViewFragment extends Fragment {
         super.onAttach(context);
         if (context instanceof MatchListener) {
             mListener = (MatchListener) context;
+        } else {
+            throw new RuntimeException(context.toString()
+                    + " must implement OnFragmentInteractionListener");
+        }
+        if (context instanceof EmailFragment.EmailListener) {
+            mEmailListener = (EmailFragment.EmailListener) context;
         } else {
             throw new RuntimeException(context.toString()
                     + " must implement OnFragmentInteractionListener");
