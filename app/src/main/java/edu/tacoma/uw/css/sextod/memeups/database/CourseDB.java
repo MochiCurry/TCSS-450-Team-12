@@ -38,7 +38,8 @@ public class CourseDB {
 
      */
     public boolean insertCourse(String email, String first, String last, String username, String bio,
-                                String display, String meme, int score) {
+                                String display,
+                                String meme, int score) {
         ContentValues contentValues = new ContentValues();
         contentValues.put("email", email);
         contentValues.put("first", first);
@@ -69,7 +70,8 @@ public class CourseDB {
     public List<Match> getCourses() {
 
         String[] columns = {
-                "email", "first", "last", "username", "bio", "display_url",
+                "email", "first", "last", "username", "bio",
+                "display_url",
                 "meme_url", "score_category"
         };
 
@@ -97,7 +99,9 @@ public class CourseDB {
             String meme_url = c.getString(6);
             int score = c.getInt(7);
 
-            Match course = new Match(email, first, last, username, bio, display_url, meme_url, score);
+            Match course = new Match(email, first, last, username, bio,
+                    display_url,
+                    meme_url, score);
             list.add(course);
             c.moveToNext();
         }

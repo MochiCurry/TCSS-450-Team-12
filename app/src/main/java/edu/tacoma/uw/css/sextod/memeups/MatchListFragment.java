@@ -99,8 +99,29 @@ public class MatchListFragment extends Fragment {
                     getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
             NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
             if (networkInfo != null && networkInfo.isConnected()) {
-                CourseAsyncTask courseAsyncTask = new CourseAsyncTask();
-                courseAsyncTask.execute(new String[]{COURSE_URL});
+                try
+                {
+                    StringBuilder sb = new StringBuilder(COURSE_URL);
+
+                    SharedPreferences mLoginEmail = this.getActivity().getSharedPreferences(getString(R.string.LOGIN_PREFS)
+                            , Context.MODE_PRIVATE);
+
+                    String mode = mLoginEmail.getString("listmode", "");
+                    sb.append(URLEncoder.encode(mode, "UTF-8"));
+
+                    String email = mLoginEmail.getString("email", "");
+                    sb.append("&useremail=");
+                    sb.append(URLEncoder.encode(email, "UTF-8"));
+
+                    Log.i(TAG, sb.toString());
+
+                    CourseAsyncTask courseAsyncTask = new CourseAsyncTask();
+                    courseAsyncTask.execute(new String[]{sb.toString()});
+                }catch(Exception e) {
+                    Toast.makeText(view.getContext(), "Something wrong with the url" + e.getMessage(), Toast.LENGTH_LONG)
+                            .show();
+                }
+
             }
             else {
                 Toast.makeText(view.getContext(),
@@ -126,28 +147,28 @@ public class MatchListFragment extends Fragment {
 
 
 
-            try
-            {
-                StringBuilder sb = new StringBuilder(COURSE_URL);
-
-                SharedPreferences mLoginEmail = this.getActivity().getSharedPreferences(getString(R.string.LOGIN_PREFS)
-                        , Context.MODE_PRIVATE);
-
-                String mode = mLoginEmail.getString("listmode", "");
-                sb.append(URLEncoder.encode(mode, "UTF-8"));
-
-                String email = mLoginEmail.getString("email", "");
-                sb.append("&useremail=");
-                sb.append(URLEncoder.encode(email, "UTF-8"));
-
-                Log.i(TAG, sb.toString());
-
-                CourseAsyncTask courseAsyncTask = new CourseAsyncTask();
-                courseAsyncTask.execute(new String[]{sb.toString()});
-            }catch(Exception e) {
-                Toast.makeText(view.getContext(), "Something wrong with the url" + e.getMessage(), Toast.LENGTH_LONG)
-                        .show();
-            }
+//            try
+//            {
+//                StringBuilder sb = new StringBuilder(COURSE_URL);
+//
+//                SharedPreferences mLoginEmail = this.getActivity().getSharedPreferences(getString(R.string.LOGIN_PREFS)
+//                        , Context.MODE_PRIVATE);
+//
+//                String mode = mLoginEmail.getString("listmode", "");
+//                sb.append(URLEncoder.encode(mode, "UTF-8"));
+//
+//                String email = mLoginEmail.getString("email", "");
+//                sb.append("&useremail=");
+//                sb.append(URLEncoder.encode(email, "UTF-8"));
+//
+//                Log.i(TAG, sb.toString());
+//
+//                CourseAsyncTask courseAsyncTask = new CourseAsyncTask();
+//                courseAsyncTask.execute(new String[]{sb.toString()});
+//            }catch(Exception e) {
+//                Toast.makeText(view.getContext(), "Something wrong with the url" + e.getMessage(), Toast.LENGTH_LONG)
+//                        .show();
+//            }
 
             /*FloatingActionButton floatingActionButton = (FloatingActionButton)
                     getActivity().findViewById(R.id.fab);
@@ -257,14 +278,16 @@ public class MatchListFragment extends Fragment {
                 // Also, add to the local database
                 for (int i=0; i<mCourseList.size(); i++) {
                     Match course = mCourseList.get(i);
-                    mCourseDB.insertCourse(course.getmFirst(),
+                    mCourseDB.insertCourse(course.getmEmail(),
+                            course.getmFirst(),
                             course.getmLongDescription(),
                             course.getmUsername(),
                             course.getmBio(),
                             course.getDISPLAY(),
                             course.getMEME(),
-                            course.getmEmail(),
                             course.getmScore()
+
+
                     );
                 }
                 mRecyclerView.setAdapter(new MyCourseRecyclerViewAdapter(mCourseList, mListener));
