@@ -2,9 +2,10 @@ package edu.tacoma.uw.css.sextod.memeups;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -17,6 +18,7 @@ import android.widget.Toast;
 
 import org.json.JSONException;
 
+import edu.tacoma.uw.css.sextod.memeups.database.MatchDB;
 import edu.tacoma.uw.css.sextod.memeups.database.Match;
 
 import java.io.BufferedReader;
@@ -43,6 +45,8 @@ public class MatchListFragment extends Fragment {
     private OnListFragmentInteractionListener mListener;
     private List<Match> mCourseList;
     private RecyclerView mRecyclerView;
+    private MatchDB mCourseDB;
+
 
 
     /**
@@ -84,38 +88,93 @@ public class MatchListFragment extends Fragment {
             } else {
                 mRecyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
-           // mRecyclerView.setAdapter(new MyCourseRecyclerViewAdapter(mCourseList, mListener));
+            // mRecyclerView.setAdapter(new MyCourseRecyclerViewAdapter(mCourseList, mListener));
 
 
-            try
-            {
-                StringBuilder sb = new StringBuilder(COURSE_URL);
+        }
 
-                SharedPreferences mLoginEmail = this.getActivity().getSharedPreferences(getString(R.string.LOGIN_PREFS)
-                        , Context.MODE_PRIVATE);
 
-                String mode = mLoginEmail.getString("listmode", "");
-                sb.append(URLEncoder.encode(mode, "UTF-8"));
+            ConnectivityManager connMgr = (ConnectivityManager)
+                    getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
+            NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
+            if (networkInfo != null && networkInfo.isConnected()) {
+                try
+                {
+                    StringBuilder sb = new StringBuilder(COURSE_URL);
 
-                String email = mLoginEmail.getString("email", "");
-                sb.append("&useremail=");
-                sb.append(URLEncoder.encode(email, "UTF-8"));
+                    SharedPreferences mLoginEmail = this.getActivity().getSharedPreferences(getString(R.string.LOGIN_PREFS)
+                            , Context.MODE_PRIVATE);
 
-                Log.i(TAG, sb.toString());
+                    String mode = mLoginEmail.getString("listmode", "");
+                    sb.append(URLEncoder.encode(mode, "UTF-8"));
 
-                CourseAsyncTask courseAsyncTask = new CourseAsyncTask();
-                courseAsyncTask.execute(new String[]{sb.toString()});
-            }catch(Exception e) {
-                Toast.makeText(view.getContext(), "Something wrong with the url" + e.getMessage(), Toast.LENGTH_LONG)
-                        .show();
+                    String email = mLoginEmail.getString("email", "");
+                    sb.append("&useremail=");
+                    sb.append(URLEncoder.encode(email, "UTF-8"));
+
+                    Log.i(TAG, sb.toString());
+
+                    CourseAsyncTask courseAsyncTask = new CourseAsyncTask();
+                    courseAsyncTask.execute(new String[]{sb.toString()});
+                }catch(Exception e) {
+                    Toast.makeText(view.getContext(), "Something wrong with the url" + e.getMessage(), Toast.LENGTH_LONG)
+                            .show();
+                }
+
             }
+            else {
+                Toast.makeText(view.getContext(),
+                        "No network connection available. Displaying locally stored data",
+                        Toast.LENGTH_SHORT).show();
+
+                if (mCourseDB == null) {
+                    mCourseDB = new MatchDB(getActivity());
+                }
+                if (mCourseList == null) {
+                    mCourseList = mCourseDB.getCourses();
+                }
+
+                mRecyclerView.setAdapter(new MyCourseRecyclerViewAdapter(mCourseList, mListener));
+            }
+
+
+
+
+
+
+
+
+
+
+//            try
+//            {
+//                StringBuilder sb = new StringBuilder(COURSE_URL);
+//
+//                SharedPreferences mLoginEmail = this.getActivity().getSharedPreferences(getString(R.string.LOGIN_PREFS)
+//                        , Context.MODE_PRIVATE);
+//
+//                String mode = mLoginEmail.getString("listmode", "");
+//                sb.append(URLEncoder.encode(mode, "UTF-8"));
+//
+//                String email = mLoginEmail.getString("email", "");
+//                sb.append("&useremail=");
+//                sb.append(URLEncoder.encode(email, "UTF-8"));
+//
+//                Log.i(TAG, sb.toString());
+//
+//                CourseAsyncTask courseAsyncTask = new CourseAsyncTask();
+//                courseAsyncTask.execute(new String[]{sb.toString()});
+//            }catch(Exception e) {
+//                Toast.makeText(view.getContext(), "Something wrong with the url" + e.getMessage(), Toast.LENGTH_LONG)
+//                        .show();
+//            }
 
             /*FloatingActionButton floatingActionButton = (FloatingActionButton)
                     getActivity().findViewById(R.id.fab);
             floatingActionButton.show();*/
 
 
-        }
+
         return view;
     }
 
@@ -203,11 +262,42 @@ public class MatchListFragment extends Fragment {
                 return;
             }
 
+
 // Everything is good, show the list of courses.
+            if (!mCourseList.isEmpty()) {
+
+                if (mCourseDB == null) {
+                    mCourseDB = new MatchDB(getActivity());
+                }
+
+                // Delete old data so that you can refresh the local
+                // database with the network data.
+                mCourseDB.deleteCourses();
+
+                // Also, add to the local database
+                for (int i=0; i<mCourseList.size(); i++) {
+                    Match course = mCourseList.get(i);
+                    mCourseDB.insertCourse(course.getmEmail(),
+                            course.getmFirst(),
+                            course.getmLongDescription(),
+                            course.getmUsername(),
+                            course.getmBio(),
+                            course.getDISPLAY(),
+                            course.getMEME(),
+                            course.getmScore()
+
+
+                    );
+                }
+                mRecyclerView.setAdapter(new MyCourseRecyclerViewAdapter(mCourseList, mListener));
+            }
+
+
             if (!mCourseList.isEmpty()) {
                 mRecyclerView.setAdapter(new MyCourseRecyclerViewAdapter(mCourseList, mListener));
             }
+            }
         }
 
-    }
+
 }
