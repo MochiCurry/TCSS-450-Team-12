@@ -15,6 +15,10 @@ import static junit.framework.Assert.fail;
 public class UserTest
 {
     //Test constructor
+
+    /**
+     * Test constructor
+     */
     @Test
     public void testAccountConstructor() {
         assertNotNull(new User("mmuppa@uw.edu", "test1@3"));
@@ -22,6 +26,9 @@ public class UserTest
 
     //Test bad email
     @Test
+    /**
+     * Test Bad Email
+     */
     public void testAccountConstructorBadEmail() {
         try {
             new User("mmuppauw.edu", "test1@3");
@@ -32,6 +39,10 @@ public class UserTest
     }
 
     //Test bad password
+
+    /**
+     * Test bad password
+     */
     @Test
     public void testAccountConstructorBadPassword() {
         try {
@@ -44,6 +55,10 @@ public class UserTest
     }
 
     //Test empty email
+
+    /**
+     * Test Empty Email
+     */
     @Test
     public void testUserConstructorEmptyEmail()
     {
@@ -56,6 +71,10 @@ public class UserTest
     }
 
     //Test empty password
+
+    /**
+     * Test Empty Password
+     */
     @Test
     public void testAccountConstructorEmptyPassword() {
         try {
@@ -67,6 +86,10 @@ public class UserTest
     }
 
     //Test get email
+
+    /**
+     * Test getting email
+     */
     @Test
     public void testGetEmail()
     {
@@ -75,6 +98,10 @@ public class UserTest
     }
 
     //test get password
+
+    /**
+     * Test getting password
+     */
     @Test
     public void testGetPassword()
     {
@@ -83,6 +110,10 @@ public class UserTest
     }
 
     //Test set email
+
+    /**
+     * Test setting email
+     */
     @Test
     public void testSetEmail()
     {
@@ -92,6 +123,10 @@ public class UserTest
     }
 
     //test set password
+
+    /**
+     * Test setting password
+     */
     @Test
     public void testSetPassword()
     {
@@ -100,6 +135,9 @@ public class UserTest
         Assert.assertEquals("testtttt$4", test.getPassword());
     }
 
+    /**
+     * Test parsing json with a sample json string from our app
+     */
     @Test
     public void testParseJSON()
     {
