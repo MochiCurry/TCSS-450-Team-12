@@ -11,7 +11,15 @@ import java.util.List;
 
 import edu.tacoma.uw.css.sextod.memeups.R;
 
-public class CourseDB {
+
+/**
+ * This class is to run sqlLite for matches the user inherits while using the app.
+ * It will create a database on the app and display it when the user is not online.
+ * @author Kerry Ferguson
+ * @author Travis Bain
+ * @author Dirk Sexton
+ */
+public class MatchDB {
 
 
 
@@ -26,7 +34,7 @@ public class CourseDB {
 
 
 
-    public CourseDB(Context context) {
+    public MatchDB(Context context) {
         mCourseDBHelper = new CourseDBHelper(
                 context, DB_NAME, null, DB_VERSION);
         mSQLiteDatabase = mCourseDBHelper.getWritableDatabase();

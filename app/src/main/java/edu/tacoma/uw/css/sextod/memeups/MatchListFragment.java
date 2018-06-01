@@ -6,7 +6,6 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -19,7 +18,7 @@ import android.widget.Toast;
 
 import org.json.JSONException;
 
-import edu.tacoma.uw.css.sextod.memeups.database.CourseDB;
+import edu.tacoma.uw.css.sextod.memeups.database.MatchDB;
 import edu.tacoma.uw.css.sextod.memeups.database.Match;
 
 import java.io.BufferedReader;
@@ -46,7 +45,7 @@ public class MatchListFragment extends Fragment {
     private OnListFragmentInteractionListener mListener;
     private List<Match> mCourseList;
     private RecyclerView mRecyclerView;
-    private CourseDB mCourseDB;
+    private MatchDB mCourseDB;
 
 
 
@@ -129,7 +128,7 @@ public class MatchListFragment extends Fragment {
                         Toast.LENGTH_SHORT).show();
 
                 if (mCourseDB == null) {
-                    mCourseDB = new CourseDB(getActivity());
+                    mCourseDB = new MatchDB(getActivity());
                 }
                 if (mCourseList == null) {
                     mCourseList = mCourseDB.getCourses();
@@ -268,7 +267,7 @@ public class MatchListFragment extends Fragment {
             if (!mCourseList.isEmpty()) {
 
                 if (mCourseDB == null) {
-                    mCourseDB = new CourseDB(getActivity());
+                    mCourseDB = new MatchDB(getActivity());
                 }
 
                 // Delete old data so that you can refresh the local
