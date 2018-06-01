@@ -48,8 +48,15 @@ public class MyProfileEditFragment extends Fragment {
     private Match mUser;
 
     private CourseAddListener mListener;
-    private final static String COURSE_ADD_URL
+
+    /**
+     * Used to update profile.
+     */
+    private final static String UPDATE_USER_URL
             = "http://kferg9.000webhostapp.com/android/updateProfile.php?cmd=update";
+    /**
+     * Used to get the user.
+     */
     private final static String GET_USER_URL
             = "http://kferg9.000webhostapp.com/android/list.php?cmd=singleuser";
 
@@ -195,7 +202,7 @@ public class MyProfileEditFragment extends Fragment {
 
     private String buildCourseURL(View v) {
 
-        StringBuilder sb = new StringBuilder(COURSE_ADD_URL);
+        StringBuilder sb = new StringBuilder(UPDATE_USER_URL);
 
         try {
             //To use getSharedPreferences in a fragment, use this code.

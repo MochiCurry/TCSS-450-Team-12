@@ -41,6 +41,9 @@ import static android.content.ContentValues.TAG;
  */
 public class MyProfileActivity extends AppCompatActivity implements MyProfileEditFragment.CourseAddListener
 {
+    /**
+     * Used to get single user information.
+     */
     private final static String GET_USER_URL
             = "http://kferg9.000webhostapp.com/android/list.php?cmd=singleuser";
 
